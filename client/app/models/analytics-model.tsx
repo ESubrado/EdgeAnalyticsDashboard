@@ -5,3 +5,7 @@ export interface IAnalytics {
     timestamp: Date;
     metadata: Object;
 };
+
+export interface topTableProps {
+  totalNumEvents : number
+}
