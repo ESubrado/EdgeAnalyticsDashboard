@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.5"
+  },
+  "name": "server",
+  "version": "1.0.0",
+  "main": "server.ts",
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev src/server.ts"
+  },
+  "keywords": [
+    "Real Time analytics dashboard"
+  ],
+  "author": "Eugene Subrado Jr",
+  "license": "ISC",
+  "description": ""
+}
