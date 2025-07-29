@@ -49,7 +49,7 @@ const Home : React.FC = () => {
         </nav> */}
         <TopBar/>
         <main className="p-4 mx-auto">        
-          <div className='px-4 grid gap-3 grid-cols-12'>  
+          <div className='px-4 grid gap-3 grid-cols-1 lg:grid-cols-12'>  
             <AnalyticGraph/>
             <AnalyticTopTable totalNumEvents={totalEvents}/>
           </div> 
