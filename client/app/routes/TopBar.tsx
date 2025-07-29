@@ -4,15 +4,12 @@ import { IoAddCircleOutline } from 'react-icons/io5';
 
 
 
-
-
 const TopBar = () => {
 
-    const formattedDateTime = moment().format("MMMM DD, YYYY");    
-
+    const formattedDateTime = moment().format("MMMM DD, YYYY"); 
 
     return (
-        <div className='border-b px-4 mb-4 mt-0 py-4 border-stone-200'>
+        <div className='border-b px-4 mb-2 mt-0 py-2 border-stone-200'>
             <div className="flex items-center justify-between p-0.5">
                 <div>
                     <span className='text-lg font-bold block'>

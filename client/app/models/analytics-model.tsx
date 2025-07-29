@@ -7,5 +7,10 @@ export interface IAnalytics {
 };
 
 export interface topTableProps {
-  totalNumEvents : number
+  totalNumEvents : number;
+}
+
+export interface eventTableProps {
+  loading: boolean;
+  eventItems: IAnalytics[];
 }
