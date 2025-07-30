@@ -11,25 +11,29 @@ import { TablePagination } from '@mui/material';
 import moment from 'moment';
 
 import type { eventTableProps } from '~/models/analytics-model';
+import useParseEnumFromString from '~/hooks/parse-string';
+import { EnumEventTypes } from '~/models/analytics-model';
 
 function createData(
     id: string,
     eventType: string,
     userId: string,
-    timestamp: Date,  
+    timestamp: Date, 
+    eventTypeName: string 
 ) {
-  return { id, eventType, userId, timestamp };
+  return { id, eventType, userId, timestamp, eventTypeName };
 }
 
 const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) => {
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const  parseString : any  = useParseEnumFromString(EnumEventTypes)
 
     const rows : any[] = [];
     //Loop over event items and create object that is compatible to material table
     for(let i=0; i<eventItems.length; i++){
-        rows.push(createData(eventItems[i]._id, eventItems[i].eventType, eventItems[i].userId, eventItems[i].timestamp))
+        rows.push(createData(eventItems[i]._id, eventItems[i].eventType, eventItems[i].userId, eventItems[i].timestamp, parseString(eventItems[i].eventType) || `Other (${eventItems[i].eventType})`))
     }
     rows.sort((a,b) => (a.timestamp < b.timestamp ? 1 : -1)) // ascending sorting of date
 
@@ -67,7 +71,7 @@ const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) =
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                             >
                                                 <TableCell component="th" scope="row">
-                                                    {row.eventType}
+                                                    {row.eventTypeName}
                                                 </TableCell>
                                                 <TableCell align="right">{row.userId}</TableCell>
                                                 <TableCell align="right">{moment(new Date(row.timestamp)).format("MMM-DD-YYYY hh:mm")}</TableCell>                                   

@@ -17,7 +17,7 @@ const TopBar = () => {
                         <span className='px-2 text-xs text-stone-500'>by: Eugene Subrado Jr</span>
                     </span>
                     <span className="text-sm block text-stone-500">
-                        <p>{formattedDateTime}</p>
+                        <p>Today is {formattedDateTime}</p>
                     </span>
                 </div>               
                 <div>                    

@@ -25,9 +25,10 @@ export type TimeCountMap = {
   };
 };
 
-export type EventCountMap = {
+export type EventCountMap = {     
   [eventType: string]: {
-    [count: string]: number;
+    [count: string]: number; 
+    //[index: number] : number;  
   };
 };
 

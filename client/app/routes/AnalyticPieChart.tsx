@@ -2,6 +2,9 @@ import React from 'react'
 import { Cell, Pie, PieChart, Legend } from 'recharts';
 import type { EventCounterProps, PieChartItemListProp, PieLabelProps } from '~/models/analytics-model';
 
+import useParseEnumFromString from '~/hooks/parse-string';
+import { EnumEventTypes } from '~/models/analytics-model';
+
 const RADIAN = Math.PI / 180;
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#c91e08', '#535406', "#00000"];
 
@@ -19,8 +22,18 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 const AnalyticPieChart : React.FC<PieChartItemListProp> = ({eventsListCount}) => {
 
-
-  const eventcountdata = eventsListCount
+  const  parseString : any  = useParseEnumFromString(EnumEventTypes)
+  const eventcountdata : EventCounterProps[]  = []
+  
+   //Add parsing to indicate real name of event type
+  for(var i=0; i<eventsListCount.length; i++){
+    eventcountdata.push(
+      {...eventsListCount[i], 
+        eventName : parseString(eventsListCount[i].event) || `Other (${eventsListCount[i].event})`
+      }
+    )
+  } 
+  
 
   return (
      <>
@@ -36,7 +49,7 @@ const AnalyticPieChart : React.FC<PieChartItemListProp> = ({eventsListCount}) =>
                     outerRadius={170}
                     fill="#8884d8"
                     dataKey="count"
-                    nameKey="event"
+                    nameKey="eventName"
                   >
                     {eventcountdata.map((entry : EventCounterProps, index) => (
                       <Cell key={`cell-${entry.event}`} fill={COLORS[index % COLORS.length]} />
