@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
-import type { IAnalytics } from "~/models/analytics-model";
+import React from "react";
 import Card from "~/components/card";
+import type { AnalyticsItemListProp } from "~/models/analytics-model";
 
-interface AnalyticsItemListProp {
-  items: IAnalytics[]
-}
 
 const AnalyticItemList : React.FC<AnalyticsItemListProp> = ({items}) => {
 

@@ -13,9 +13,10 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents}) => {
 
     const [chartdata, setChartData] = useState([]);
     const [loadingChart, setLoadingChart] = useState(true);
+    const [selectDateType, setSelectDateType] = useState<string>("day");
 
     useEffect(() => {
-        fetch(`${API_BASE_URL}/api/analytics/analyticchart?type=month`)
+        fetch(`${API_BASE_URL}/api/analytics/analyticchart?type=${selectDateType}`)
         .then((res) => res.json())
         .then((data) => {           
             setChartData(data);
@@ -25,12 +26,16 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents}) => {
             console.error("Error getting chart items:", err);
             setLoadingChart(false);
         });   
-    }, []);
+    }, [selectDateType]);
+
+    const handleToggle = (value: string) => {
+        setSelectDateType(value);
+    };
     
 
     return (     
         <>
-        <div className="p-4 pb-5 border border-stone-300 col-span-4 md:col-span-8 rounded"> 
+        <div className="p-4 pb-8 border border-stone-300 col-span-4 md:col-span-8 rounded"> 
                 {
                     loadingChart ? (<p>Loading Chart.....</p>) : (
                         <>
@@ -42,14 +47,32 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents}) => {
                                 </div> 
                                 <div>
                                     <ButtonGroup variant="outlined" aria-label="Basic button group">
-                                        <Button color='success'>Last Hour</Button>
-                                        <Button color='success'>Last Day</Button>
-                                        <Button color='success'>Last Month</Button>
+                                        <Button 
+                                            color='success'
+                                            variant={selectDateType === 'hour' ? 'contained' : 'outlined'}
+                                            onClick={() => handleToggle('hour')}
+                                        >
+                                            Last Hour
+                                        </Button>
+                                        <Button                                         
+                                            color='success'
+                                            variant={selectDateType === 'day' ? 'contained' : 'outlined'}
+                                            onClick={() => handleToggle('day')}
+                                        >
+                                            Last Day
+                                        </Button>
+                                        <Button 
+                                            color='success'
+                                            variant={selectDateType === 'month' ? 'contained' : 'outlined'}
+                                            onClick={() => handleToggle('month')}
+                                        >
+                                            Last Month
+                                        </Button>
                                     </ButtonGroup>
                                 </div> 
                                 
                             </div>                         
-                            <ResponsiveContainer width="100%" height="80%">                
+                            <ResponsiveContainer width="100%" height="90%">                
                                 <LineChart width={500} height={400} data={chartdata}>
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis dataKey="time" padding={{ left: 30, right: 30 }} tickFormatter={(tick)=> moment(new Date(tick)).format("MMM-DD-YYYY hh:mm")} />
@@ -59,6 +82,8 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents}) => {
                                     <Line name="Page View" type="monotone" dataKey="page_view" stroke="#8884d8" activeDot={{ r: 8 }} />
                                     <Line name="Page Download" type="monotone" dataKey="page_download" stroke="#82ca9d" />
                                     <Line name="Page Update" type="monotone" dataKey="page_update" stroke="#ffa500" />
+                                    <Line name="Page Reload" type="monotone" dataKey="page_reload" stroke="#c91e08" />
+                                    <Line name="Page Saved" type="monotone" dataKey="page_saved" stroke="#535406" />
                                     <Line name="Other Events" type="monotone" dataKey="page_other" stroke="#0088fe" />
                                 </LineChart>
                             </ResponsiveContainer>  

@@ -37,7 +37,7 @@ export const getTopAnalyticItem = async (_: Request, res: Response) => {
         }
       
         const labels = Object.keys(eventTypeCount);
-        const topEventTypes =  labels.map((event : any) => ({
+        const topEventTypes = labels.map((event : any) => ({
           event,
             ...eventTypeCount[event], 
         }));   
@@ -63,7 +63,7 @@ export const getAnalyticChartItem = async (req: Request, res: Response) => {
 
       //filter by hour, day, month
       switch(unit){
-          case 'hour':
+        case 'hour':
           compareTime = new Date(now.getTime() - 60 * 60 * 1000);
           filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
           break;
@@ -71,6 +71,9 @@ export const getAnalyticChartItem = async (req: Request, res: Response) => {
           compareTime = new Date(now.getTime() - 24 * 60 * 60 * 1000);
           filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
           break;
+        case 'week':
+          compareTime = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+          filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
         case 'month':
           compareTime = new Date(now);
           compareTime.setMonth(compareTime.getMonth() - 1);

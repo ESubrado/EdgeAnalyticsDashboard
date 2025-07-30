@@ -13,7 +13,8 @@ const TopBar = () => {
             <div className="flex items-center justify-between p-0.5">
                 <div>
                     <span className='text-lg font-bold block'>
-                        Welcome User!
+                        Welcome To Event Analytics Dashboard!
+                        <span className='px-2 text-xs text-stone-500'>by: Eugene Subrado Jr</span>
                     </span>
                     <span className="text-sm block text-stone-500">
                         <p>{formattedDateTime}</p>
