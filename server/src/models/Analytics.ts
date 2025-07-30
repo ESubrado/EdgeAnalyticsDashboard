@@ -1,12 +1,6 @@
 import { Schema, model } from 'mongoose';
+import { IAnalytics } from '../interface';
 
-interface IAnalytics {   
-    //_id: Number,
-    eventType: string;
-    userId: string;
-    timestamp: Date;
-    metadata: Object;
-}
 
 const analyticsSchema = new Schema<IAnalytics>({   
     //_id: { type: String},
