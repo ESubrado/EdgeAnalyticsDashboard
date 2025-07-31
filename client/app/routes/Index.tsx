@@ -25,8 +25,8 @@ const Home : React.FC = () => {
         try {
             setLoading(true);
             const [tableEventResponse, topEventResponse] = await Promise.all([
-                fetch(`${API_BASE_URL}/api/analytics`),
-                fetch(`${API_BASE_URL}/api/analytics/topanalytic`),
+                fetch(`${API_BASE_URL}/analytics`),
+                fetch(`${API_BASE_URL}/analytics/topanalytic`),
             ]);
 
             if (!tableEventResponse.ok || !topEventResponse.ok) {

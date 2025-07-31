@@ -16,7 +16,7 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents}) => {
     const [selectDateType, setSelectDateType] = useState<string>("day");
 
     useEffect(() => {
-        fetch(`${API_BASE_URL}/api/analytics/analyticchart?type=${selectDateType}`)
+        fetch(`${API_BASE_URL}/analytics/analyticchart?type=${selectDateType}`)
         .then((res) => res.json())
         .then((data) => {           
             setChartData(data);

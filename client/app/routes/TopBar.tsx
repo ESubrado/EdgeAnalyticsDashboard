@@ -1,12 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import moment from 'moment'
 import { IoAddCircleOutline } from 'react-icons/io5';
-
-
+import EventFormModal from '~/components/EventFormModal';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 const TopBar = () => {
 
-    const formattedDateTime = moment().format("MMMM DD, YYYY"); 
+    const formattedDateTime = moment().format("MMMM DD, YYYY");
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
 
     return (
         <div className='border-b px-4 mb-2 mt-0 py-2 border-stone-200'>
@@ -21,10 +32,13 @@ const TopBar = () => {
                     </span>
                 </div>               
                 <div>                    
-                    <button className=" border border-stone-300 flex text-sm items-center gap-2 bg-stone-100 transition-colors hover:bg-blue-500 px-3 py-1.5 rounded">
+                    <button className=" border border-stone-300 flex text-sm items-center gap-2 bg-stone-100 transition-colors hover:bg-blue-500 px-3 py-1.5 rounded"
+                        onClick={handleOpenModal}
+                    >
                         <IoAddCircleOutline/>
                         <span>Add New Event </span>
-                    </button>                    
+                    </button>                     
+                    <EventFormModal open={isModalOpen} onClose={handleCloseModal}/>                                                       
                 </div>
             </div>        
         </div>

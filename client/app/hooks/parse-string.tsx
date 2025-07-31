@@ -23,7 +23,7 @@ function useParseEnumFromString<TEnum extends Record<string, string | number>>(
             // If not a direct key match, try to find a value that matches (for string enums)
             const foundIndex = enumValues.indexOf(inputString);
             if (foundIndex !== -1) {
-            // If a value matches, return the corresponding key value
+            // If a value matches, return the corresponding key value, ommitted by essubrado
             return enumKeys[foundIndex] as TEnum[keyof TEnum];
             }
 

@@ -4,6 +4,7 @@ export interface IAnalytics {
     userId: string;
     timestamp: Date;
     metadata: Object;
+    createdAt: Date;
 }
 
 export interface IAnalyticsChart {

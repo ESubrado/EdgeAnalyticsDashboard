@@ -19,9 +19,10 @@ function createData(
     eventType: string,
     userId: string,
     timestamp: Date, 
-    eventTypeName: string 
+    eventTypeName: string, 
+    createdAt?: Date | null
 ) {
-  return { id, eventType, userId, timestamp, eventTypeName };
+  return { id, eventType, userId, timestamp, eventTypeName, createdAt };
 }
 
 const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) => {
@@ -33,9 +34,16 @@ const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) =
     const rows : any[] = [];
     //Loop over event items and create object that is compatible to material table
     for(let i=0; i<eventItems.length; i++){
-        rows.push(createData(eventItems[i]._id, eventItems[i].eventType, eventItems[i].userId, eventItems[i].timestamp, parseString(eventItems[i].eventType) || `Other (${eventItems[i].eventType})`))
+        rows.push(createData(
+            eventItems[i]._id, 
+            eventItems[i].eventType, 
+            eventItems[i].userId, 
+            eventItems[i].timestamp, 
+            parseString(eventItems[i].eventType) || `Other (${eventItems[i].eventType})`,
+            eventItems[i].createdAt ? eventItems[i].createdAt : null, 
+        ))
     }
-    rows.sort((a,b) => (a.timestamp < b.timestamp ? 1 : -1)) // ascending sorting of date
+    rows.sort((a,b) => (a.createdAt < b.createdAt ? 1 : -1)) // ascending sorting of date
 
     const handleChangePage = (event : any, newPage : any) => {
       setPage(newPage);
@@ -59,7 +67,8 @@ const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) =
                                         <TableRow>
                                             <TableCell>Event Type</TableCell>
                                             <TableCell align="right">User</TableCell>
-                                            <TableCell align="right">Time Stamp</TableCell>                                        
+                                            <TableCell align="right">Time Stamp</TableCell> 
+                                            <TableCell align="right">Created At</TableCell>                                        
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -74,7 +83,8 @@ const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) =
                                                     {row.eventTypeName}
                                                 </TableCell>
                                                 <TableCell align="right">{row.userId}</TableCell>
-                                                <TableCell align="right">{moment(new Date(row.timestamp)).format("MMM-DD-YYYY hh:mm")}</TableCell>                                   
+                                                <TableCell align="right">{moment(new Date(row.timestamp)).format("MMM-DD-YYYY hh:mm A")}</TableCell>
+                                                <TableCell align="right">{moment(new Date(row.createdAt)).format("MMM-DD-YYYY hh:mm A")}</TableCell>                                    
                                             </TableRow>
                                         ))
                                     }

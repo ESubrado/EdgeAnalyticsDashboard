@@ -4,10 +4,17 @@ export interface IAnalytics {
     userId: string;
     timestamp: Date;
     metadata: Object;
+    createdAt?: Date;
 };
 
 export interface topTableProps {
   totalNumEvents : number;
+}
+
+export interface EventFormProps {
+  open: boolean;
+  onClose: () => void;
+  //onSubmit: (data: FormData) => void;
 }
 
 export interface eventTableProps {
