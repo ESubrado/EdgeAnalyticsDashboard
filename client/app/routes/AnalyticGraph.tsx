@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import  ButtonGroup  from '@mui/material/ButtonGroup';
-import { Button } from '@mui/material';
-import { chartdata } from '~/data/DataSamples';
+import { Button} from '@mui/material';
 import type { topTableProps } from '~/models/analytics-model';
 import moment from 'moment';
 
@@ -13,7 +12,7 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents, refreshD
 
     const [chartdata, setChartData] = useState([]);
     const [loadingChart, setLoadingChart] = useState(true);
-    const [selectDateType, setSelectDateType] = useState<string>("day");
+    const [selectDateType, setSelectDateType] = useState<string>("day");   
 
     useEffect(() => {
         fetch(`${API_BASE_URL}/analytics/analyticchart?type=${selectDateType}`)
@@ -22,9 +21,9 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents, refreshD
             setChartData(data);
             setLoadingChart(false);
         })
-        .catch((err) => {
+        .catch((err) => {      
+            setLoadingChart(true);
             console.error("Error getting chart items:", err);
-            setLoadingChart(false);
         });   
     }, [selectDateType, refreshDependent]);
 
@@ -32,7 +31,6 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents, refreshD
         setSelectDateType(value);
     };
     
-
     return (     
         <>
         <div className="p-4 pb-8 border border-stone-300 col-span-4 md:col-span-8 rounded"> 
@@ -90,7 +88,7 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents, refreshD
                         </> 
                     )
                 }                        
-        </div>
+        </div>        
         </>           
   )
 }

@@ -12,6 +12,11 @@ export interface topTableProps {
   refreshDependent?: number;
 }
 
+export interface topBarProps {
+  activateCreate : boolean;
+}
+
+
 export interface EventFormProps {
   open: boolean;
   onClose: () => void;

@@ -45,18 +45,10 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
 
             const data = await response.json();
             console.log('Success:', data);
-
-        } catch (error) {
-
-            console.error('Error:', error);
-
-        } finally {            
             handleOnClose();
-            
-            setTimeout(()=>{ // temporary reload, to be removed when implementing socket IO
-                 window.location.reload(); 
-            }, 1000)           
-        }  
+        } catch (error) {            
+            console.error('Error:', error);
+        }
     };
 
     const handleOnClose = () =>{
