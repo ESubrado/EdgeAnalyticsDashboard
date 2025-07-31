@@ -1,8 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createAnalyticItem = exports.getAnalyticChartItem = exports.getTopAnalyticItem = exports.getAnalyticItem = void 0;
 const analytics_1 = require("../models/analytics");
 const interface_1 = require("../interface");
+const moment_1 = __importDefault(require("moment"));
 const getAnalyticItem = async (_, res) => {
     try {
         const analyticsData = await analytics_1.AnalyticsBase.find({});
@@ -80,7 +84,9 @@ const getAnalyticChartItem = async (req, res) => {
         //Create an object format to store events on specific dates in string, to be used for charting
         filteredAnalyticsData.forEach(event => {
             const date = new Date(event.timestamp);
-            const timeKey = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:00`;
+            const localmoment = (0, moment_1.default)(date);
+            const timeKey = localmoment.utc().format();
+            //const timeKey =`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:00`    
             if (!initFormat[timeKey]) {
                 initFormat[timeKey] = {};
             }
