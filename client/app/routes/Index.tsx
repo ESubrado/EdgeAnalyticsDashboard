@@ -13,7 +13,7 @@ import { Snackbar } from "@mui/material";
 import type { SnackbarCloseReason } from "@mui/material";
 
 import API_BASE_URL from "~/base-client";
-const socket = io("http://localhost:3001/"); // your backend URL
+const socket = io(API_BASE_URL); // your backend URL
 
 const Home : React.FC = () => {
 
