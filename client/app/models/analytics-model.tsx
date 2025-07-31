@@ -9,6 +9,7 @@ export interface IAnalytics {
 
 export interface topTableProps {
   totalNumEvents : number;
+  refreshDependent?: number;
 }
 
 export interface EventFormProps {

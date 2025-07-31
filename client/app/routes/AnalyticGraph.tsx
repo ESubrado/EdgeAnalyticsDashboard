@@ -9,7 +9,7 @@ import moment from 'moment';
 import API_BASE_URL from '~/base-client';
 
 
-export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents}) => {
+export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents, refreshDependent}) => {
 
     const [chartdata, setChartData] = useState([]);
     const [loadingChart, setLoadingChart] = useState(true);
@@ -26,7 +26,7 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents}) => {
             console.error("Error getting chart items:", err);
             setLoadingChart(false);
         });   
-    }, [selectDateType]);
+    }, [selectDateType, refreshDependent]);
 
     const handleToggle = (value: string) => {
         setSelectDateType(value);
