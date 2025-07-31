@@ -87,8 +87,10 @@ export const getAnalyticChartItem = async (req: Request, res: Response) => {
 
       //Create an object format to store events on specific dates in string, to be used for charting
       filteredAnalyticsData.forEach(event => {
-        const date = new Date(event.timestamp);         
-        const timeKey =`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:00`    
+        const date = new Date(event.timestamp);  
+        const localmoment = moment(date);
+        const timeKey = localmoment.utc().format()      
+        //const timeKey =`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:00`    
 
         if (!initFormat[timeKey]) {
           initFormat[timeKey] = {};
