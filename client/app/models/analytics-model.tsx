@@ -4,10 +4,17 @@ export interface IAnalytics {
     userId: string;
     timestamp: Date;
     metadata: Object;
+    createdAt?: Date;
 };
 
 export interface topTableProps {
   totalNumEvents : number;
+}
+
+export interface EventFormProps {
+  open: boolean;
+  onClose: () => void;
+  //onSubmit: (data: FormData) => void;
 }
 
 export interface eventTableProps {
@@ -17,7 +24,8 @@ export interface eventTableProps {
 
 export interface EventCounterProps {
   event: string,
-  count: number
+  count: number,
+  eventName?: string
 }
 
 export interface AnalyticsItemListProp {
@@ -33,10 +41,13 @@ export interface PieChartItemListProp {
   eventsListCount: EventCounterProps[]
 }
 
-export enum EventTypes {
+export enum EnumEventTypes {
     View = "page_view",
     Download = "page_download",
     Update = "page_update",   
+    Reload = "page_reload",
+    Saved = "page_saved",
+    Other = "page_other"   
 }
 
 // Pie Chart Enumerations

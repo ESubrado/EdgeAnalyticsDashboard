@@ -37,8 +37,9 @@ export const getTopAnalyticItem = async (_: Request, res: Response) => {
         }
       
         const labels = Object.keys(eventTypeCount);
-        const topEventTypes = labels.map((event : any) => ({
+        const topEventTypes = labels.map((event : any, index) => ({
           event,
+         // index,
             ...eventTypeCount[event], 
         }));   
 

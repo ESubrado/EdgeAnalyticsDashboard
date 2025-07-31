@@ -4,6 +4,7 @@ export interface IAnalytics {
     userId: string;
     timestamp: Date;
     metadata: Object;
+    createdAt: Date;
 }
 
 export interface IAnalyticsChart {
@@ -25,9 +26,10 @@ export type TimeCountMap = {
   };
 };
 
-export type EventCountMap = {
+export type EventCountMap = {     
   [eventType: string]: {
-    [count: string]: number;
+    [count: string]: number; 
+    //[index: number] : number;  
   };
 };
 
