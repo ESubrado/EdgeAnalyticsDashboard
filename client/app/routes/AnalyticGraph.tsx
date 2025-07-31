@@ -77,7 +77,7 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents, refreshD
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis dataKey="time" padding={{ left: 30, right: 30 }} tickFormatter={(tick)=> moment(new Date(tick)).format("MMM-DD-YYYY hh:mm A")} />
                                     <YAxis />
-                                    <Tooltip />
+                                    <Tooltip labelFormatter={(value)=>moment(value).format("MMM-DD-YYYY hh:mm A")}/>
                                     <Legend height={22}/>
                                     <Line name="Page View" type="monotone" dataKey="page_view" stroke="#8884d8" activeDot={{ r: 8 }} />
                                     <Line name="Page Download" type="monotone" dataKey="page_download" stroke="#82ca9d" />
