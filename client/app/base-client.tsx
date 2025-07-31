@@ -5,5 +5,6 @@
 
 //export const base = createClient(BASE_URL, BASE_ANON_KEY);
 
-const API_BASE_URL = import.meta.env.VITE_API_URL; // For Production, replace with new url
+//const API_BASE_URL = import.meta.env.VITE_API_URL; // For Production, replace with new url
+const API_BASE_URL = "https://edgeanalytics-server.onrender.com";
 export default API_BASE_URL;
