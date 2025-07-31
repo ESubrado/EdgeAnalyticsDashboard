@@ -58,7 +58,7 @@ const Home : React.FC = () => {
 
     // Listen for real-time messages
     socket.on("mongoChange", (data) => {
-        console.log('Received data:', data);
+        //console.log('Received data:', data);
         setReloadOnIO(data._id);
     });
 
