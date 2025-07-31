@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import {
   Dialog,
   DialogTitle,
@@ -12,16 +11,11 @@ import {
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { useForm, Controller } from 'react-hook-form';
+
 import type { SubmitHandler } from 'react-hook-form';
 import type { EventFormProps } from '~/models/analytics-model';
-
+import type { EventFormInputs } from '~/models/analytics-model';
 import API_BASE_URL from '~/base-client';
-
-type EventFormInputs = {
-  userId: string;
-  eventType: string;
-  timestamp: Date | null;
-};
 
 const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {  
     const { control , handleSubmit, formState: { errors }, reset } = useForm<EventFormInputs>({
@@ -32,10 +26,10 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
         }
     });
   
-    const handleFormSubmit : SubmitHandler<EventFormInputs> = async (formData) => { 
-
+    //Post new data handler
+    const handleFormSubmit : SubmitHandler<EventFormInputs> = async (formData) => {         
         try {
-            const response = await fetch(`${API_BASE_URL}/analytics`, {
+            const response = await fetch(`${API_BASE_URL}/api/analytics`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json', // or 'multipart/form-data' for file uploads
@@ -45,18 +39,10 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
 
             const data = await response.json();
             console.log('Success:', data);
-
-        } catch (error) {
-
-            console.error('Error:', error);
-
-        } finally {            
             handleOnClose();
-            
-            setTimeout(()=>{ // temporary reload, to be removed when implementing socket IO
-                 window.location.reload(); 
-            }, 1000)           
-        }  
+        } catch (error) {            
+            console.error('Error:', error);
+        }
     };
 
     const handleOnClose = () =>{
@@ -64,6 +50,7 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
         onClose(); // close modal
     }
 
+    //function to handle special characters. Enable also basic formatting buttons.
     const filterCharacters = (e : any) => {
         const key = e.key
         const regex = /^[a-zA-Z0-9 ]$/;
@@ -107,6 +94,7 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
                                     <MenuItem value="page_view">View Page</MenuItem>
                                     <MenuItem value="page_download">Download Page</MenuItem>
                                     <MenuItem value="page_update">Update Page</MenuItem>
+                                    <MenuItem value="page_saved">Save Page</MenuItem>
                                 </TextField>
                             )}
                         />

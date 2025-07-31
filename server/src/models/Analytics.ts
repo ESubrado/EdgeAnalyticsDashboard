@@ -9,7 +9,7 @@ const analyticsSchema = new Schema<IAnalytics>({
     timestamp: { type: Date, required: true },
     metadata: { type: Object },
     createdAt: { type: Date}
-}, { collection: "events", timestamps: true });
+}, { collection: "events", timestamps: true, strict: false });
 
 
 export const AnalyticsBase = model<IAnalytics>('Event', analyticsSchema);

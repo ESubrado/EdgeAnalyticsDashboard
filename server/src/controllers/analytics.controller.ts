@@ -1,5 +1,5 @@
 import { Response, Request  } from 'express';
-import { AnalyticsBase } from '../models/Analytics';
+import { AnalyticsBase } from '../models/analytics';
 import { EventCountMap, EventTypes, IAnalytics } from '../interface';
 import { TimeCountMap } from '../interface';
 import moment from 'moment';
@@ -50,7 +50,6 @@ export const getTopAnalyticItem = async (_: Request, res: Response) => {
         });
     }
 };
-
 
 export const getAnalyticChartItem = async (req: Request, res: Response) => {
     try{      
@@ -122,7 +121,6 @@ export const getAnalyticChartItem = async (req: Request, res: Response) => {
         });
     }
 };
-
 
 export const createAnalyticItem = async (req: Request, res: Response) => {
   try {

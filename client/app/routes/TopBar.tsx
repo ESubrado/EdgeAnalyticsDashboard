@@ -4,11 +4,11 @@ import { IoAddCircleOutline } from 'react-icons/io5';
 import EventFormModal from '~/components/EventFormModal';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import type { topBarProps } from '~/models/analytics-model';
 
-const TopBar = () => {
-
+const TopBar : React.FC<topBarProps> = ({activateCreate}) => {
+   
     const formattedDateTime = moment().format("MMMM DD, YYYY");
-
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleOpenModal = () => {
@@ -33,7 +33,7 @@ const TopBar = () => {
                 </div>               
                 <div>                    
                     <button className=" border border-stone-300 flex text-sm items-center gap-2 bg-stone-100 transition-colors hover:bg-blue-500 px-3 py-1.5 rounded"
-                        onClick={handleOpenModal}
+                        onClick={handleOpenModal} disabled={activateCreate}
                     >
                         <IoAddCircleOutline/>
                         <span>Add New Event </span>
