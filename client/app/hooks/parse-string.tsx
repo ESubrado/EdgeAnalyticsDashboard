@@ -8,6 +8,7 @@ import { useMemo } from 'react';
  * @returns {((inputString: string) => TEnum[keyof TEnum] | undefined)} A function that takes a string
  * and returns the corresponding enum value or undefined if no match is found.
  */
+
 function useParseEnumFromString<TEnum extends Record<string, string | number>>(
   enumObject: TEnum
 ): (inputString: string) => TEnum[keyof TEnum] | undefined {

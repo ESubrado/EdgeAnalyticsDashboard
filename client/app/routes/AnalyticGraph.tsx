@@ -14,8 +14,9 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents, refreshD
     const [loadingChart, setLoadingChart] = useState(true);
     const [selectDateType, setSelectDateType] = useState<string>("day");   
 
+    //Get data for charts, separated due to its logic complexity
     useEffect(() => {
-        fetch(`${API_BASE_URL}/analytics/analyticchart?type=${selectDateType}`)
+        fetch(`${API_BASE_URL}/api/analytics/analyticchart?type=${selectDateType}`)
         .then((res) => res.json())
         .then((data) => {           
             setChartData(data);
@@ -27,6 +28,7 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents, refreshD
         });   
     }, [selectDateType, refreshDependent]);
 
+    //toggle to change time line
     const handleToggle = (value: string) => {
         setSelectDateType(value);
     };

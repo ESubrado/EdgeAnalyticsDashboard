@@ -1,3 +1,5 @@
+//All inteface declaration under the same roof
+
 export interface IAnalytics {
     _id: string;
     eventType: string;
@@ -55,6 +57,12 @@ export enum EnumEventTypes {
     Saved = "page_saved",
     Other = "page_other"   
 }
+
+export type EventFormInputs = {
+  userId: string;
+  eventType: string;
+  timestamp: Date | null;
+};
 
 // Pie Chart Enumerations
 
