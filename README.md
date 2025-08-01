@@ -133,7 +133,7 @@ There are two ways to test the create new entry feature in the site.
 ### By using an API Platform.
 - Download an API Platform. Examples are Fiddler or Postman.
 - In the main, page select a POST Method and type in the POST API call
-> https://edgeanalytics-server.onrender.com/api/analytics \
+> https://edgeanalytics-server.onrender.com/api/analytics
 - The the body portion
 > Body { "eventType" : string, "userId": "string", "timestamp": "Date"  }
 - In the case of dates, look for script section and select Pre-request option. Create a variable to set dates in the body.
