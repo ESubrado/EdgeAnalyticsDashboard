@@ -11,7 +11,7 @@ These are the features:
  - Has a real time update feature. When a new event is posted, the table will automatically gets updated.
 
  ## Link and Access :link:
- Project is now live and deployed by a hosting company called Render under free subscription. 
+ Project is now live and deployed by a hosting organizating called Render under free subscription. 
 
  > [Note] 
  On subscribing this free tier, the site might experience lags and will typically spin down if there is no activity. 
@@ -26,7 +26,7 @@ These are the features:
     - POST /api/analytics (_Post new event entry_)
         - Body { "eventType" : string, "userId": "string", "timestamp": "Date"  }
 
-For the source file, visit this link: https://github.com/ESubrado/EdgeAnalyticsDashboard 
+For the source file, visit the Github repository page at: https://github.com/ESubrado/EdgeAnalyticsDashboard 
 
  ## Structure :building_construction:
 Here's the file structure of both client and server code bases. 
@@ -34,14 +34,14 @@ Here's the file structure of both client and server code bases.
  ### For Server Side
   - Root (src)
     - controllers
-        - **<ins>analytics.controller.ts</ins>** (_contains logic and CRUD access to database_)
+        - **<ins>analytics.controller.ts</ins>** (_Contains logic and CRUD access to database_)
     - models
-        - **<ins>analytics.ts</ins>** (_contains schema used for mongodb_)
+        - **<ins>analytics.ts</ins>** (_Contains schema used for mongodb_)
     - routes
-        - **<ins>analytics.route.ts</ins>** (_contains url routes used for get and post_)
-    - **<ins>app.ts</ins>** (_contains db and websocket connection_)
-    - **<ins>interface.ts</ins>** (_contains export type definitions_)
-    - **<ins>server.ts</ins>** (_main server executionable file_)
+        - **<ins>analytics.route.ts</ins>** (_Contains url routes used for get and post_)
+    - **<ins>app.ts</ins>** (_Contains db and websocket connection_)
+    - **<ins>interface.ts</ins>** (_Contains export type definitions_)
+    - **<ins>server.ts</ins>** (_Main server executionable file_)
 
 ### For Client Side
 - Root (app)
@@ -67,7 +67,7 @@ Here's the file structure of both client and server code bases.
     - **<ins>routes.ts</ins>** (_Used for routing when navigation tab is available._)
 
 ## Technology Stack and Libraries :robot:
-This project uses the MERN framework stack. React for frontend, and Express.js, Node.js and MongoDB on server side. This application also a variety of libraries. These are the notable ones:
+This project uses the MERN framework stack. React for frontend, and Express.js, Node.js and MongoDB on server side. This application also uses a variety of libraries.\ These are the notable ones:
 
 ### Server Side
 - **Node.js ts-node** - _Typescript execution and REPL (Read-Eval-Print Loop) for Node.js. Handles the run dev command._
@@ -88,13 +88,13 @@ This project uses the MERN framework stack. React for frontend, and Express.js, 
 
 ### Database
 - **MongoDB** 
-    - One of the most popular NoSQL database that is good for scalability and flexibility. Its primarily being used for developers due its ease in prototyping and for Agile development. Has a desktop GUI called MongoDB Compass to manage data and for traffic monitoring. With this, the application should handle multiple request coming from different users.
+    - One of the most popular NoSQL database platform that is good for scalability and flexibility. It's primarily being used by developers due its ease in prototyping and compatible with Agile development methodology. Has a desktop GUI called MongoDB Compass to manage data and for traffic monitoring. With this, the application should be able handle multiple request coming from different users.
 
 ## Installation :floppy_disk:
 
 ### Pre installation
-- Access the project through my github repository at: https://github.com/ESubrado/EdgeAnalyticsDashboard.
-- Can either clone the repository from any GIT GUI (Source Tree) or download the zip file.
+- Access the project through my GitHub repository at: https://github.com/ESubrado/EdgeAnalyticsDashboard.
+- Can either clone the repository using any GIT GUI (Source Tree) or download the zip file.
 - Make sure that a code editor is already installed in the workstation. For VS Code editor, please click this [link](https://code.visualstudio.com/) to get the latest version. 
 - After cloning or extracting the zip file. Use VS Code editor to open the main folder. There should be two folders available. 
 - Make sure also that the latest node.js is installed in the workstation. Here's the [link](https://nodejs.org/en)
