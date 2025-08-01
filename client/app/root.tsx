@@ -7,6 +7,7 @@ import {
   ScrollRestoration,
 } from "react-router";
 
+// Built in declaration for react route framework
 import type { Route } from "./+types/root";
 import "./app.css";
 
@@ -45,6 +46,7 @@ export default function App() {
   return <Outlet />;
 }
 
+// Built in error handler for react router
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let message = "Oops!";
   let details = "An unexpected error occurred.";

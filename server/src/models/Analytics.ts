@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { IAnalytics } from '../interface';
 
-
+// schema for mongodb data
 const analyticsSchema = new Schema<IAnalytics>({   
     //_id: { type: String},
     eventType: { type: String, required: true },

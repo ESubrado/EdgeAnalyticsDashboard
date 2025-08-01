@@ -8,13 +8,14 @@ import type { topBarProps } from '~/models/analytics-model';
 
 const TopBar : React.FC<topBarProps> = ({activateCreate}) => {
    
+    //Top bar variables declaration
     const formattedDateTime = moment().format("MMMM DD, YYYY");
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    //Functions to cater create new entry modal opening and closing.
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
-
     const handleCloseModal = () => {
         setIsModalOpen(false);
     };
@@ -23,9 +24,9 @@ const TopBar : React.FC<topBarProps> = ({activateCreate}) => {
         <div className='border-b px-4 mb-2 mt-0 py-2 border-stone-200'>
             <div className="flex items-center justify-between p-0.5">
                 <div>
-                    <span className='text-lg font-bold block'>
-                        Welcome To Event Analytics Dashboard!
-                        <span className='px-2 text-xs text-stone-500'>by: Eugene Subrado Jr</span>
+                    <span className='text-4xl font-bold block'>
+                        Real-Time Event Analytics Dashboard
+                        <span className='px-2 text-sm text-stone-500'>by: Eugene Subrado Jr</span>
                     </span>
                     <span className="text-sm block text-stone-500">
                         <p>Today is {formattedDateTime}</p>

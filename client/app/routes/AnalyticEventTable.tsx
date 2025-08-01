@@ -6,7 +6,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import TableFooter from '@mui/material/TableFooter';
 import { TablePagination } from '@mui/material';
 import moment from 'moment';
 
@@ -14,6 +13,7 @@ import type { eventTableProps } from '~/models/analytics-model';
 import useParseEnumFromString from '~/hooks/parse-string';
 import { EnumEventTypes } from '~/models/analytics-model';
 
+//function used to create an object that is acceptable to the table. Store it to row array
 function createData(
     id: string,
     eventType: string,
@@ -32,6 +32,7 @@ const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) =
     const  parseString : any  = useParseEnumFromString(EnumEventTypes)
 
     const rows : any[] = [];
+    
     //Loop over event items and create object that is compatible to material table
     for(let i=0; i<eventItems.length; i++){
         rows.push(createData(
@@ -43,12 +44,14 @@ const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) =
             eventItems[i].createdAt ? eventItems[i].createdAt : null, 
         ))
     }
-    rows.sort((a,b) => (a.createdAt < b.createdAt ? 1 : -1)) // ascending sorting of date
 
+    // ascending sorting of date
+    rows.sort((a,b) => (a.createdAt < b.createdAt ? 1 : -1)) 
+
+    //table pagination functions
     const handleChangePage = (event : any, newPage : any) => {
       setPage(newPage);
     };
-
     const handleChangeRowsPerPage = (event : any) => {
       setRowsPerPage(parseInt(event.target.value, 10));
       setPage(0); // Reset to first page when rows per page changes
