@@ -4,7 +4,8 @@ import { EventCountMap, EventTypes, IAnalytics } from '../interface';
 import { TimeCountMap } from '../interface';
 import moment from 'moment';
 
-
+// for GET /api/analytics - to get all events
+//To Do: Consider adding server paging for optimization
 export const getAnalyticItem = async (_: Request, res: Response) => {
     try{
         const analyticsData = await AnalyticsBase.find({});      
@@ -16,11 +17,13 @@ export const getAnalyticItem = async (_: Request, res: Response) => {
     }
 };
 
+// for GET /api/analytics/topanalytic - to get modified array to display top events
 export const getTopAnalyticItem = async (_: Request, res: Response) => {
     try{
         const analyticsData = await AnalyticsBase.find({});
         const eventTypeCount : EventCountMap = {};        
 
+        // Logic to get events names and increment every occurence 
         for(let i = 0; i<analyticsData.length; i++){
           let event : any = analyticsData[i].eventType;
           const eventTypeValues = Object.values(EventTypes);
@@ -36,6 +39,7 @@ export const getTopAnalyticItem = async (_: Request, res: Response) => {
           eventTypeCount[parsedEventType]["count"]++    
         }
       
+        //Create separate object to get only event and its count
         const labels = Object.keys(eventTypeCount);
         const topEventTypes = labels.map((event : any, index) => ({
           event,
@@ -43,7 +47,7 @@ export const getTopAnalyticItem = async (_: Request, res: Response) => {
             ...eventTypeCount[event], 
         }));   
 
-        res.json(topEventTypes.sort((a:any,b:any)=> b.count - a.count));
+        res.json(topEventTypes.sort((a:any,b:any)=> b.count - a.count)); // sort in decreasing order
     } catch(err : any) {
         res.status(500).send({
             message: err.message || "Some error occurred while retrieving stories."
@@ -51,6 +55,7 @@ export const getTopAnalyticItem = async (_: Request, res: Response) => {
     }
 };
 
+// for GET /api/analytics/analyticchart - to get modified array for charts
 export const getAnalyticChartItem = async (req: Request, res: Response) => {
     try{      
       const analyticsData = await AnalyticsBase.find({});  
@@ -61,7 +66,7 @@ export const getAnalyticChartItem = async (req: Request, res: Response) => {
       let compareTime: Date;
       let filteredAnalyticsData : any[] = [];      
 
-      //filter by hour, day, month
+      //use switch to changa date time range according to hour, day, and month
       switch(unit){
         case 'hour':
           compareTime = new Date(now.getTime() - 60 * 60 * 1000);
@@ -71,9 +76,9 @@ export const getAnalyticChartItem = async (req: Request, res: Response) => {
           compareTime = new Date(now.getTime() - 24 * 60 * 60 * 1000);
           filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
           break;
-        case 'week':
-          compareTime = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-          filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
+        // case 'week':
+        //   compareTime = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        //   filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
         case 'month':
           compareTime = new Date(now);
           compareTime.setMonth(compareTime.getMonth() - 1);
@@ -110,7 +115,7 @@ export const getAnalyticChartItem = async (req: Request, res: Response) => {
 
       //Convert array consistent to chart requirement
       const labels = Object.keys(initFormat).sort((a,b)=> new Date(a).getTime() - new Date(b).getTime());
-      const chartFormat =  labels.map((time : any) => ({
+      const chartFormat =  labels.map((time : any) => ({ //create a array for time and event 
          time,
            ...initFormat[time], 
       })); 
@@ -124,6 +129,7 @@ export const getAnalyticChartItem = async (req: Request, res: Response) => {
     }
 };
 
+// for POST /api/analytics - create new item
 export const createAnalyticItem = async (req: Request, res: Response) => {
   try {
     const analyticData = await AnalyticsBase.create(req.body);

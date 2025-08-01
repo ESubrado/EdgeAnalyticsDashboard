@@ -5,6 +5,7 @@ import type { EventCounterProps, PieChartItemListProp, PieLabelProps } from '~/m
 import useParseEnumFromString from '~/hooks/parse-string';
 import { EnumEventTypes } from '~/models/analytics-model';
 
+// Initial declaration for pie chart styling and customed label names in legend
 const RADIAN = Math.PI / 180;
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#c91e08', '#535406', "#00000"];
 
@@ -12,7 +13,6 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-(midAngle ?? 0) * RADIAN);
   const y = cy + radius * Math.sin(-(midAngle ?? 0) * RADIAN);
-
   return (
     <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
       {`${((percent ?? 1) * 100).toFixed(0)}%`}
@@ -32,8 +32,7 @@ const AnalyticPieChart : React.FC<PieChartItemListProp> = ({eventsListCount}) =>
         eventName : parseString(eventsListCount[i].event) || `Other (${eventsListCount[i].event})`
       }
     )
-  } 
-  
+  }  
 
   return (
      <>

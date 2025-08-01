@@ -26,7 +26,9 @@ const Home : React.FC = () => {
   const [reloadonIO, setReloadOnIO] = useState(0)
   const [openPrompt, setOpenPrompt] = useState(false);
 
-   useEffect(() => {  
+  useEffect(() => {  
+    // this function gets data from two APIs using fetch and promises. Will be triggered on page load, 
+    // and when socket oi receives data from the server
     const fetchData = async () => {
         try {           
             const [tableEventResponse, topEventResponse] = await Promise.all([
@@ -50,7 +52,7 @@ const Home : React.FC = () => {
         } catch (error: any) {           
             setOpenPrompt(true); 
             setLoading(true);  
-            socket.disconnect(); 
+            socket.disconnect(); // disconnect socket then error is available
             console.error(error.message);        
         } 
     } 
@@ -62,11 +64,13 @@ const Home : React.FC = () => {
         setReloadOnIO(data._id);
     });
 
+    //return function removes event listeners thats being recieved or emitted from this section.
     return () => {
       socket.off("mongoChange");
     };
-  }, [reloadonIO]);
+  }, [reloadonIO]); // this state variable triggers the use effec when a new data is being replaced from server. 
 
+  // function to handle closing of the snack bar component. (prompt)
   const handleClose = (
           event: React.SyntheticEvent | Event,
           reason?: SnackbarCloseReason,
@@ -83,7 +87,8 @@ const Home : React.FC = () => {
         <TopBar activateCreate={loading}/>
         <main className="p-1 mx-auto">        
           <div className='px-4 grid gap-3 grid-cols-1 lg:grid-cols-12'>  
-            <AnalyticGraph totalNumEvents={totalEvents} refreshDependent={reloadonIO}/>
+            {/*refreshDependent enables the graph to reload when new data is available from the socket */}
+            <AnalyticGraph totalNumEvents={totalEvents} refreshDependent={reloadonIO}/>           
             <AnalyticTopTable loading={loading} topEventsItems={topEventsdata}/>
           </div> 
           <div className='px-4 pt-4 grid gap-3 grid-cols-12'> 
