@@ -7,6 +7,8 @@ exports.createAnalyticItem = exports.getAnalyticChartItem = exports.getTopAnalyt
 const analytics_1 = require("../models/analytics");
 const interface_1 = require("../interface");
 const moment_1 = __importDefault(require("moment"));
+// for GET /api/analytics - to get all events
+//To Do: Consider adding server paging for optimization
 const getAnalyticItem = async (_, res) => {
     try {
         const analyticsData = await analytics_1.AnalyticsBase.find({});
@@ -19,10 +21,12 @@ const getAnalyticItem = async (_, res) => {
     }
 };
 exports.getAnalyticItem = getAnalyticItem;
+// for GET /api/analytics/topanalytic - to get modified array to display top events
 const getTopAnalyticItem = async (_, res) => {
     try {
         const analyticsData = await analytics_1.AnalyticsBase.find({});
         const eventTypeCount = {};
+        // Logic to get events names and increment every occurence 
         for (let i = 0; i < analyticsData.length; i++) {
             let event = analyticsData[i].eventType;
             const eventTypeValues = Object.values(interface_1.EventTypes);
@@ -35,13 +39,14 @@ const getTopAnalyticItem = async (_, res) => {
             }
             eventTypeCount[parsedEventType]["count"]++;
         }
+        //Create separate object to get only event and its count
         const labels = Object.keys(eventTypeCount);
         const topEventTypes = labels.map((event, index) => ({
             event,
             // index,
             ...eventTypeCount[event],
         }));
-        res.json(topEventTypes.sort((a, b) => b.count - a.count));
+        res.json(topEventTypes.sort((a, b) => b.count - a.count)); // sort in decreasing order
     }
     catch (err) {
         res.status(500).send({
@@ -50,39 +55,39 @@ const getTopAnalyticItem = async (_, res) => {
     }
 };
 exports.getTopAnalyticItem = getTopAnalyticItem;
+// for GET /api/analytics/analyticchart - to get modified array for charts
 const getAnalyticChartItem = async (req, res) => {
     try {
-        const analyticsData = await analytics_1.AnalyticsBase.find({});
-        const initFormat = {};
         const unit = req.query.type || "hour";
         const now = new Date();
         let compareTime;
-        let filteredAnalyticsData = [];
-        //filter by hour, day, month
+        //use switch to changa date time range according to hour, day, and month
         switch (unit) {
             case 'hour':
                 compareTime = new Date(now.getTime() - 60 * 60 * 1000);
-                filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
                 break;
             case 'day':
                 compareTime = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-                filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
                 break;
-            case 'week':
-                compareTime = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-                filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
+            // case 'week':
+            //   compareTime = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);       
             case 'month':
                 compareTime = new Date(now);
                 compareTime.setMonth(compareTime.getMonth() - 1);
-                filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
                 break;
             default:
                 compareTime = new Date(now);
-                compareTime.setFullYear(compareTime.getFullYear() - 1); // store data only for 1 year
-                filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
+                compareTime.setFullYear(compareTime.getFullYear() - 1); // store data only for 1 year        
         }
+        const analyticsData = await analytics_1.AnalyticsBase.find({
+            timestamp: {
+                $gte: compareTime,
+                $lte: now
+            }
+        });
+        const initFormat = {};
         //Create an object format to store events on specific dates in string, to be used for charting
-        filteredAnalyticsData.forEach(event => {
+        analyticsData.forEach(event => {
             const date = new Date(event.timestamp);
             const localmoment = (0, moment_1.default)(date);
             const timeKey = localmoment.utc().format();
@@ -115,6 +120,7 @@ const getAnalyticChartItem = async (req, res) => {
     }
 };
 exports.getAnalyticChartItem = getAnalyticChartItem;
+// for POST /api/analytics - create new item
 const createAnalyticItem = async (req, res) => {
     try {
         const analyticData = await analytics_1.AnalyticsBase.create(req.body);
