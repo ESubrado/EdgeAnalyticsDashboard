@@ -142,6 +142,10 @@ There are two ways to test the create new entry feature in the site.
 > pm.variables.set("timestampDate", currentDate.toISOString());
 - Once all is set, press send. The new entry should also be available in the dashboard.
 
+## To Dos: 
+- Mobile view responsive feature is on development. Need to add a placeholder to inform users that development is in progress.
+- Server paging for table to address future performance problem. This is also work in progress.
+
 ---
 
 
