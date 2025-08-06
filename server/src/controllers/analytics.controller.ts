@@ -55,79 +55,90 @@ export const getTopAnalyticItem = async (_: Request, res: Response) => {
     }
 };
 
+//Get events in date range
+async function findEventsInDateRange(startDate: Date, endDate: Date): Promise<IAnalytics[]> {
+  try {
+    const events = await AnalyticsBase.find({
+      timestamp: { // to do: make this a dynamic
+        $gte: startDate,
+        $lte: endDate,
+      },
+    }).exec();
+    return events;
+  } catch (error) {
+    console.error('Error finding events:', error);
+    throw error;
+  }
+}
+
 // for GET /api/analytics/analyticchart - to get modified array for charts
-export const getAnalyticChartItem = async (req: Request, res: Response) => {
-    try{  
+export const getAnalyticChartItem = async (req: Request, res: Response) => {    
 
-      const unit = req.query.type || "hour";
-      const now = new Date();
-      let compareTime: Date;      
+    const unit = req.query.type || "hour";
+    const now = new Date();
+    let compareTime: Date;      
 
-      //use switch to changa date time range according to hour, day, and month
-      switch(unit){
-        case 'hour':
-          compareTime = new Date(now.getTime() - 60 * 60 * 1000);         
-          break;
-        case 'day':
-          compareTime = new Date(now.getTime() - 24 * 60 * 60 * 1000);          
-          break;
-        // case 'week':
-        //   compareTime = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);       
-        case 'month':
-          compareTime = new Date(now);
-          compareTime.setMonth(compareTime.getMonth() - 1);         
-          break;
-        default:
-          compareTime = new Date(now);
-          compareTime.setFullYear(compareTime.getFullYear() - 1); // store data only for 1 year        
-      } 
+    //use switch to changa date time range according to hour, day, and month
+    switch(unit){
+      case 'hour':
+        compareTime = new Date(now.getTime() - 60 * 60 * 1000);         
+        break;
+      case 'day':
+        compareTime = new Date(now.getTime() - 24 * 60 * 60 * 1000);          
+        break;
+      // case 'week':
+      //   compareTime = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);       
+      case 'month':
+        compareTime = new Date(now);
+        compareTime.setMonth(compareTime.getMonth() - 1);         
+        break;
+      default:
+        compareTime = new Date(now);
+        compareTime.setFullYear(compareTime.getFullYear() - 1); // store data only for 1 year        
+    } 
 
-      const analyticsData: IAnalytics[] = await AnalyticsBase.find({
-        timestamp: {
-          $gte: compareTime,
-          $lte: now
-        }
-      });
-      
-      const initFormat: TimeCountMap = {};      
+    //call function to get range of events based on timestamp
+    findEventsInDateRange(compareTime, now)
+      .then(analyticsData => {
 
-      //Create an object format to store events on specific dates in string, to be used for charting
-      analyticsData.forEach(event => {
-        const date = new Date(event.timestamp);  
-        const localmoment = moment(date);
-        const timeKey = localmoment.utc().format()      
-        //const timeKey =`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:00`    
+        const initFormat: TimeCountMap = {};
 
-        if (!initFormat[timeKey]) {
-          initFormat[timeKey] = {};
-        }
+        //Create an object format to store events on specific dates in string, to be used for charting
+        analyticsData.forEach(event => {
+            const date = new Date(event.timestamp);
+            const localmoment = moment(date);
+            const timeKey = localmoment.utc().format()
+            //const timeKey =`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:00`    
 
-        //restrict event types depending on Event Types Enum
-        const eventTypeValues : string[] = Object.values(EventTypes) 
-        let parsedEventType = "" 
-        eventTypeValues.includes(event.eventType) ? 
-          parsedEventType = event.eventType : parsedEventType = "page_other";
+            if (!initFormat[timeKey]) {
+              initFormat[timeKey] = {};
+            }
 
-        if (!initFormat[timeKey][parsedEventType]) {           
-            initFormat[timeKey][parsedEventType] = 0;                    
-        }
-        initFormat[timeKey][parsedEventType]++;
-      });
+            //restrict event types depending on Event Types Enum
+            const eventTypeValues: string[] = Object.values(EventTypes)
+            let parsedEventType = ""
+            eventTypeValues.includes(event.eventType) ?
+              parsedEventType = event.eventType : parsedEventType = "page_other";
 
-      //Convert array consistent to chart requirement
-      const labels = Object.keys(initFormat).sort((a,b)=> new Date(a).getTime() - new Date(b).getTime());
-      const chartFormat =  labels.map((time : any) => ({ //create a array for time and event 
-         time,
-           ...initFormat[time], 
-      })); 
+            if (!initFormat[timeKey][parsedEventType]) {
+              initFormat[timeKey][parsedEventType] = 0;
+            }
+            initFormat[timeKey][parsedEventType]++;
+          });
 
-      res.json(chartFormat);
+        //Convert array consistent to chart requirement
+        const labels = Object.keys(initFormat).sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+        const chartFormat = labels.map((time: any) => ({ //create a array for time and event 
+          time,
+          ...initFormat[time],
+        }));
 
-    } catch(err : any) {
+        res.json(chartFormat);
+      }).catch(err => {
         res.status(500).send({
-            message: err.message || "Some error occurred while retrieving stories."
-        });
-    }
+              message: err.message || "Some error occurred while retrieving events."
+          });
+      });  
 };
 
 // for POST /api/analytics - create new item

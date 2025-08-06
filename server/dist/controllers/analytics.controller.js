@@ -55,36 +55,48 @@ const getTopAnalyticItem = async (_, res) => {
     }
 };
 exports.getTopAnalyticItem = getTopAnalyticItem;
+//Get events in date range
+async function findEventsInDateRange(startDate, endDate) {
+    try {
+        const events = await analytics_1.AnalyticsBase.find({
+            timestamp: {
+                $gte: startDate,
+                $lte: endDate,
+            },
+        }).exec();
+        return events;
+    }
+    catch (error) {
+        console.error('Error finding events:', error);
+        throw error;
+    }
+}
 // for GET /api/analytics/analyticchart - to get modified array for charts
 const getAnalyticChartItem = async (req, res) => {
-    try {
-        const unit = req.query.type || "hour";
-        const now = new Date();
-        let compareTime;
-        //use switch to changa date time range according to hour, day, and month
-        switch (unit) {
-            case 'hour':
-                compareTime = new Date(now.getTime() - 60 * 60 * 1000);
-                break;
-            case 'day':
-                compareTime = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-                break;
-            // case 'week':
-            //   compareTime = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);       
-            case 'month':
-                compareTime = new Date(now);
-                compareTime.setMonth(compareTime.getMonth() - 1);
-                break;
-            default:
-                compareTime = new Date(now);
-                compareTime.setFullYear(compareTime.getFullYear() - 1); // store data only for 1 year        
-        }
-        const analyticsData = await analytics_1.AnalyticsBase.find({
-            timestamp: {
-                $gte: compareTime,
-                $lte: now
-            }
-        });
+    const unit = req.query.type || "hour";
+    const now = new Date();
+    let compareTime;
+    //use switch to changa date time range according to hour, day, and month
+    switch (unit) {
+        case 'hour':
+            compareTime = new Date(now.getTime() - 60 * 60 * 1000);
+            break;
+        case 'day':
+            compareTime = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+            break;
+        // case 'week':
+        //   compareTime = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);       
+        case 'month':
+            compareTime = new Date(now);
+            compareTime.setMonth(compareTime.getMonth() - 1);
+            break;
+        default:
+            compareTime = new Date(now);
+            compareTime.setFullYear(compareTime.getFullYear() - 1); // store data only for 1 year        
+    }
+    //call function to get range of events based on timestamp
+    findEventsInDateRange(compareTime, now)
+        .then(analyticsData => {
         const initFormat = {};
         //Create an object format to store events on specific dates in string, to be used for charting
         analyticsData.forEach(event => {
@@ -112,12 +124,11 @@ const getAnalyticChartItem = async (req, res) => {
             ...initFormat[time],
         }));
         res.json(chartFormat);
-    }
-    catch (err) {
+    }).catch(err => {
         res.status(500).send({
-            message: err.message || "Some error occurred while retrieving stories."
+            message: err.message || "Some error occurred while retrieving events."
         });
-    }
+    });
 };
 exports.getAnalyticChartItem = getAnalyticChartItem;
 // for POST /api/analytics - create new item
