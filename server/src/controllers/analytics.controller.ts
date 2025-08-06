@@ -57,41 +57,42 @@ export const getTopAnalyticItem = async (_: Request, res: Response) => {
 
 // for GET /api/analytics/analyticchart - to get modified array for charts
 export const getAnalyticChartItem = async (req: Request, res: Response) => {
-    try{      
-      const analyticsData = await AnalyticsBase.find({});  
-      const initFormat: TimeCountMap = {};
-      const unit = req.query.type || "hour";
+    try{  
 
+      const unit = req.query.type || "hour";
       const now = new Date();
-      let compareTime: Date;
-      let filteredAnalyticsData : any[] = [];      
+      let compareTime: Date;      
 
       //use switch to changa date time range according to hour, day, and month
       switch(unit){
         case 'hour':
-          compareTime = new Date(now.getTime() - 60 * 60 * 1000);
-          filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
+          compareTime = new Date(now.getTime() - 60 * 60 * 1000);         
           break;
         case 'day':
-          compareTime = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-          filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
+          compareTime = new Date(now.getTime() - 24 * 60 * 60 * 1000);          
           break;
         // case 'week':
-        //   compareTime = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-        //   filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
+        //   compareTime = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);       
         case 'month':
           compareTime = new Date(now);
-          compareTime.setMonth(compareTime.getMonth() - 1);
-          filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
+          compareTime.setMonth(compareTime.getMonth() - 1);         
           break;
         default:
           compareTime = new Date(now);
-          compareTime.setFullYear(compareTime.getFullYear() - 1); // store data only for 1 year
-          filteredAnalyticsData = analyticsData.filter((event) => new Date(event.timestamp) >= compareTime);
+          compareTime.setFullYear(compareTime.getFullYear() - 1); // store data only for 1 year        
       } 
 
+      const analyticsData: IAnalytics[] = await AnalyticsBase.find({
+        timestamp: {
+          $gte: compareTime,
+          $lte: now
+        }
+      });
+      
+      const initFormat: TimeCountMap = {};      
+
       //Create an object format to store events on specific dates in string, to be used for charting
-      filteredAnalyticsData.forEach(event => {
+      analyticsData.forEach(event => {
         const date = new Date(event.timestamp);  
         const localmoment = moment(date);
         const timeKey = localmoment.utc().format()      
@@ -102,7 +103,7 @@ export const getAnalyticChartItem = async (req: Request, res: Response) => {
         }
 
         //restrict event types depending on Event Types Enum
-        const eventTypeValues = Object.values(EventTypes) 
+        const eventTypeValues : string[] = Object.values(EventTypes) 
         let parsedEventType = "" 
         eventTypeValues.includes(event.eventType) ? 
           parsedEventType = event.eventType : parsedEventType = "page_other";
