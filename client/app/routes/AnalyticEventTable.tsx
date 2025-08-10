@@ -46,7 +46,7 @@ const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) =
     }
 
     // ascending sorting of date
-    rows.sort((a,b) => (a.createdAt < b.createdAt ? 1 : -1)) 
+    //rows.sort((a,b) => (a.createdAt < b.createdAt ? 1 : -1)) 
 
     //table pagination functions
     const handleChangePage = (event : any, newPage : any) => {
