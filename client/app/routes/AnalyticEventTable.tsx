@@ -46,7 +46,7 @@ const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) =
     }
 
     // ascending sorting of date
-    rows.sort((a,b) => (a.createdAt < b.createdAt ? 1 : -1)) 
+    //rows.sort((a,b) => (a.createdAt < b.createdAt ? 1 : -1)) 
 
     //table pagination functions
     const handleChangePage = (event : any, newPage : any) => {
@@ -59,8 +59,8 @@ const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) =
 
     return (
         <>      
-            <div className='p-4 pb-0 border border-stone-300 rounded col-span-4 md:col-span-7'>        
-                <div className="flex items justify-between">
+            <div className='px-2 md:p-2 pb-0 border border-stone-300 rounded col-span-12 lg:col-span-7'>        
+                <div className="flex items justify-between py-2">
                     {   //Loading text shows when no data is passed from the parent component
                         loading ? (<p>Loading....</p>) : ( 
                             <>

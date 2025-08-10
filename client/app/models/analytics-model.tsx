@@ -1,5 +1,7 @@
 //All inteface declaration under the same roof
 
+import type { NavigateFunction } from "react-router";
+
 export interface IAnalytics {
     _id: string;
     eventType: string;
@@ -16,6 +18,9 @@ export interface topTableProps {
 
 export interface topBarProps {
   activateCreate : boolean;
+  showCreateBtn: boolean;
+  showReturnBtn: boolean;
+  useNav: NavigateFunction;
 }
 
 

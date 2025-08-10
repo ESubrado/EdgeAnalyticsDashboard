@@ -8,7 +8,7 @@ import moment from 'moment';
 //To Do: Consider adding server paging for optimization
 export const getAnalyticItem = async (_: Request, res: Response) => {
     try{
-        const analyticsData = await AnalyticsBase.find({});      
+        const analyticsData = await AnalyticsBase.find({}).sort({createdAt: 'desc'});      
         res.json(analyticsData);
     } catch(err : any) {
         res.status(500).send({

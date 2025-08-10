@@ -13,6 +13,7 @@ import { Snackbar } from "@mui/material";
 import type { SnackbarCloseReason } from "@mui/material";
 
 import API_BASE_URL from "~/base-client";
+import { useNavigate } from "react-router";
 const socket = io(API_BASE_URL); // your backend URL
 
 const Home : React.FC = () => {
@@ -25,6 +26,10 @@ const Home : React.FC = () => {
   const [totalEvents, setTotalEvents] = useState(0);
   const [reloadonIO, setReloadOnIO] = useState(0)
   const [openPrompt, setOpenPrompt] = useState(false);
+
+  const showCreateBtn = false;
+  const showReturnButton = true;
+  const navigateBackFromAbout = useNavigate();
 
   useEffect(() => {  
     // this function gets data from two APIs using fetch and promises. Will be triggered on page load, 
@@ -84,9 +89,9 @@ const Home : React.FC = () => {
   return (
     <>
       <div className="min-h-screen bg-gray-100 rounded-lg shadow">       
-        <TopBar activateCreate={loading}/>
+        <TopBar activateCreate={loading} useNav={navigateBackFromAbout} showCreateBtn={showCreateBtn} showReturnBtn={showReturnButton}/>
         <main className="p-1 mx-auto">        
-          <div className='px-4 grid gap-3 grid-cols-1 lg:grid-cols-12'>  
+          <div className='px-4 grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-12'>  
             {/*refreshDependent enables the graph to reload when new data is available from the socket */}
             <AnalyticGraph totalNumEvents={totalEvents} refreshDependent={reloadonIO}/>           
             <AnalyticTopTable loading={loading} topEventsItems={topEventsdata}/>

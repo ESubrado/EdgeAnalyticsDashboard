@@ -36,7 +36,7 @@ const AnalyticPieChart : React.FC<PieChartItemListProp> = ({eventsListCount}) =>
 
   return (
      <>
-        <div className='p-4 pb-0 border border-stone-300 rounded col-span-2 md:col-span-5'>        
+        <div className='p-4 pb-0 border border-stone-300 rounded col-span-12 lg:col-span-5'>        
             <div className="flex mb-0 items justify-center">
                 <PieChart width={500} height={390}>
                   <Pie

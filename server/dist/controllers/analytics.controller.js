@@ -11,7 +11,7 @@ const moment_1 = __importDefault(require("moment"));
 //To Do: Consider adding server paging for optimization
 const getAnalyticItem = async (_, res) => {
     try {
-        const analyticsData = await analytics_1.AnalyticsBase.find({});
+        const analyticsData = await analytics_1.AnalyticsBase.find({}).sort({ createdAt: 'desc' });
         res.json(analyticsData);
     }
     catch (err) {

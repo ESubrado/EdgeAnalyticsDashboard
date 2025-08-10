@@ -22,18 +22,20 @@ const TopBar : React.FC<topBarProps> = ({activateCreate}) => {
 
     return (
         <div className='border-b px-4 mb-2 mt-0 py-2 border-stone-200'>
-            <div className="flex items-center justify-between p-0.5">
+            <div className="p-2 text-center lg:text-left lg:flex lg:items-center lg:justify-between lg:p-0.5">
                 <div>
-                    <span className='text-4xl font-bold block'>
-                        Real-Time Event Analytics Dashboard
-                        <span className='px-2 text-sm text-stone-500'>by: Eugene Subrado Jr</span>
-                    </span>
+                    <div className='grid lg:flex'>
+                        <span className='text-2xl lg:text-4xl font-bold'>
+                            Real-Time Event Analytics Dashboard
+                        </span>
+                        <span className='lg:px-2 md:pt-4 text-sm text-stone-500'>by: Eugene Subrado Jr</span>
+                    </div>                    
                     <span className="text-sm block text-stone-500">
                         <p>Today is {formattedDateTime}</p>
                     </span>
                 </div>               
-                <div>                    
-                    <button className=" border border-stone-300 flex text-sm items-center gap-2 bg-stone-100 transition-colors hover:bg-blue-500 px-3 py-1.5 rounded"
+                <div className='pt-3 flex justify-self-center lg:justify-end'>                    
+                    <button className="border border-stone-300 text-sm flex items-center gap-2 bg-stone-100 transition-colors hover:bg-blue-500 px-3 py-1.5 rounded"
                         onClick={handleOpenModal} disabled={activateCreate}
                     >
                         <IoAddCircleOutline/>
