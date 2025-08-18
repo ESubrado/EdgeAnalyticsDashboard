@@ -1,5 +1,5 @@
 import React from 'react'
-import { List, ListItem, ListItemText, Paper, Typography } from '@mui/material'
+import { Divider, List, ListItem, ListItemText, Paper, Typography } from '@mui/material'
 import type { EventCounterProps } from '~/models/analytics-model'
 import type { TopEventsItemListProp } from '~/models/analytics-model'
 
@@ -44,14 +44,14 @@ const AnalyticTopTable : React.FC<TopEventsItemListProp> = ({loading, topEventsI
                 </Typography>
                 <List disablePadding>
                   {items.map((item : EventCounterProps) => (
-                    <ListItem key={item.eventName} divider >
+                    <ListItem key={item.eventName} divider>
                       <ListItemText
                         primary={item.eventName} slotProps={{primary: {component: "label", fontSize: "11pt", display: 'flex', justifyContent: "left"}}}                        
                       />
                       <ListItemText
                         primary={item.count} slotProps={{primary: {component: "label", fontSize: "11pt", display: 'flex', justifyContent: "right"}}}                       
                       />
-                    </ListItem>
+                    </ListItem>                    
                   ))}
                 </List>
              </Paper>
