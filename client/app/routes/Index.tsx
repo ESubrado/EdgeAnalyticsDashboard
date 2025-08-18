@@ -88,7 +88,7 @@ const Home : React.FC = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-100 rounded-lg shadow">       
+      <div className="min-h-screen bg-gradient-to-r from-slate-900 to-slate-700 rounded-lg shadow">       
         <TopBar activateCreate={loading} useNav={navigateBackFromAbout} showCreateBtn={showCreateBtn} showReturnBtn={showReturnButton}/>
         <main className="p-1 mx-auto">        
           <div className='px-4 grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-12'>  

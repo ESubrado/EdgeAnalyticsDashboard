@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import moment from 'moment'
 import { IoAddCircleOutline } from 'react-icons/io5';
 import EventFormModal from '~/components/EventFormModal';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import type { topBarProps } from '~/models/analytics-model';
 
 const TopBar : React.FC<topBarProps> = ({activateCreate}) => {
@@ -25,12 +23,12 @@ const TopBar : React.FC<topBarProps> = ({activateCreate}) => {
             <div className="p-2 text-center lg:text-left lg:flex lg:items-center lg:justify-between lg:p-0.5">
                 <div>
                     <div className='grid lg:flex'>
-                        <span className='text-2xl lg:text-4xl font-bold'>
+                        <span className='text-2xl lg:text-4xl font-bold text-stone-50'>
                             Real-Time Event Analytics Dashboard
                         </span>
-                        <span className='lg:px-2 md:pt-4 text-sm text-stone-500'>by: Eugene Subrado Jr</span>
+                        <span className='lg:px-2 md:pt-4 text-sm text-stone-50'>by: Eugene Subrado Jr</span>
                     </div>                    
-                    <span className="text-sm block text-stone-500">
+                    <span className="text-sm block text-stone-50">
                         <p>Today is {formattedDateTime}</p>
                     </span>
                 </div>               

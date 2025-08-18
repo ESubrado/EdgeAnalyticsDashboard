@@ -6,7 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { TablePagination } from '@mui/material';
+import { styled, TablePagination } from '@mui/material';
 import moment from 'moment';
 
 import type { eventTableProps } from '~/models/analytics-model';
@@ -30,6 +30,10 @@ const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) =
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const  parseString : any  = useParseEnumFromString(EnumEventTypes)
+
+    const WhiteTableCell = styled(TableCell)({
+        color: "white"
+    });
 
     const rows : any[] = [];
     
@@ -59,19 +63,19 @@ const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) =
 
     return (
         <>      
-            <div className='px-2 md:p-2 pb-0 border border-stone-300 rounded col-span-12 lg:col-span-7'>        
+            <div className='px-2 md:p-2 pb-0 border border-stone-300 bg-transparent rounded col-span-12 lg:col-span-7'>        
                 <div className="flex items justify-between py-2">
                     {   //Loading text shows when no data is passed from the parent component
                         loading ? (<p>Loading....</p>) : ( 
                             <>
-                            <TableContainer component={Paper} sx={{maxHeight: '375px', overflowY: 'auto'}}>
+                                <TableContainer component={Paper} elevation={24} sx={{ maxHeight: '375px', overflowY: 'auto', backgroundColor: "transparent"}}>
                                 <Table sx={{ minWidth: 650 }} aria-label="grid Table">
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>Event Type</TableCell>
-                                            <TableCell align="right">User</TableCell>
-                                            <TableCell align="right">Time Stamp</TableCell> 
-                                            <TableCell align="right">Created At</TableCell>                                        
+                                                <WhiteTableCell>Event Type</WhiteTableCell>
+                                                <WhiteTableCell align="right">User</WhiteTableCell>
+                                                <WhiteTableCell align="right">Time Stamp</WhiteTableCell> 
+                                                <WhiteTableCell align="right">Created At</WhiteTableCell>                                        
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -80,25 +84,27 @@ const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) =
                                         .map((row) => (
                                             <TableRow
                                             key={row.id}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 }, color: "white" }}
                                             >
-                                                <TableCell component="th" scope="row">
+                                                <WhiteTableCell component="th" scope="row">
                                                     {row.eventTypeName}
-                                                </TableCell>
-                                                <TableCell align="right">{row.userId}</TableCell>
-                                                <TableCell align="right">{moment(new Date(row.timestamp)).format("MMM-DD-YYYY hh:mm A")}</TableCell>
-                                                <TableCell align="right">{moment(new Date(row.createdAt)).format("MMM-DD-YYYY hh:mm A")}</TableCell>                                    
+                                                </WhiteTableCell>
+                                                <WhiteTableCell align="right">{row.userId}</WhiteTableCell>
+                                                <WhiteTableCell align="right">{moment(new Date(row.timestamp)).format("MMM-DD-YYYY hh:mm A")}</WhiteTableCell>
+                                                <WhiteTableCell align="right">{moment(new Date(row.createdAt)).format("MMM-DD-YYYY hh:mm A")}</WhiteTableCell>                                    
                                             </TableRow>
                                         ))
                                     }
                                     </TableBody>                     
                                 </Table>
                                 <TablePagination
+                                sx={{color:"white"}}
                                     count={rows.length}
                                     component="div"
                                     rowsPerPageOptions={[5, 10, 20 ]} // Customize options
                                     rowsPerPage={rowsPerPage}
                                     page={page}
+                                    
                                     onPageChange={handleChangePage}
                                     onRowsPerPageChange={handleChangeRowsPerPage}
                                 />                               

@@ -35,7 +35,7 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents, refreshD
     
     return (     
         <>
-        <div className="p-4 pb-8 border border-stone-300 col-span-12 lg:col-span-8 rounded"> 
+        <div className="p-4 pb-8 border border-stone-300 bg-transparent col-span-12 lg:col-span-8 rounded"> 
                 {
                     loadingChart ? (<p>Loading Chart.....</p>) : (
                         <>
@@ -46,23 +46,20 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents, refreshD
                                     </div>       
                                 </div> 
                                 <div className='text-center'>                                 
-                                    <ButtonGroup variant="outlined" aria-label="Basic button group">
-                                        <Button 
-                                            color='success'
+                                    <ButtonGroup color="success" variant="outlined" aria-label="Basic button group">
+                                        <Button                                                                                    
                                             variant={selectDateType === 'hour' ? 'contained' : 'outlined'}
                                             onClick={() => handleToggle('hour')}
                                         >
                                             Last Hour
                                         </Button>
-                                        <Button                                         
-                                            color='success'
+                                        <Button                                             
                                             variant={selectDateType === 'day' ? 'contained' : 'outlined'}
                                             onClick={() => handleToggle('day')}
                                         >
                                             Last Day
                                         </Button>
-                                        <Button 
-                                            color='success'
+                                        <Button                                                                                       
                                             variant={selectDateType === 'month' ? 'contained' : 'outlined'}
                                             onClick={() => handleToggle('month')}
                                         >
@@ -75,7 +72,7 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents, refreshD
                                 <ResponsiveContainer width="100%" height="100%">
                                     <LineChart data={chartdata} margin={{ top: 5, right: 5, left: 0, bottom: 0 }}>
                                         <CartesianGrid strokeDasharray="3 3" />
-                                        <XAxis dataKey="time" padding={{ left: 30, right: 30 }} tickFormatter={(tick) => moment(new Date(tick)).format("MMM-DD-YYYY hh:mm A")} />
+                                        <XAxis stroke="white" dataKey="time" padding={{ left: 30, right: 30 }} tickFormatter={(tick) => moment(new Date(tick)).format("MMM-DD-YYYY hh:mm A")} />
                                         <YAxis />
                                         <Tooltip labelFormatter={(value) => moment(value).format("MMM-DD-YYYY hh:mm A")} />
                                         <Legend height={22} />
