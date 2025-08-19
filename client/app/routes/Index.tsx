@@ -21,7 +21,7 @@ export const meta: MetaFunction = () => {
   return [
     { title: "Real-Time Analytics Dashboard" },
     { name: "description", content: "Welcome to the dashboard!" },
-    { tagName: "link", rel: "icon", href: "/dashboard-icon.ico" }, // Path to your favicon
+   // { tagName: "link", rel: "icon", href: "../public/dashboard-icon.ico" }, // Path to your favicon
   ];
 }; 
 
@@ -97,7 +97,7 @@ const Home : React.FC = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-100 rounded-lg shadow">       
+      <div className="min-h-screen bg-gray-50 rounded-lg shadow">       
         <TopBar activateCreate={loading} useNav={navigateBackFromAbout} showCreateBtn={showCreateBtn} showReturnBtn={showReturnButton}/>
         <main className="p-1 mx-auto">        
           <div className='px-4 grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-12'>  

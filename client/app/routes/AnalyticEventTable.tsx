@@ -59,7 +59,7 @@ const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) =
 
     return (
         <>      
-            <div className='px-2 md:p-2 pb-0 border border-stone-300 rounded col-span-12 lg:col-span-7'>        
+            <div className='px-2 md:p-2 pb-0 bg-stone-100 border border-stone-300 rounded col-span-12 lg:col-span-7'>        
                 <div className="flex items justify-between py-2">
                     {   //Loading text shows when no data is passed from the parent component
                         loading ? (<p>Loading....</p>) : ( 

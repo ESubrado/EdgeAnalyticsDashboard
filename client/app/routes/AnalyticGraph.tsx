@@ -35,7 +35,7 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents, refreshD
     
     return (     
         <>
-        <div className="p-4 pb-8 border border-stone-300 col-span-12 lg:col-span-8 rounded"> 
+            <div className="p-4 pb-8 border bg-stone-100 border-stone-300 col-span-12 lg:col-span-8 rounded"> 
                 {
                     loadingChart ? (<p>Loading Chart.....</p>) : (
                         <>
