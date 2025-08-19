@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { type MetaFunction } from "react-router";
 import { io } from "socket.io-client";
 
 import { AnalyticGraph } from "./AnalyticGraph";
@@ -7,7 +8,7 @@ import TopBar from "./TopBar";
 import AnalyticPieChart from "./AnalyticPieChart";
 import AnalyticEventTable from "./AnalyticEventTable";
 
-import type { IAnalytics, PieChartItemListProp } from "~/models/analytics-model";
+import type { IAnalytics } from "~/models/analytics-model";
 import type { EventCounterProps } from "~/models/analytics-model";
 import { Snackbar } from "@mui/material";
 import type { SnackbarCloseReason } from "@mui/material";
@@ -15,6 +16,14 @@ import type { SnackbarCloseReason } from "@mui/material";
 import API_BASE_URL from "~/base-client";
 import { useNavigate } from "react-router";
 const socket = io(API_BASE_URL); // your backend URL
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Real-Time Analytics Dashboard" },
+    { name: "description", content: "Welcome to the dashboard!" },
+    { tagName: "link", rel: "icon", href: "/dashboard-icon.ico" }, // Path to your favicon
+  ];
+}; 
 
 const Home : React.FC = () => {
 
@@ -60,7 +69,7 @@ const Home : React.FC = () => {
             socket.disconnect(); // disconnect socket then error is available
             console.error(error.message);        
         } 
-    } 
+    }     
     fetchData();
 
     // Listen for real-time messages
