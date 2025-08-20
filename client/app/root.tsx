@@ -6,6 +6,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 // Built in declaration for react route framework
 import type { Route } from "./+types/root";
@@ -43,7 +45,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <>
+      <Provider store={store}>
+          <Outlet />  
+      </Provider>     
+    </>    
+  );  
 }
 
 // Built in error handler for react router

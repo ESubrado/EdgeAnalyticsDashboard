@@ -1,32 +1,42 @@
 import React, { useState, useEffect } from 'react'
+
+import { useDispatch, useSelector, type UseSelector } from 'react-redux';
+import { fetchGraphData } from '~/store/slices/sliceGraph';
+import { type RootState, type AppDispatch } from '~/store/store';
+
+
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import  ButtonGroup  from '@mui/material/ButtonGroup';
 import { Button} from '@mui/material';
 import type { topTableProps } from '~/models/analytics-model';
 import moment from 'moment';
 
-import API_BASE_URL from '~/base-client';
-
-
 export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents, refreshDependent}) => {
 
-    const [chartdata, setChartData] = useState([]);
-    const [loadingChart, setLoadingChart] = useState(true);
+    //const [chartdata, setChartData] = useState([]);
+    //const [loadingChart, setLoadingChart] = useState(true);
+    const dispatch = useDispatch<AppDispatch>();
+    const { chartdata, loadingChart, error } = useSelector((state: RootState) => state.data)
     const [selectDateType, setSelectDateType] = useState<string>("day");   
 
+
     //Get data for charts, separated due to its logic complexity
-    useEffect(() => {
-        fetch(`${API_BASE_URL}/api/analytics/analyticchart?type=${selectDateType}`)
-        .then((res) => res.json())
-        .then((data) => {           
-            setChartData(data);
-            setLoadingChart(false);
-        })
-        .catch((err) => {      
-            setLoadingChart(true);
-            console.error("Error getting chart items:", err);
-        });   
-    }, [selectDateType, refreshDependent]);
+    // useEffect(() => {
+    //     fetch(`${API_BASE_URL}/api/analytics/analyticchart?type=${selectDateType}`)
+    //     .then((res) => res.json())
+    //     .then((data) => {           
+    //         setChartData(data);
+    //         setLoadingChart(false);
+    //     })
+    //     .catch((err) => {      
+    //         setLoadingChart(true);
+    //         console.error("Error getting chart items:", err);
+    //     });   
+    // }, [selectDateType, refreshDependent]);
+
+    useEffect(()=> {
+        dispatch(fetchGraphData({ type: selectDateType }));
+    }, [dispatch, selectDateType, refreshDependent])
 
     //toggle to change time line
     const handleToggle = (value: string) => {
