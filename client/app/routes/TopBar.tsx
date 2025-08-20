@@ -21,7 +21,7 @@ const TopBar : React.FC<topBarProps> = ({activateCreate}) => {
     };
 
     return (
-        <div className='border-b px-4 mb-2 mt-0 py-2 border-stone-200'>
+        <div className='border-b px-4 mb-2 mt-0 py-2 border-stone-300'>
             <div className="p-2 text-center lg:text-left lg:flex lg:items-center lg:justify-between lg:p-0.5">
                 <div>
                     <div className='grid lg:flex'>

@@ -27,9 +27,9 @@ const AnalyticTopTable : React.FC<TopEventsItemListProp> = ({loading, topEventsI
   const items = getTopFive(newTopEventItem);
   return (
      <>
-        <div className="px-6 py-0 pt-6 border border-stone-300 rounded col-span-12 lg:col-span-4">                    
+      <div className="px-6 py-0 pt-6 bg-stone-100 not-first:border border-stone-300 rounded col-span-12 lg:col-span-4">                    
           <div className="md:flex mb-10 items justify-between">
-             <Paper elevation={3} style={{ 
+             <Paper elevation={10} style={{ 
                 display: "flex", 
                 padding: '2rem', 
                 flexDirection: 'column',                
