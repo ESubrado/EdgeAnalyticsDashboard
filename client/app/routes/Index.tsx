@@ -89,25 +89,32 @@ const Home : React.FC = () => {
   return (
     <>
       <div className="min-h-screen bg-gray-50 rounded-lg shadow">       
-        <TopBar activateCreate={loading} useNav={navigateBackFromAbout} showCreateBtn={showCreateBtn} showReturnBtn={showReturnButton}/>
-        <main className="p-1 mx-auto">        
-          <div className='px-4 grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-12'>  
-            {/*refreshDependent enables the graph to reload when new data is available from the socket */}
-            <AnalyticGraph totalNumEvents={totalEvents} refreshDependent={reloadonIO}/>           
-            <AnalyticTopTable loading={loading} topEventsItems={topEventsdata}/>
-          </div> 
-          <div className='px-4 pt-4 grid gap-3 grid-cols-12'> 
-            <AnalyticPieChart eventsListCount={pieEventTypeCount}/>
-            <AnalyticEventTable loading={loading} eventItems={analyticItem}/>  
-          </div> 
-          {/* { loading ? ( 
-            <p>Loading....</p>
+        <TopBar activateCreate={loading} useNav={navigateBackFromAbout} showCreateBtn={showCreateBtn} showReturnBtn={showReturnButton}/>               
+            { loading ? (
+              <></>
             ) : (
-             <AnalyticItemList items={analyticItem}/>
+              <>
+                 <main className="p-1 mx-auto">        
+                    <div className='px-4 grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-12'>  
+                      {/*refreshDependent enables the graph to reload when new data is available from the socket */}
+                      <AnalyticGraph totalNumEvents={totalEvents} refreshDependent={reloadonIO}/>           
+                      <AnalyticTopTable loading={loading} topEventsItems={topEventsdata}/>
+                    </div> 
+                    <div className='px-4 pt-4 grid gap-3 grid-cols-12'> 
+                      <AnalyticPieChart eventsListCount={pieEventTypeCount}/>
+                      <AnalyticEventTable loading={loading} eventItems={analyticItem}/>  
+                    </div> 
+                    {/* { loading ? ( 
+                      <p>Loading....</p>
+                      ) : (
+                      <AnalyticItemList items={analyticItem}/>
+                      )
+                    }    
+                    */}
+                </main>
+              </>
             )
-          }    
-          */}
-        </main>
+          }   
         <Snackbar
             open={openPrompt}
             autoHideDuration={6000}           
