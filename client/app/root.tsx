@@ -6,6 +6,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import { AppTableProvider } from "./context/AppContext";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 
@@ -48,7 +49,9 @@ export default function App() {
   return (
     <>
       <Provider store={store}>
+        <AppTableProvider>
           <Outlet />  
+        </AppTableProvider>          
       </Provider>     
     </>    
   );  

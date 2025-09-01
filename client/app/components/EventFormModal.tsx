@@ -18,6 +18,7 @@ import type { EventFormInputs } from '~/models/analytics-model';
 import API_BASE_URL from '~/base-client';
 
 const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {  
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const { control , handleSubmit, formState: { errors }, reset } = useForm<EventFormInputs>({
         defaultValues: {
         timestamp: null,
@@ -148,7 +149,9 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
 
             <DialogActions>
                 <Button onClick={() => onClose()}>Cancel</Button>
-                <Button type="submit" form="modal-form" variant="contained">Submit</Button>
+                    <Button type="submit" form="modal-form" variant="contained" disabled={isSubmitting}>
+                        { isSubmitting ? 'Submitting...' : 'Submit' }
+                    </Button>
             </DialogActions>
     
         </Dialog>
