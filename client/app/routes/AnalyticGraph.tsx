@@ -4,11 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchGraphData } from '~/store/slices/sliceGraph';
 import { type RootState, type AppDispatch } from '~/store/store';
 
-
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import  ButtonGroup  from '@mui/material/ButtonGroup';
 import { Button} from '@mui/material';
-import type { topTableProps } from '~/models/analytics-model';
+
 import moment from 'moment';
 import LoadingIcon from '~/components/LoadingIcon';
 import { useAppTableContext } from '~/context/AppContext';
