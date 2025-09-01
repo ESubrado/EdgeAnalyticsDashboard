@@ -18,6 +18,7 @@ import type { EventFormInputs } from '~/models/analytics-model';
 import API_BASE_URL from '~/base-client';
 
 const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {  
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const { control , handleSubmit, formState: { errors }, reset } = useForm<EventFormInputs>({
         defaultValues: {
         timestamp: null,
@@ -27,7 +28,9 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
     });
   
     //Post new data handler
-    const handleFormSubmit : SubmitHandler<EventFormInputs> = async (formData) => {         
+    const handleFormSubmit : SubmitHandler<EventFormInputs> = async (formData) => {      
+        setIsSubmitting(true);   
+        
         try {
             const response = await fetch(`${API_BASE_URL}/api/analytics`, {
                 method: 'POST',
@@ -38,9 +41,10 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
             });
 
             const data = await response.json();
-            console.log('Success:', data);
+            console.log('Success:', data);            
             handleOnClose();
-        } catch (error) {            
+        } catch (error) {   
+            setIsSubmitting(false);          
             console.error('Error:', error);
         }
     };
@@ -48,6 +52,7 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
     const handleOnClose = () =>{
         reset(); // reset form after submit
         onClose(); // close modal
+        setIsSubmitting(false);
     }
 
     //function to handle special characters. Enable also basic formatting buttons.
@@ -148,7 +153,9 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
 
             <DialogActions>
                 <Button onClick={() => onClose()}>Cancel</Button>
-                <Button type="submit" form="modal-form" variant="contained">Submit</Button>
+                    <Button type="submit" form="modal-form" variant="contained" disabled={isSubmitting}>
+                        { isSubmitting ? 'Submitting...' : 'Submit' }
+                    </Button>
             </DialogActions>
     
         </Dialog>

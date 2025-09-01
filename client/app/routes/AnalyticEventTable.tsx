@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Paper from '@mui/material/Paper'; 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,10 +9,10 @@ import TableRow from '@mui/material/TableRow';
 import { TablePagination } from '@mui/material';
 import moment from 'moment';
 
-import type { eventTableProps } from '~/models/analytics-model';
 import useParseEnumFromString from '~/hooks/parse-string';
 import { EnumEventTypes } from '~/models/analytics-model';
 import LoadingIcon from '~/components/LoadingIcon';
+import { useAppTableContext } from '~/context/AppContext';
 
 //function used to create an object that is acceptable to the table. Store it to row array
 function createData(
@@ -26,28 +26,27 @@ function createData(
   return { id, eventType, userId, timestamp, eventTypeName, createdAt };
 }
 
-const AnalyticEventTable : React.FC<eventTableProps> = ({loading, eventItems}) => {
-
+const AnalyticEventTable = () => {
+    const {analyticItemsData, loading} = useAppTableContext();
+    
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const  parseString : any  = useParseEnumFromString(EnumEventTypes)
+    const rows : any[] = [];    
 
-    const rows : any[] = [];
+    console.log('Load Table')
     
     //Loop over event items and create object that is compatible to material table
-    for(let i=0; i<eventItems.length; i++){
+    for (let i = 0; i < analyticItemsData.length; i++){
         rows.push(createData(
-            eventItems[i]._id, 
-            eventItems[i].eventType, 
-            eventItems[i].userId, 
-            eventItems[i].timestamp, 
-            parseString(eventItems[i].eventType) || `Other (${eventItems[i].eventType})`,
-            eventItems[i].createdAt ? eventItems[i].createdAt : null, 
+            analyticItemsData[i]._id, 
+            analyticItemsData[i].eventType, 
+            analyticItemsData[i].userId, 
+            analyticItemsData[i].timestamp, 
+            parseString(analyticItemsData[i].eventType) || `Other (${analyticItemsData[i].eventType})`,
+            analyticItemsData[i].createdAt ? analyticItemsData[i].createdAt : null, 
         ))
-    }
-
-    // ascending sorting of date
-    //rows.sort((a,b) => (a.createdAt < b.createdAt ? 1 : -1)) 
+    }    
 
     //table pagination functions
     const handleChangePage = (event : any, newPage : any) => {

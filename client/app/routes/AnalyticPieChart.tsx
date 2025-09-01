@@ -4,6 +4,7 @@ import type { EventCounterProps, PieChartItemListProp, PieLabelProps } from '~/m
 
 import useParseEnumFromString from '~/hooks/parse-string';
 import { EnumEventTypes } from '~/models/analytics-model';
+import { useAppTableContext } from '~/context/AppContext';
 
 // Initial declaration for pie chart styling and customed label names in legend
 const RADIAN = Math.PI / 180;
@@ -20,16 +21,19 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   );
 };
 
-const AnalyticPieChart : React.FC<PieChartItemListProp> = ({eventsListCount}) => {
+const AnalyticPieChart  = () => {
+
+  const {topEventsData} = useAppTableContext()
 
   const  parseString : any  = useParseEnumFromString(EnumEventTypes)
   const eventcountdata : EventCounterProps[]  = []
   
    //Add parsing to indicate real name of event type
-  for(var i=0; i<eventsListCount.length; i++){
+  for (var i = 0; i < topEventsData.length; i++){
     eventcountdata.push(
-      {...eventsListCount[i], 
-        eventName : parseString(eventsListCount[i].event) || `Other (${eventsListCount[i].event})`
+      {
+        ...topEventsData[i], 
+        eventName: parseString(topEventsData[i].event) || `Other (${topEventsData[i].event})`
       }
     )
   }  

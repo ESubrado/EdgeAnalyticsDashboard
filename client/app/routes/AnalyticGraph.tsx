@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
-import { useDispatch, useSelector, type UseSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchGraphData } from '~/store/slices/sliceGraph';
 import { type RootState, type AppDispatch } from '~/store/store';
 
@@ -11,33 +11,19 @@ import { Button} from '@mui/material';
 import type { topTableProps } from '~/models/analytics-model';
 import moment from 'moment';
 import LoadingIcon from '~/components/LoadingIcon';
+import { useAppTableContext } from '~/context/AppContext';
 
-export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents, refreshDependent}) => {
+export const AnalyticGraph = () => {
+   
+    const {analyticItemsData, socketData} = useAppTableContext();
 
-    //const [chartdata, setChartData] = useState([]);
-    //const [loadingChart, setLoadingChart] = useState(true);
     const dispatch = useDispatch<AppDispatch>();
     const { chartdata, loadingChart, error } = useSelector((state: RootState) => state.data)
-    const [selectDateType, setSelectDateType] = useState<string>("day");   
-
-
-    //Get data for charts, separated due to its logic complexity
-    // useEffect(() => {
-    //     fetch(`${API_BASE_URL}/api/analytics/analyticchart?type=${selectDateType}`)
-    //     .then((res) => res.json())
-    //     .then((data) => {           
-    //         setChartData(data);
-    //         setLoadingChart(false);
-    //     })
-    //     .catch((err) => {      
-    //         setLoadingChart(true);
-    //         console.error("Error getting chart items:", err);
-    //     });   
-    // }, [selectDateType, refreshDependent]);
+    const [selectDateType, setSelectDateType] = useState<string>("day");     
 
     useEffect(()=> {
         dispatch(fetchGraphData({ type: selectDateType }));
-    }, [dispatch, selectDateType, refreshDependent])
+    }, [dispatch, selectDateType, socketData])
 
     //toggle to change time line
     const handleToggle = (value: string) => {
@@ -53,7 +39,7 @@ export const AnalyticGraph: React.FC<topTableProps> = ({totalNumEvents, refreshD
                             <div className='m-1 md:flex justify-between'> 
                                 <div className="mb-2">
                                     <div className="bg-white shadow text-center p-2 md:p-3 md:px-4 rounded-b-md transition">                                       
-                                        <span className='font-semibold text-xl'>Total Number of Events: {totalNumEvents || 0}</span>
+                                        <span className='font-semibold text-xl'>Total Number of Events: {analyticItemsData.length || 0}</span>
                                     </div>       
                                 </div> 
                                 <div className='text-center'>                                 

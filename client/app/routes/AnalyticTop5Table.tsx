@@ -1,25 +1,29 @@
 import React from 'react'
 import { List, ListItem, ListItemText, Paper, Typography } from '@mui/material'
 import type { EventCounterProps } from '~/models/analytics-model'
-import type { TopEventsItemListProp } from '~/models/analytics-model'
+//import type { TopEventsItemListProp } from '~/models/analytics-model'
 
 import useParseEnumFromString from '~/hooks/parse-string';
 import { EnumEventTypes } from '~/models/analytics-model';
+import { useAppTableContext } from '~/context/AppContext';
 
 function getTopFive<T>(arr: T[]): T[] { // show only top 5 in array
   return arr.slice(0, 5);
 }
 
-const AnalyticTopTable : React.FC<TopEventsItemListProp> = ({loading, topEventsItems}) => {   
+const AnalyticTopTable = () => {   
+
+  const {loading, topEventsData} = useAppTableContext()
   
   const  parseString : any  = useParseEnumFromString(EnumEventTypes);
   let newTopEventItem: EventCounterProps[] = [];
 
   //Add parsing to indicate real name of event type
-  for(var i=0; i<topEventsItems.length; i++){
+  for (var i = 0; i < topEventsData.length; i++){
     newTopEventItem.push(
-      {...topEventsItems[i], 
-        eventName : parseString(topEventsItems[i].event) || `Other (${topEventsItems[i].event})`
+      {
+        ...topEventsData[i], 
+        eventName: parseString(topEventsData[i].event) || `Other (${topEventsData[i].event})`
       }
     )
   }
