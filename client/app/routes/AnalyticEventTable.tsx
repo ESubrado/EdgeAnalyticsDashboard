@@ -33,6 +33,8 @@ const AnalyticEventTable = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const  parseString : any  = useParseEnumFromString(EnumEventTypes)
     const rows : any[] = [];    
+
+    console.log('Load Table')
     
     //Loop over event items and create object that is compatible to material table
     for (let i = 0; i < analyticItemsData.length; i++){

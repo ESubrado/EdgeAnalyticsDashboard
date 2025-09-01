@@ -28,7 +28,9 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
     });
   
     //Post new data handler
-    const handleFormSubmit : SubmitHandler<EventFormInputs> = async (formData) => {         
+    const handleFormSubmit : SubmitHandler<EventFormInputs> = async (formData) => {      
+        setIsSubmitting(true);   
+        
         try {
             const response = await fetch(`${API_BASE_URL}/api/analytics`, {
                 method: 'POST',
@@ -39,9 +41,10 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
             });
 
             const data = await response.json();
-            console.log('Success:', data);
+            console.log('Success:', data);            
             handleOnClose();
-        } catch (error) {            
+        } catch (error) {   
+            setIsSubmitting(false);          
             console.error('Error:', error);
         }
     };
@@ -49,6 +52,7 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
     const handleOnClose = () =>{
         reset(); // reset form after submit
         onClose(); // close modal
+        setIsSubmitting(false);
     }
 
     //function to handle special characters. Enable also basic formatting buttons.
