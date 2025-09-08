@@ -27,13 +27,13 @@ const RegisterForm: React.FC = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="flex items-center justify-center min-h-screen90 bg-gray-100">
             <Card className="w-full max-w-md shadow-lg rounded-2xl">
                 <CardContent className="p-6">
                     <Typography variant="h5" className="text-center mb-6 font-bold">
                         Create Account
                     </Typography>
-                    <form onSubmit={handleSubmit} className="space-y-12">
+                    <form onSubmit={handleSubmit} className="space-y-6">
                         <TextField
                             label="Full Name"
                             name="name"

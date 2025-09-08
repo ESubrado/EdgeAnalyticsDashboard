@@ -5,6 +5,7 @@ import EventFormModal from '~/components/EventFormModal';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import type { topBarProps } from '~/models/analytics-model';
+import { Button, ButtonGroup } from '@mui/material';
 
 const TopBar : React.FC<topBarProps> = (props) => {
    
@@ -34,38 +35,45 @@ const TopBar : React.FC<topBarProps> = (props) => {
                         <p>Today is {formattedDateTime}</p>
                     </span>
                 </div>               
-                <div className='pt-3 flex justify-self-center lg:justify-end'> 
-                        {props.showCreateBtn ? (
-                            <>  
-                            <div className='text-sm flex gap-3'>
-                                <button className="flex items-center gap-2 border border-stone-300 bg-stone-100 transition-colors hover:bg-blue-500 px-4 py-1.5 rounded"
-                                    onClick={handleOpenModal} disabled={props.activateCreate}
+                <div className='pt-3 flex justify-self-center lg:justify-end'>
+                    {props.showCreateBtn ? (
+                        <>
+                            <ButtonGroup variant="text" aria-label="Basic button group" sx={{
+                                ".MuiButtonGroup-grouped:not(:last-of-type)": {
+                                    borderColor: "ButtonText",
+                                },
+                            }}> 
+                                <Button className="flex items-center gap-2 border px-4 py-1.5 rounded" sx={{ textTransform: "none", color: 'ButtonText' }}
+                                        onClick={handleOpenModal} disabled={props.activateCreate}
+                                    >
+                                        <span>Add New Event </span>
+                                    </Button>
+                                <Button className="flex items-center gap-2 border px-4 py-1.5 rounded" sx={{ textTransform: "none", color: 'ButtonText' }}
+                                    onClick={() => props.useNav('/register')} disabled={props.activateCreate}
                                 >
-                                    <IoAddCircleOutline fontSize={20} />
-                                    <span>Add New Event </span>
-                                </button>
-                                {/* <button className="flex items-center gap-2 border border-stone-300 bg-stone-100 transition-colors hover:bg-blue-500 px-4 py-1.5 rounded"
-                                    onClick={() => props.useNav('/about')} disabled={props.activateCreate}
-                                >
-                                    <IoInformationCircleOutline fontSize={20} />
-                                    <span >About Page</span>
-                                </button> */}
-                            </div>
-                            </>
-                        ) : (<>
-                            <button className="flex items-center gap-2 border text-sm border-stone-300 bg-stone-100 transition-colors hover:bg-blue-500 px-4 py-1.5 rounded"
+                                    <span >Login</span>
+                                </Button>
+                                <Button className="flex items-center gap-2 border px-4 py-1.5 rounded" sx={{ textTransform: "none", color: 'ButtonText' }}
+                                        onClick={() => props.useNav('/about')} disabled={props.activateCreate}
+                                    >
+                                        <span >About</span>
+                                </Button>
+                            </ButtonGroup>
+                        </>
+                    ) : (
+                        <>
+                            <Button className="flex items-center gap-2 border not-first:px-4 py-1.5 rounded" sx={{ textTransform: "none" }}
                                 onClick={() => props.useNav('/')}
                             >
                                 <IoBackspaceOutline fontSize={20} />
                                 <span>Back</span>
-                            </button>
-                        </>)                        
-                        }  
-
+                            </Button> 
+                        </>
+                    )}  
                     <EventFormModal open={isModalOpen} onClose={handleCloseModal}/>                                                       
                 </div>
             </div>        
-        </div>
+        </div>        
     )
 }
 
