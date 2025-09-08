@@ -1,31 +1,26 @@
-import { useState } from "react";
-import { io } from "socket.io-client";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router";
+
+import { Snackbar } from "@mui/material";
+import type { SnackbarCloseReason } from "@mui/material";
 
 import { AnalyticGraph } from "./AnalyticGraph";
 import AnalyticTopTable from "./AnalyticTop5Table";
 import TopBar from "./TopBar";
 import AnalyticPieChart from "./AnalyticPieChart";
 import AnalyticEventTable from "./AnalyticEventTable";
-
-import { Snackbar } from "@mui/material";
-import type { SnackbarCloseReason } from "@mui/material";
-
-import API_BASE_URL from "~/base-client";
-import { useNavigate } from "react-router";
 import { useAppTableContext } from "~/context/AppContext";
-const socket = io(API_BASE_URL); // your backend URL
 
-const Home = () => {
+const Home : React.FC = () => {
 
-  const {analyticItemsData, loading, loadingError, refreshTables} = useAppTableContext();
-
-  const totalEvents = analyticItemsData.length;
-  //const [reloadonIO, setReloadOnIO] = useState(0)
+  const location = useLocation();
+  const {loading, loadingError, refreshTables} = useAppTableContext();  
+  
   const [openPrompt, setOpenPrompt] = useState(loadingError);
 
-  const showCreateBtn = false;
-  const showReturnButton = true;
-  const navigateBackFromAbout = useNavigate();  
+  const showCreateBtn = location.pathname === '/';
+  const showReturnButton = false;  
+  const navigateBackFromAbout = useNavigate(); 
 
   // function to handle closing of the snack bar component. (prompt)
   const handleClose = (

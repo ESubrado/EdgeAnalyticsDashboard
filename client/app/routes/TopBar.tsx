@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import moment from 'moment'
-import { IoAddCircleOutline } from 'react-icons/io5';
+import { IoAddCircleOutline, IoInformationCircleOutline, IoBackspaceOutline } from 'react-icons/io5';
 import EventFormModal from '~/components/EventFormModal';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import type { topBarProps } from '~/models/analytics-model';
 
-const TopBar : React.FC<topBarProps> = ({activateCreate}) => {
+const TopBar : React.FC<topBarProps> = (props) => {
    
     //Top bar variables declaration
     const formattedDateTime = moment().format("MMMM DD, YYYY");
@@ -34,13 +34,34 @@ const TopBar : React.FC<topBarProps> = ({activateCreate}) => {
                         <p>Today is {formattedDateTime}</p>
                     </span>
                 </div>               
-                <div className='pt-3 flex justify-self-center lg:justify-end'>                    
-                    <button className="border border-stone-300 text-sm flex items-center gap-2 bg-stone-100 transition-colors hover:bg-blue-500 px-3 py-1.5 rounded"
-                        onClick={handleOpenModal} disabled={activateCreate}
-                    >
-                        <IoAddCircleOutline/>
-                        <span>Add New Event </span>
-                    </button>                     
+                <div className='pt-3 flex justify-self-center lg:justify-end'> 
+                        {props.showCreateBtn ? (
+                            <>  
+                            <div className='text-sm flex gap-3'>
+                                <button className="flex items-center gap-2 border border-stone-300 bg-stone-100 transition-colors hover:bg-blue-500 px-4 py-1.5 rounded"
+                                    onClick={handleOpenModal} disabled={props.activateCreate}
+                                >
+                                    <IoAddCircleOutline fontSize={20} />
+                                    <span>Add New Event </span>
+                                </button>
+                                {/* <button className="flex items-center gap-2 border border-stone-300 bg-stone-100 transition-colors hover:bg-blue-500 px-4 py-1.5 rounded"
+                                    onClick={() => props.useNav('/about')} disabled={props.activateCreate}
+                                >
+                                    <IoInformationCircleOutline fontSize={20} />
+                                    <span >About Page</span>
+                                </button> */}
+                            </div>
+                            </>
+                        ) : (<>
+                            <button className="flex items-center gap-2 border text-sm border-stone-300 bg-stone-100 transition-colors hover:bg-blue-500 px-4 py-1.5 rounded"
+                                onClick={() => props.useNav('/')}
+                            >
+                                <IoBackspaceOutline fontSize={20} />
+                                <span>Back</span>
+                            </button>
+                        </>)                        
+                        }  
+
                     <EventFormModal open={isModalOpen} onClose={handleCloseModal}/>                                                       
                 </div>
             </div>        
