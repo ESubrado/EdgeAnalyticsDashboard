@@ -15,6 +15,13 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// Add request logging middleware
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
+
 app.use('/api/analytics', userRoutes);
 
 // create server instance and initialize websocket
@@ -31,6 +38,14 @@ mongoose.connect(process.env.MONGODB_URI!)
   .catch(err => console.error('MongoDB connection error:', err));
 
 const db = mongoose.connection;
+
+db.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
+});
+
+db.on('disconnected', () => {
+  console.log('MongoDB disconnected');
+});
 
 // Socket.IO connection
 io.on('connection', (socket) => {
