@@ -18,7 +18,7 @@ export const AnalyticGraph = () => {
 
     const dispatch = useDispatch<AppDispatch>();
     const { chartdata, loadingChart, error } = useSelector((state: RootState) => state.data)
-    const [selectDateType, setSelectDateType] = useState<string>("day");     
+    const [selectDateType, setSelectDateType] = useState<string>("month");     
 
     useEffect(()=> {
         dispatch(fetchGraphData({ type: selectDateType }));

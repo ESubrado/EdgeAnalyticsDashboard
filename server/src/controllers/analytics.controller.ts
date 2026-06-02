@@ -8,9 +8,12 @@ import moment from 'moment';
 //To Do: Consider adding server paging for optimization
 export const getAnalyticItem = async (_: Request, res: Response) => {
     try{
-        const analyticsData = await AnalyticsBase.find({}).sort({createdAt: 'desc'});      
+        console.log('Fetching all analytics data...');
+        const analyticsData = await AnalyticsBase.find({}).sort({createdAt: 'desc'});
+        console.log(`Found ${analyticsData.length} analytics records`);
         res.json(analyticsData);
     } catch(err : any) {
+        console.error('Error retrieving analytics:', err);
         res.status(500).send({
             message: err.message || "Some error occurred while retrieving stories."
         });
