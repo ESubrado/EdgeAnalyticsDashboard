@@ -57,7 +57,7 @@ type PortfolioProject = {
 const developerProfile = {
   name: "Eugene Jr Subrado",
   role: "Software Development Engineer",
-  photoUrl: "",
+  photoUrl: "/myProfilePhoto.jpg",
   initials: "ES",
   pitch:
     "Software development engineer specializing in robust front-end pages, automation platforms, and full-stack web applications.",
@@ -104,7 +104,7 @@ const profileSections: ProfileSection[] = [
     id: "about-me",
     navLabel: "About",
     eyebrow: "Profile",
-    headline: "Software development engineer with about 10 years of experience.",
+    headline: "Experienced Software Development Engineer",
     summary: developerProfile.about,
     icon: IoPersonCircleOutline,
     accent: "bg-orange-500",
@@ -488,7 +488,14 @@ const AboutTheDeveloper = () => {
         <div className="grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
           <aside className="lg:sticky lg:top-3 lg:max-h-[calc(100vh-1.5rem)] lg:self-start lg:overflow-y-auto lg:pr-1">
             <div className="border border-stone-300 bg-white p-4 shadow-sm lg:p-3">
-              {showAsideIdentity && (
+              <div
+                aria-hidden={!showAsideIdentity}
+                className={`overflow-hidden transition-all duration-300 ease-out motion-reduce:transition-none ${
+                  showAsideIdentity
+                    ? "max-h-32 translate-y-0 opacity-100"
+                    : "max-h-0 translate-y-3 opacity-0"
+                }`}
+              >
                 <div className="flex items-center gap-3">
                   <div className="grid h-24 w-24 shrink-0 place-items-center overflow-hidden rounded border border-stone-300 bg-stone-100">
                     {developerProfile.photoUrl ? (
@@ -510,7 +517,7 @@ const AboutTheDeveloper = () => {
                     </p>
                   </div>
                 </div>
-              )}
+              </div>
 
               <div className={`${showAsideIdentity ? "mt-3" : ""} space-y-2`}>
                 {contactItems.map((item) => {

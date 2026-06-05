@@ -7,6 +7,8 @@ type AboutDeveloperHeaderProps = {
     role: string;
     pitch: string;
     availability: string;
+    photoUrl: string;
+    initials: string;
   };
 };
 
@@ -24,16 +26,31 @@ const AboutDeveloperHeader = ({ profile }: AboutDeveloperHeaderProps) => (
       </div>
       <section className="border-b border-stone-300 pb-5">
         <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(280px,360px)] lg:items-end">
-          <div>
-            <span className="text-sm font-semibold uppercase tracking-normal text-emerald-700">
-              About the Developer
-            </span>
-            <h1 className="mt-2 text-3xl font-bold text-stone-900 lg:text-4xl">
-              {profile.name}
-            </h1>
-            <p className="mt-3 max-w-3xl text-base leading-7 text-stone-600">
-              {profile.pitch}
-            </p>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="grid h-32 w-32 shrink-0 place-items-center overflow-hidden rounded border border-stone-300 bg-stone-100 lg:h-36 lg:w-36">
+              {profile.photoUrl ? (
+                <img
+                  src={profile.photoUrl}
+                  alt={profile.name}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <span className="text-4xl font-bold text-stone-700">
+                  {profile.initials}
+                </span>
+              )}
+            </div>
+            <div>
+              <span className="text-sm font-semibold uppercase tracking-normal text-emerald-700">
+                About the Developer
+              </span>
+              <h1 className="mt-2 text-3xl font-bold text-stone-900 lg:text-4xl">
+                {profile.name}
+              </h1>
+              <p className="mt-3 max-w-3xl text-base leading-7 text-stone-600">
+                {profile.pitch}
+              </p>
+            </div>
           </div>
           <div className="flex items-center gap-3 border border-stone-300 bg-white p-4 shadow-sm">
             <IoRocketOutline className="h-6 w-6 shrink-0 text-emerald-700" />
