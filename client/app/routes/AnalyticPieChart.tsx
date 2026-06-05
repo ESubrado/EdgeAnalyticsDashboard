@@ -1,6 +1,7 @@
 import React from 'react'
 import { Cell, Pie, PieChart, Legend } from 'recharts';
-import type { EventCounterProps, PieChartItemListProp, PieLabelProps } from '~/models/analytics-model';
+import type { PieLabelRenderProps } from 'recharts';
+import type { EventCounterProps } from '~/models/analytics-model';
 
 import useParseEnumFromString from '~/hooks/parse-string';
 import { EnumEventTypes } from '~/models/analytics-model';
@@ -10,7 +11,7 @@ import { useAppTableContext } from '~/context/AppContext';
 const RADIAN = Math.PI / 180;
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#c91e08', '#535406', "#00000"];
 
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, name }: PieLabelProps) => {
+const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: PieLabelRenderProps) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-(midAngle ?? 0) * RADIAN);
   const y = cy + radius * Math.sin(-(midAngle ?? 0) * RADIAN);
