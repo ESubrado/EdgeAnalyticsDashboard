@@ -6,6 +6,7 @@ import {
   IoCodeSlashOutline,
   IoFolderOpenOutline,
   IoGlobeOutline,
+  IoLocationOutline,
   IoLogoGithub,
   IoLogoLinkedin,
   IoMailOutline,
@@ -41,6 +42,8 @@ type TimelineItem = {
   organization: string;
   period: string;
   description: string;
+  bullets?: string[];
+  href?: string;
 };
 
 type PortfolioProject = {
@@ -52,32 +55,40 @@ type PortfolioProject = {
 };
 
 const developerProfile = {
-  name: "Eugene Subrado Jr.",
-  role: "Full-stack Developer",
+  name: "Eugene Jr Subrado",
+  role: "Software Development Engineer",
   photoUrl: "",
   initials: "ES",
   pitch:
-    "I build practical web applications that turn live operational data into interfaces people can scan, trust, and act on quickly.",
-  availability: "Open to full-stack, frontend, and dashboard-focused opportunities",
+    "Software development engineer specializing in robust front-end pages, automation platforms, and full-stack web applications.",
+  about:
+    "A professional software engineer with about ten (10) years of experience in developing quality, robust, and optimized front-end web pages. Knowledgeable in platforms such as JavaScript, jQuery, Flask (Python), Node.js (Express.js), Kendo UI, Bootstrap, Vue.js, and React (Next.js). Developed, contributed, and completed major automation projects for a pharmaceutical company that employs more than 5,000 individuals globally. Dependable, self-starting, and solutions-oriented with a strong commitment to team goals and client satisfaction.",
+  availability: "Based in Dumaguete City, Philippines",
 };
 
 const contactItems: ContactItem[] = [
   {
-    label: "Email",
-    value: "your.email@example.com",
-    href: "mailto:your.email@example.com",
-    icon: IoMailOutline,
-  },
-  {
     label: "Phone",
-    value: "+63 000 000 0000",
-    href: "tel:+630000000000",
+    value: "+63 999 735 5553",
+    href: "tel:+639997355553",
     icon: IoCallOutline,
   },
   {
+    label: "Email",
+    value: "eug.subradojr@gmail.com",
+    href: "mailto:eug.subradojr@gmail.com",
+    icon: IoMailOutline,
+  },
+  {
+    label: "Location",
+    value: "Dumaguete City, Philippines",
+    href: "https://www.google.com/maps/search/Dumaguete%20City%2C%20Philippines",
+    icon: IoLocationOutline,
+  },
+  {
     label: "LinkedIn",
-    value: "linkedin.com/in/your-profile",
-    href: "https://www.linkedin.com/",
+    value: "linkedin.com/in/esubrado",
+    href: "https://www.linkedin.com/in/esubrado/",
     icon: IoLogoLinkedin,
   },
   {
@@ -93,170 +104,302 @@ const profileSections: ProfileSection[] = [
     id: "about-me",
     navLabel: "About",
     eyebrow: "Profile",
-    headline: "Developer profile built around real-time, useful software.",
-    summary:
-      "I enjoy shaping full-stack products where frontend clarity, API behavior, and data flow all work together. My recent work centers on a MERN real-time event analytics dashboard with live updates, charts, tables, and form validation.",
+    headline: "Software development engineer with about 10 years of experience.",
+    summary: developerProfile.about,
     icon: IoPersonCircleOutline,
-    accent: "bg-emerald-500",
+    accent: "bg-orange-500",
     points: [
-      "MERN application development",
-      "Real-time dashboard interfaces",
-      "Readable analytics and workflow-focused UI",
+      "Robust front-end web pages",
+      "Automation platforms for global users",
+      "Dependable and solutions-oriented delivery",
     ],
   },
   {
     id: "tech-stack",
     navLabel: "Tech",
     eyebrow: "Technology Stack",
-    headline: "A stack selected for responsive dashboards and maintainable APIs.",
+    headline: "Front-end, full-stack, CMS, analytics, and delivery tools.",
     summary:
-      "The current project uses React, React Router, TypeScript, Tailwind CSS, Material UI, Recharts, Node.js, Express, Socket.IO, MongoDB, Docker, and Render deployment.",
+      "Technical skills include React, jQuery, JavaScript, Bootstrap, Tailwind CSS, Node.js, Express.js, NestJS, Python, Flask, TypeScript, Next.js, MongoDB, SharePoint CSOM, SQL databases, API tools, deployment platforms, and Agile delivery workflows.",
     icon: IoCodeSlashOutline,
     accent: "bg-sky-500",
     points: [
-      "React UI composition with reusable route components",
-      "Express and MongoDB API workflows",
-      "Socket.IO updates for real-time data refresh",
+      "React v16+ / jQuery / JavaScript",
+      "Node.js / Express.js / NestJS",
+      "Python 3.0+ / Flask",
     ],
   },
   {
     id: "experience",
     navLabel: "Experience",
     eyebrow: "Experience",
-    headline: "Hands-on delivery from data model through deployed interface.",
+    headline: "Professional experience across engineering, project delivery, support, and audit.",
     summary:
-      "My experience covers building dashboard features, wiring REST endpoints, modeling MongoDB data, validating user input, and deploying a working full-stack application.",
+      "Experience includes software engineering at Xtensa Inc. and Quartica, project management at Maks Enterprises, customer retention technical support at Qualfon Philippines, and IT internal audit work at Silliman University.",
     icon: IoBriefcaseOutline,
     accent: "bg-amber-500",
     points: [
-      "Dashboard pages with charts, top lists, and event tables",
-      "Create-entry workflows with validation and server persistence",
-      "Production deployment using Render and Docker-ready project structure",
+      "Project Manager / Scrum Master",
+      "Senior Front End Engineer",
+      "IT Internal Auditor and support roles",
     ],
   },
   {
     id: "certificates-awards",
     navLabel: "Awards",
     eyebrow: "Certificates and Awards",
-    headline: "Credentials, recognition, and milestones in one place.",
+    headline: "Cybersecurity, front-end development, REST APIs, and company awards.",
     summary:
-      "Use this section for certifications, training, awards, recognitions, or professional milestones from your CV or PDF profile.",
+      "Certificates include ISC2 Certified in Cybersecurity candidate status, Meta Front-End Professional Certificate, and an ongoing Udemy REST API course. Awards include loyalty, engagement, and team captain recognition from Xtensa Inc.",
     icon: IoRibbonOutline,
     accent: "bg-rose-500",
     points: [
-      "Certification name, issuer, and date",
-      "Award title, organization, and achievement context",
-      "Training or bootcamp completion details",
+      "ISC2 Certified in Cybersecurity candidate",
+      "Meta Front-End Professional Certificate",
+      "Xtensa Inc. recognition awards",
     ],
   },
   {
     id: "portfolio-projects",
     navLabel: "Projects",
     eyebrow: "Portfolio Projects",
-    headline: "Project work that shows how the stack comes together.",
+    headline: "Deployed portfolio work with dashboard and billing automation use cases.",
     summary:
-      "The portfolio area highlights shipped work, technical decisions, and the problem each project solves. The current dashboard project is included as a real example.",
+      "Portfolio projects include a real-time event analytics dashboard and Simplify Bill, a billing PDF conversion tool built with a Next.js and Flask technology stack.",
     icon: IoFolderOpenOutline,
     accent: "bg-cyan-600",
     points: [
-      "Live project links and source repositories",
-      "Stack tags for quick scanning",
-      "Short outcome-focused project summaries",
+      "MERN dashboard with Socket.IO",
+      "Next.js and Flask billing PDF converter",
+      "Hosted project demonstrations",
     ],
+  },
+];
+
+const skillRatings = [
+  {
+    label: "React v16+ / jQuery / JavaScript",
+    value: 85,
+  },
+  {
+    label: "Bootstrap / Tailwind / CSS3",
+    value: 83,
+  },
+  {
+    label: "Node.js / Express.js / NestJS",
+    value: 80,
+  },
+  {
+    label: "Python 3.0+ / Flask",
+    value: 75,
   },
 ];
 
 const technologyGroups = [
   {
-    title: "Frontend",
-    tools: ["React", "React Router", "TypeScript", "Tailwind CSS", "Material UI", "Recharts"],
+    title: "Frontend and UI",
+    tools: [
+      "React v16+",
+      "jQuery",
+      "Vanilla JavaScript",
+      "TypeScript",
+      "React Redux",
+      "Vue 3",
+      "Next.js",
+      "Bootstrap",
+      "Tailwind CSS",
+      "CSS3",
+      "Material UI",
+      "Recharts",
+      "Kendo UI",
+    ],
   },
   {
-    title: "Backend",
-    tools: ["Node.js", "Express.js", "REST APIs", "Socket.IO", "Mongoose"],
+    title: "Backend and Data",
+    tools: [
+      "Node.js",
+      "Express.js",
+      "NestJS",
+      "Python 3.0+",
+      "Flask",
+      "REST APIs",
+      "MongoDB",
+      "SQLite",
+      "PostgreSQL",
+      "GraphQL",
+      "SharePoint List CSOM",
+    ],
   },
   {
-    title: "Database and Tools",
-    tools: ["MongoDB", "GitHub", "Render", "Docker", "Postman", "Vite"],
+    title: "CMS, Tools, and Delivery",
+    tools: [
+      "WordPress",
+      "Elementor",
+      "WooCommerce",
+      "Fiddler",
+      "Postman",
+      "Jest",
+      "Browser Dev Tools",
+      "Azure",
+      "Render",
+      "SourceTree",
+      "GitHub",
+      "GitKraken",
+      "Canva",
+      "Figma",
+      "Jira",
+    ],
+  },
+  {
+    title: "AI, Analytics, and Process",
+    tools: [
+      "GPT-4.1",
+      "Claude Opus",
+      "Cursor",
+      "GitHub Copilot",
+      "Agile Scrum Methodology",
+      "Continuous Improvement and Delivery",
+      "Google Analytics",
+      "Google Tag Manager",
+    ],
+  },
+];
+
+
+const academicItems: TimelineItem[] = [
+  {
+    title: "Bachelor of Science in Computer Engineering",
+    organization: "Silliman University, Philippines",
+    period: "SY 2002 - 2007",
+    description: "Completed the Bachelor of Science in Computer Engineering program.",
   },
 ];
 
 const experienceItems: TimelineItem[] = [
   {
-    title: "Full-stack Developer",
-    organization: "Edge Real-Time Analytics Dashboard",
-    period: "2026",
+    title: "Project Manager / Scrum Master",
+    organization: "Maks Enterprises",
+    period: "Dec 2025 - May 2026",
     description:
-      "Built a MERN dashboard that visualizes event activity using charts, top event lists, a live event table, validated create forms, and Socket.IO refresh behavior.",
+      "Contract role focused on software development project delivery.",
+    bullets: [
+      "Managed software development projects using Jira and Agile methodologies as Scrum Master.",
+      "Coordinated developers, QA teams, and stakeholders to deliver CRM and e-commerce enhancements for MAKRO ERP.",
+      "Facilitated stakeholder demonstrations and translated business requirements into technical deliverables.",
+      "Led feature planning, sprint execution, and release activities for WordPress, WooCommerce, and custom web applications.",
+      "Collaborated closely with developers on implementation strategies, issue resolution, and deployment planning.",
+    ],
   },
   {
-    title: "Frontend Dashboard Development",
-    organization: "React, Tailwind CSS, Material UI, Recharts",
-    period: "Project work",
+    title: "Software Engineer / Senior Front End Engineer",
+    organization: "Xtensa Inc. / Quartica",
+    period: "Aug 2015 - Jul 2025",
     description:
-      "Created responsive dashboard layouts for analytics data with chart filtering, dense tables, reusable components, and clear empty/loading/error states.",
+      "Developed and maintained web applications and pages for clients in the pharmaceutical and chemical industry.",
+    bullets: [
+      "Served as Software Engineer from August 2015 to June 2023 and Senior Front End Engineer from July 2023 to July 2025.",
+      "Developed and maintained SharePoint-based web applications, including a list aggregator using HTML, CSS, Bootstrap, jQuery, and CSOM.",
+      "Modernized legacy client upskilling platforms by upgrading outdated jQuery and Kendo UI implementations.",
+      "Built core front-end functionality and API integrations for the SDS module using SPA architecture, React, jQuery, Bootstrap, and Kendo UI.",
+      "Supported over 5,000 global users and mentored junior developers on methodologies, tools, optimization, and collaboration practices.",
+    ],
   },
   {
-    title: "Backend API and Data Modeling",
-    organization: "Node.js, Express.js, MongoDB",
-    period: "Project work",
+    title: "Customer Retention Team",
+    organization: "Qualfon Philippines Inc.",
+    period: "Oct 2014 - Jul 2015",
     description:
-      "Implemented API routes for analytics entries, top events, chart-ready data, and new event creation using MongoDB-backed persistence.",
+      "Provided customer retention support for mobile devices and telecommunications services.",
+    bullets: [
+      "Provided technical support and troubleshooting for mobile devices and telecommunications services while maintaining quality standards.",
+      "Developed strong communication and problem-resolution skills by translating technical concepts into user-friendly guidance.",
+    ],
+  },
+  {
+    title: "IT Internal Auditor",
+    organization: "Silliman University",
+    period: "Jun 2013 - May 2014",
+    description:
+      "Performed IT audit work involving infrastructure, backup systems, and database records.",
+    bullets: [
+      "Analyzed IT infrastructure, backup systems, and database records using SQL to identify risks, validate data accuracy, and recommend process improvements using COBIT as a standard.",
+      "Prepared technical documentation and presented findings to stakeholders, strengthening analytical and problem-solving skills.",
+    ],
   },
 ];
 
 const certificateItems: TimelineItem[] = [
   {
-    title: "Certificate Title",
-    organization: "Issuing Organization",
-    period: "Year",
+    title: "Certified in Cybersecurity Certification",
+    organization: "ISC2",
+    period: "August 2024",
     description:
-      "Add the certificate focus, covered skills, credential ID, or verification link from the profile PDF.",
+      "Candidate only. ID: 9287lcdd-5549-4495-85d1-ca2f0538854, valid until August 2027.",
   },
   {
-    title: "Award or Recognition Title",
-    organization: "Awarding Organization",
-    period: "Year",
+    title: "Meta Front-End Professional Certificate",
+    organization: "Coursera",
+    period: "June 2024",
     description:
-      "Add the achievement context, category, ranking, or reason this recognition matters.",
+      "React and Node.js based professional certificate.",
+    href: "https://coursera.org/verify/professional-cert/MTX3V5JYCSBSB",
   },
   {
-    title: "Training or Professional Milestone",
-    organization: "Program Provider",
-    period: "Year",
+    title: "Build Professional REST APIs with Python, Flask, Docker, Flask-Smorest, and Flask-SQLAlchemy",
+    organization: "Udemy",
+    period: "Ongoing",
     description:
-      "Add completion details for workshops, bootcamps, seminars, or professional development.",
+      "Ongoing professional development course focused on production-ready Python REST API development.",
+  },
+];
+
+const awardItems: TimelineItem[] = [
+  {
+    title: "Five (5) Years, Loyalty Service Award",
+    organization: "Xtensa Inc.",
+    period: "December 2020",
+    description: "Received for five years of service.",
+  },
+  {
+    title: "The Engagement Champion Award",
+    organization: "Xtensa Inc.",
+    period: "December 2022",
+    description:
+      "Received for being an active and engaged employee and acting as a role model for others.",
+  },
+  {
+    title: "Team Captain Award",
+    organization: "Xtensa Inc.",
+    period: "December 15, 2023",
+    description:
+      "Received for embodying the qualities of Captain America: leadership, integrity, and commitment to work.",
   },
 ];
 
 const portfolioProjects: PortfolioProject[] = [
   {
     title: "Edge Real-Time Analytics Dashboard",
-    type: "Full-stack dashboard",
+    type: "Real-time MERN dashboard",
     description:
-      "A deployed MERN application with real-time event updates, chart filtering, event creation, top-event summaries, and MongoDB-backed analytics APIs.",
-    stack: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "Socket.IO"],
+      "A dashboard that updates in real time when a new event is added to the database. The project is based on a MERN pattern using React v19 with Tailwind CSS, Material UI, and Socket.IO, backed by a Node.js and Express backend.",
+    stack: ["React v19", "Tailwind CSS", "Material UI", "Socket.IO", "Node.js", "Express"],
     href: "https://edgeanalytics-client.onrender.com/",
   },
   {
-    title: "Portfolio Project Title",
-    type: "Project category",
+    title: "Simplify Bill",
+    type: "Billing PDF conversion tool",
     description:
-      "Add a short project summary from the PDF: the problem, your role, the result, and the technologies used.",
-    stack: ["React", "API", "Database"],
-  },
-  {
-    title: "Capstone or Professional Project",
-    type: "Featured work",
-    description:
-      "Use this card for a second major project, client deliverable, school project, or open-source contribution.",
-    stack: ["Frontend", "Backend", "Deployment"],
+      "Converts a hundred-page business telephone billing PDF file for Verizon Business into an understandable format with charts and individual person charges. Uses a Next.js frontend and Flask backend. Demonstration needed.",
+    stack: ["Next.js", "React", "Flask", "Python", "Charts"],
+    href: "https://simpliebilling.onrender.com/",
   },
 ];
 
 const AboutTheDeveloper = () => {
+  const headerRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const [activeSectionId, setActiveSectionId] = useState(profileSections[0].id);
+  const [showAsideIdentity, setShowAsideIdentity] = useState(false);
 
   const activeSection = useMemo(
     () =>
@@ -266,31 +409,63 @@ const AboutTheDeveloper = () => {
   );
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((first, second) => second.intersectionRatio - first.intersectionRatio)[0];
+    const updateAsideIdentityVisibility = () => {
+      const headerElement = headerRef.current;
 
-        if (visibleEntry?.target.id) {
-          setActiveSectionId(visibleEntry.target.id);
-        }
-      },
-      {
-        rootMargin: "-34% 0px -45% 0px",
-        threshold: [0.2, 0.45, 0.7],
-      },
-    );
-
-    profileSections.forEach((section) => {
-      const sectionElement = sectionRefs.current[section.id];
-
-      if (sectionElement) {
-        observer.observe(sectionElement);
+      if (!headerElement) {
+        return;
       }
-    });
 
-    return () => observer.disconnect();
+      setShowAsideIdentity(headerElement.getBoundingClientRect().bottom <= 0);
+    };
+
+    updateAsideIdentityVisibility();
+    window.addEventListener("scroll", updateAsideIdentityVisibility, { passive: true });
+    window.addEventListener("resize", updateAsideIdentityVisibility);
+
+    return () => {
+      window.removeEventListener("scroll", updateAsideIdentityVisibility);
+      window.removeEventListener("resize", updateAsideIdentityVisibility);
+    };
+  }, []);
+
+  useEffect(() => {
+    let animationFrameId: number | null = null;
+
+    const updateActiveSection = () => {
+      animationFrameId = null;
+
+      const nextActiveSectionId = getActiveProfileSectionId(sectionRefs.current);
+
+      if (nextActiveSectionId) {
+        setActiveSectionId((currentActiveSectionId) =>
+          currentActiveSectionId === nextActiveSectionId
+            ? currentActiveSectionId
+            : nextActiveSectionId,
+        );
+      }
+    };
+
+    const requestActiveSectionUpdate = () => {
+      if (animationFrameId !== null) {
+        return;
+      }
+
+      animationFrameId = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    requestActiveSectionUpdate();
+    window.addEventListener("scroll", requestActiveSectionUpdate, { passive: true });
+    window.addEventListener("resize", requestActiveSectionUpdate);
+
+    return () => {
+      if (animationFrameId !== null) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+
+      window.removeEventListener("scroll", requestActiveSectionUpdate);
+      window.removeEventListener("resize", requestActiveSectionUpdate);
+    };
   }, []);
 
   const handleSectionSelect = (sectionId: string) => {
@@ -302,37 +477,42 @@ const AboutTheDeveloper = () => {
   };
 
   const ActiveIcon = activeSection.icon;
+  const activeSummaryPreview = getSummaryPreview(activeSection.summary);
 
   return (
     <div className="min-h-screen rounded-lg bg-gray-50 shadow">
-      <AboutDeveloperHeader profile={developerProfile} />
+      <div ref={headerRef}>
+        <AboutDeveloperHeader profile={developerProfile} />
+      </div>
       <main className="mx-auto max-w-7xl px-4 pb-10 pt-4">
         <div className="grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
-          <aside className="lg:sticky lg:top-4 lg:self-start">
-            <div className="border border-stone-300 bg-white p-5 shadow-sm">
-              <div className="flex items-center gap-4">
-                <div className="grid h-24 w-24 shrink-0 place-items-center overflow-hidden rounded border border-stone-300 bg-stone-100">
-                  {developerProfile.photoUrl ? (
-                    <img
-                      src={developerProfile.photoUrl}
-                      alt={developerProfile.name}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <span className="text-3xl font-bold text-stone-700">
-                      {developerProfile.initials}
-                    </span>
-                  )}
+          <aside className="lg:sticky lg:top-3 lg:max-h-[calc(100vh-1.5rem)] lg:self-start lg:overflow-y-auto lg:pr-1">
+            <div className="border border-stone-300 bg-white p-4 shadow-sm lg:p-3">
+              {showAsideIdentity && (
+                <div className="flex items-center gap-3">
+                  <div className="grid h-24 w-24 shrink-0 place-items-center overflow-hidden rounded border border-stone-300 bg-stone-100">
+                    {developerProfile.photoUrl ? (
+                      <img
+                        src={developerProfile.photoUrl}
+                        alt={developerProfile.name}
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <span className="text-2xl font-bold text-stone-700">
+                        {developerProfile.initials}
+                      </span>
+                    )}
+                  </div>
+                  <div>
+                    <p className="text-lg font-bold leading-tight text-stone-900">{developerProfile.name}</p>
+                    <p className="text-sm font-medium text-emerald-700">
+                      {developerProfile.role}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xl font-bold text-stone-900">{developerProfile.name}</p>
-                  <p className="text-sm font-medium text-emerald-700">
-                    {developerProfile.role}
-                  </p>
-                </div>
-              </div>
+              )}
 
-              <div className="mt-5 space-y-3">
+              <div className={`${showAsideIdentity ? "mt-3" : ""} space-y-2`}>
                 {contactItems.map((item) => {
                   const ContactIcon = item.icon;
 
@@ -340,9 +520,9 @@ const AboutTheDeveloper = () => {
                     <a
                       key={item.label}
                       href={item.href}
-                      className="flex items-center gap-3 border border-stone-200 bg-gray-50 px-3 py-2 text-sm transition-colors hover:border-emerald-400 hover:bg-emerald-50"
+                      className="flex items-center gap-2 border border-stone-200 bg-gray-50 px-2.5 py-1.5 text-sm transition-colors hover:border-emerald-400 hover:bg-emerald-50"
                     >
-                      <ContactIcon className="h-5 w-5 shrink-0 text-stone-700" />
+                      <ContactIcon className="h-4 w-4 shrink-0 text-stone-700" />
                       <span className="min-w-0">
                         <span className="block font-semibold text-stone-900">{item.label}</span>
                         <span className="block break-words text-stone-600">{item.value}</span>
@@ -350,50 +530,32 @@ const AboutTheDeveloper = () => {
                     </a>
                   );
                 })}
-              </div>
+              </div>            
 
-              <div className="mt-5 border-t border-stone-200 pt-5">
-                <div className="flex items-center gap-3">
-                  <span className={`h-10 w-1.5 ${activeSection.accent}`} />
+              <div className="mt-3 border-t border-stone-200 pt-3">
+                <div className="flex items-center gap-2.5">
+                  <span className={`h-8 w-1.5 ${activeSection.accent}`} />
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-normal text-stone-500">
                       Now Viewing
                     </p>
-                    <p className="text-lg font-bold text-stone-900">{activeSection.eyebrow}</p>
+                    <p className="text-base font-bold text-stone-900">{activeSection.eyebrow}</p>
                   </div>
                 </div>
-                <div className="mt-4 flex gap-3">
-                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded border border-stone-300 bg-stone-100">
-                    <ActiveIcon className="h-6 w-6 text-stone-800" />
+                <div className="mt-3 flex gap-2.5">
+                  <div className="grid h-9 w-9 shrink-0 place-items-center rounded border border-stone-300 bg-stone-100">
+                    <ActiveIcon className="h-5 w-5 text-stone-800" />
                   </div>
-                  <p className="text-sm leading-6 text-stone-600">{activeSection.summary}</p>
+                  <p className="text-sm leading-5 text-stone-600">{activeSummaryPreview}</p>
                 </div>
               </div>
             </div>
 
-            <nav className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-1" aria-label="Profile sections">
-              {profileSections.map((section) => {
-                const SectionIcon = section.icon;
-                const isActive = section.id === activeSectionId;
-
-                return (
-                  <button
-                    key={section.id}
-                    type="button"
-                    title={section.eyebrow}
-                    onClick={() => handleSectionSelect(section.id)}
-                    className={`flex h-11 items-center gap-2 border px-3 text-left text-sm font-semibold transition-colors ${
-                      isActive
-                        ? "border-emerald-500 bg-emerald-50 text-emerald-900"
-                        : "border-stone-300 bg-white text-stone-700 hover:border-emerald-300 hover:bg-emerald-50"
-                    }`}
-                  >
-                    <SectionIcon className="h-5 w-5 shrink-0" />
-                    <span className="truncate">{section.navLabel}</span>
-                  </button>
-                );
-              })}
-            </nav>
+            <ProfileSectionNavigation
+              activeSectionId={activeSectionId}
+              sections={profileSections}
+              onSectionSelect={handleSectionSelect}
+            />
           </aside>
 
           <div className="space-y-6">
@@ -408,14 +570,10 @@ const AboutTheDeveloper = () => {
                     <p className="mt-3 text-sm font-semibold leading-6 text-stone-800">{point}</p>
                   </div>
                 ))}
-              </div>
-              <div className="border border-stone-300 bg-white p-5 shadow-sm">
-                <h3 className="text-lg font-bold text-stone-900">Profile Snapshot</h3>
-                <p className="mt-2 text-sm leading-6 text-stone-600">
-                  This first section is arranged for a professional profile photo, headline,
-                  direct contact methods, and a quick summary of developer focus. It is ready for
-                  the exact biography and contact details from the PDF.
-                </p>
+              </div>             
+              <div>
+                <h3 className="mb-3 text-lg font-bold text-stone-900">Academic History</h3>
+                <Timeline items={academicItems} icon={IoSchoolOutline} />
               </div>
             </ProfileScrollSection>
 
@@ -423,7 +581,11 @@ const AboutTheDeveloper = () => {
               section={profileSections[1]}
               sectionRefs={sectionRefs}
             >
-              <div className="grid gap-4 md:grid-cols-3">
+              <div className="border border-stone-300 bg-white p-5 shadow-sm">
+                <h3 className="text-lg font-bold text-stone-900">Technical Skill Ratings</h3>
+                <SkillMeterList skills={skillRatings} />
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
                 {technologyGroups.map((group) => (
                   <div key={group.title} className="border border-stone-300 bg-white p-5 shadow-sm">
                     <h3 className="text-lg font-bold text-stone-900">{group.title}</h3>
@@ -453,14 +615,21 @@ const AboutTheDeveloper = () => {
               section={profileSections[3]}
               sectionRefs={sectionRefs}
             >
-              <Timeline items={certificateItems} icon={IoSchoolOutline} />
+              <div>
+                <h3 className="mb-3 text-lg font-bold text-stone-900">Certificates</h3>
+                <Timeline items={certificateItems} icon={IoSchoolOutline} />
+              </div>
+              <div>
+                <h3 className="mb-3 text-lg font-bold text-stone-900">Awards</h3>
+                <Timeline items={awardItems} icon={IoRibbonOutline} />
+              </div>
             </ProfileScrollSection>
 
             <ProfileScrollSection
               section={profileSections[4]}
               sectionRefs={sectionRefs}
             >
-              <div className="grid gap-4 xl:grid-cols-3">
+              <div className="grid gap-4 xl:grid-cols-2">
                 {portfolioProjects.map((project) => (
                   <article
                     key={project.title}
@@ -508,6 +677,104 @@ const AboutTheDeveloper = () => {
   );
 };
 
+const getSummaryPreview = (summary: string, limit = 80) => {
+  if (summary.length <= limit) {
+    return summary;
+  }
+
+  const clippedSummary = summary.slice(0, limit);
+  const lastSpaceIndex = clippedSummary.lastIndexOf(" ");
+  const endIndex = lastSpaceIndex > limit * 0.5 ? lastSpaceIndex : limit;
+
+  return `${clippedSummary.slice(0, endIndex).trim()}...`;
+};
+
+const getActiveProfileSectionId = (sectionElements: Record<string, HTMLElement | null>) => {
+  const activationPoint = window.innerHeight * 0.38;
+  let bestVisibleSection: {
+    id: string;
+    visibleHeight: number;
+    centerDistance: number;
+  } | null = null;
+
+  for (const section of profileSections) {
+    const sectionElement = sectionElements[section.id];
+
+    if (!sectionElement) {
+      continue;
+    }
+
+    const sectionRect = sectionElement.getBoundingClientRect();
+
+    if (sectionRect.top <= activationPoint && sectionRect.bottom >= activationPoint) {
+      return section.id;
+    }
+
+    const visibleTop = Math.max(sectionRect.top, 0);
+    const visibleBottom = Math.min(sectionRect.bottom, window.innerHeight);
+    const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+
+    if (visibleHeight === 0) {
+      continue;
+    }
+
+    const sectionCenter = sectionRect.top + sectionRect.height / 2;
+    const centerDistance = Math.abs(sectionCenter - activationPoint);
+
+    if (
+      !bestVisibleSection ||
+      visibleHeight > bestVisibleSection.visibleHeight ||
+      (visibleHeight === bestVisibleSection.visibleHeight &&
+        centerDistance < bestVisibleSection.centerDistance)
+    ) {
+      bestVisibleSection = {
+        id: section.id,
+        visibleHeight,
+        centerDistance,
+      };
+    }
+  }
+
+  return bestVisibleSection?.id;
+};
+
+type ProfileSectionNavigationProps = {
+  sections: ProfileSection[];
+  activeSectionId: string;
+  onSectionSelect: (sectionId: string) => void;
+};
+
+const ProfileSectionNavigation = ({
+  sections,
+  activeSectionId,
+  onSectionSelect,
+}: ProfileSectionNavigationProps) => (
+  <nav className="mt-2 grid grid-cols-2 gap-1.5 lg:grid-cols-1" aria-label="Profile sections">
+    {sections.map((section) => {
+      const SectionIcon = section.icon;
+      const isActive = section.id === activeSectionId;
+
+      return (
+        <button
+          key={section.id}
+          type="button"
+          title={section.eyebrow}
+          aria-current={isActive ? "true" : undefined}
+          onClick={() => onSectionSelect(section.id)}
+          className={`flex h-11 items-center gap-2 border px-3 text-left text-sm font-semibold transition-colors ${
+            isActive
+              ? "border-emerald-500 bg-emerald-50 text-emerald-900"
+              : "border-stone-300 bg-white text-stone-700 hover:border-emerald-300 hover:bg-emerald-50"
+          }`}
+        >
+          <SectionIcon className="h-5 w-5 shrink-0" />
+          <span className="truncate">{section.navLabel}</span>
+        </button>
+      );
+    })}
+  </nav>
+);
+
 type ProfileScrollSectionProps = {
   section: ProfileSection;
   sectionRefs: React.MutableRefObject<Record<string, HTMLElement | null>>;
@@ -539,20 +806,88 @@ const ProfileScrollSection = ({
           </p>
           <h2 className="mt-1 text-2xl font-bold text-stone-900">{section.headline}</h2>
           <p className="mt-3 text-sm leading-6 text-stone-600">{section.summary}</p>
-          <div className="mt-4 grid gap-2 sm:grid-cols-3">
+          {/* <div className="mt-4 grid gap-2 sm:grid-cols-3">
             {section.points.map((point) => (
               <div key={point} className="flex items-center gap-2 text-sm font-medium text-stone-700">
                 <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${section.accent}`} />
                 <span>{point}</span>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
-      {children}
+      <div className="space-y-4">{children}</div>
     </section>
   );
 };
+
+type SkillMeter = {
+  label: string;
+  value: number;
+};
+
+type SkillMeterListProps = {
+  skills: SkillMeter[];
+  compact?: boolean;
+};
+
+const SkillMeterList = ({ skills, compact = false }: SkillMeterListProps) => (
+  <div className={compact ? "mt-4 space-y-3" : "space-y-4"}>
+    {skills.map((skill) => (
+      <div key={skill.label}>
+        <div className="mb-1 flex items-center justify-between gap-3 text-sm">
+          <span className="font-semibold text-stone-800">{skill.label}</span>
+          <span className="shrink-0 text-stone-600">{skill.value}%</span>
+        </div>
+        <div className="h-2 overflow-hidden rounded-full bg-stone-200">
+          <div
+            className="h-full rounded-full bg-orange-500"
+            style={{ width: `${skill.value}%` }}
+          />
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+type SidebarListProps = {
+  title: string;
+  items: string[];
+};
+
+const SidebarList = ({ title, items }: SidebarListProps) => (
+  <div className="mt-5 border-t border-stone-200 pt-5">
+    <h3 className="text-lg font-bold text-stone-900">{title}</h3>
+    <ul className="mt-3 space-y-2">
+      {items.map((item) => (
+        <li key={item} className="text-sm leading-6 text-stone-600">
+          {item}
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+type LanguageListProps = {
+  items: Array<{
+    label: string;
+    value: string;
+  }>;
+};
+
+const LanguageList = ({ items }: LanguageListProps) => (
+  <div className="mt-5 border-t border-stone-200 pt-5">
+    <h3 className="text-lg font-bold text-stone-900">Languages</h3>
+    <div className="mt-3 space-y-2">
+      {items.map((item) => (
+        <div key={item.label} className="flex justify-between gap-3 text-sm">
+          <span className="font-semibold text-stone-800">{item.label}</span>
+          <span className="text-stone-600">{item.value}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 
 type TimelineProps = {
   items: TimelineItem[];
@@ -571,6 +906,24 @@ const Timeline = ({ items, icon: Icon }: TimelineProps) => (
             <h3 className="text-lg font-bold text-stone-900">{item.title}</h3>
             <p className="mt-1 text-sm font-semibold text-emerald-700">{item.organization}</p>
             <p className="mt-3 text-sm leading-6 text-stone-600">{item.description}</p>
+            {item.bullets && (
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-stone-600">
+                {item.bullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
+            )}
+            {item.href && (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-flex h-9 items-center gap-2 border border-emerald-600 bg-emerald-50 px-3 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-100"
+              >
+                <IoOpenOutline className="h-5 w-5" />
+                <span>View Credential</span>
+              </a>
+            )}
           </div>
           <span className="w-fit border border-stone-300 bg-stone-100 px-2.5 py-1 text-sm font-semibold text-stone-700">
             {item.period}

@@ -13,7 +13,7 @@ type AboutDeveloperHeaderProps = {
 const AboutDeveloperHeader = ({ profile }: AboutDeveloperHeaderProps) => (
   <header className="bg-gray-50 px-4 pt-4">
     <div className="mx-auto max-w-7xl">
-      <div className="mb-4 flex justify-end">
+      <div className="mb-1 flex justify-end">
         <Link
           to="/"
           className="flex items-center gap-2 whitespace-nowrap rounded border border-stone-300 bg-stone-100 px-3 py-1.5 text-sm transition-colors hover:bg-blue-500"
@@ -28,7 +28,7 @@ const AboutDeveloperHeader = ({ profile }: AboutDeveloperHeaderProps) => (
             <span className="text-sm font-semibold uppercase tracking-normal text-emerald-700">
               About the Developer
             </span>
-            <h1 className="mt-2 text-3xl font-bold text-stone-900 lg:text-5xl">
+            <h1 className="mt-2 text-3xl font-bold text-stone-900 lg:text-4xl">
               {profile.name}
             </h1>
             <p className="mt-3 max-w-3xl text-base leading-7 text-stone-600">
