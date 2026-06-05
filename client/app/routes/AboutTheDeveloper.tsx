@@ -470,6 +470,15 @@ const AboutTheDeveloper = () => {
 
   const handleSectionSelect = (sectionId: string) => {
     setActiveSectionId(sectionId);
+
+    if (sectionId === profileSections[0].id) {
+      headerRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+      return;
+    }
+
     document.getElementById(sectionId)?.scrollIntoView({
       behavior: "smooth",
       block: "start",
@@ -486,7 +495,7 @@ const AboutTheDeveloper = () => {
       </div>
       <main className="mx-auto max-w-7xl px-4 pb-10 pt-4">
         <div className="grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
-          <aside className="lg:sticky lg:top-3 lg:max-h-[calc(100vh-1.5rem)] lg:self-start lg:overflow-y-auto lg:pr-1">
+          <aside className="lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:self-start lg:overflow-y-auto lg:pr-1">
             <div className="border border-stone-300 bg-white p-4 shadow-sm lg:p-3">
               <div
                 aria-hidden={!showAsideIdentity}
@@ -684,7 +693,7 @@ const AboutTheDeveloper = () => {
   );
 };
 
-const getSummaryPreview = (summary: string, limit = 80) => {
+const getSummaryPreview = (summary: string, limit = 150) => {
   if (summary.length <= limit) {
     return summary;
   }
@@ -801,7 +810,7 @@ const ProfileScrollSection = ({
       ref={(sectionElement) => {
         sectionRefs.current[section.id] = sectionElement;
       }}
-      className="scroll-mt-5 border border-stone-300 bg-gray-50 p-5 shadow-sm md:p-6"
+      className="scroll-mt-4 border border-stone-300 bg-gray-50 p-5 shadow-sm md:p-6"
     >
       <div className="mb-5 grid gap-4 border-b border-stone-300 pb-5 md:grid-cols-[auto_minmax(0,1fr)]">
         <div className="grid h-12 w-12 place-items-center rounded border border-stone-300 bg-white">
