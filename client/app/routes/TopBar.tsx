@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import moment from 'moment'
-import { IoAddCircleOutline } from 'react-icons/io5';
+import { Link } from 'react-router';
+import { IoAddCircleOutline, IoHomeOutline, IoPersonCircleOutline } from 'react-icons/io5';
 import EventFormModal from '~/components/EventFormModal';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import type { topBarProps } from '~/models/analytics-model';
 
-const TopBar : React.FC<topBarProps> = ({activateCreate}) => {
+const TopBar : React.FC<topBarProps> = ({activateCreate, showCreateBtn}) => {
    
     //Top bar variables declaration
     const formattedDateTime = moment().format("MMMM DD, YYYY");
@@ -34,14 +35,32 @@ const TopBar : React.FC<topBarProps> = ({activateCreate}) => {
                         <p>Today is {formattedDateTime}</p>
                     </span>
                 </div>               
-                <div className='pt-3 flex justify-self-center lg:justify-end'>                    
-                    <button className="border border-stone-300 text-sm flex items-center gap-2 bg-stone-100 transition-colors hover:bg-blue-500 px-3 py-1.5 rounded"
-                        onClick={handleOpenModal} disabled={activateCreate}
+                <div className='pt-3 flex flex-wrap gap-2 justify-self-center lg:justify-end'>                    
+                    <Link
+                        to="/"
+                        className="border border-stone-300 text-sm flex items-center gap-2 bg-stone-100 transition-colors hover:bg-blue-500 px-3 py-1.5 rounded whitespace-nowrap"
                     >
-                        <IoAddCircleOutline/>
-                        <span>Add New Event </span>
-                    </button>                     
-                    <EventFormModal open={isModalOpen} onClose={handleCloseModal}/>                                                       
+                        <IoHomeOutline/>
+                        <span>Home</span>
+                    </Link>
+                    {showCreateBtn && (
+                        <>
+                            <button className="border border-stone-300 text-sm flex items-center gap-2 bg-stone-100 transition-colors hover:bg-blue-500 px-3 py-1.5 rounded"
+                                onClick={handleOpenModal} disabled={activateCreate}
+                            >
+                                <IoAddCircleOutline/>
+                                <span>Add New Event </span>
+                            </button>
+                            <EventFormModal open={isModalOpen} onClose={handleCloseModal}/>
+                        </>
+                    )}
+                    <Link
+                        to="/about-the-developer"
+                        className="border border-stone-300 text-sm flex items-center gap-2 bg-stone-100 transition-colors hover:bg-blue-500 px-3 py-1.5 rounded whitespace-nowrap"
+                    >
+                        <IoPersonCircleOutline/>
+                        <span>About the Developer</span>
+                    </Link>
                 </div>
             </div>        
         </div>
