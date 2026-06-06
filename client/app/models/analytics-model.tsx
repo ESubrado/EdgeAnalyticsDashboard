@@ -19,6 +19,7 @@ export interface topTableProps {
 export interface topBarProps {
   activateCreate : boolean;
   showCreateBtn: boolean;
+  showHomeBtn?: boolean;
   showReturnBtn: boolean;
   useNav: NavigateFunction;
 }

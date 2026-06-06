@@ -24,6 +24,7 @@ const Home = () => {
   const [openPrompt, setOpenPrompt] = useState(loadingError);
 
   const showCreateBtn = true;
+  const showHomeBtn = false;
   const showReturnButton = true;
   const navigateBackFromAbout = useNavigate();  
 
@@ -41,7 +42,7 @@ const Home = () => {
   return (
     <>
       <div className="min-h-screen bg-gray-50 rounded-lg shadow">       
-        <TopBar activateCreate={loading} useNav={navigateBackFromAbout} showCreateBtn={showCreateBtn} showReturnBtn={showReturnButton}/>               
+        <TopBar activateCreate={loading} useNav={navigateBackFromAbout} showCreateBtn={showCreateBtn} showHomeBtn={showHomeBtn} showReturnBtn={showReturnButton}/>               
             { loading ? (
               <></>
             ) : (

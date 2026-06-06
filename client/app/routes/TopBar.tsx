@@ -7,7 +7,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import type { topBarProps } from '~/models/analytics-model';
 
-const TopBar : React.FC<topBarProps> = ({activateCreate, showCreateBtn}) => {
+const TopBar : React.FC<topBarProps> = ({activateCreate, showCreateBtn, showHomeBtn = true}) => {
    
     //Top bar variables declaration
     const formattedDateTime = moment().format("MMMM DD, YYYY");
@@ -36,13 +36,15 @@ const TopBar : React.FC<topBarProps> = ({activateCreate, showCreateBtn}) => {
                     </span>
                 </div>               
                 <div className='pt-3 flex flex-wrap gap-2 justify-self-center lg:justify-end'>                    
-                    <Link
-                        to="/"
-                        className="border border-stone-300 text-sm flex items-center gap-2 bg-stone-100 transition-colors hover:bg-blue-500 px-3 py-1.5 rounded whitespace-nowrap"
-                    >
-                        <IoHomeOutline/>
-                        <span>Home</span>
-                    </Link>
+                    {showHomeBtn && (
+                        <Link
+                            to="/"
+                            className="border border-stone-300 text-sm flex items-center gap-2 bg-stone-100 transition-colors hover:bg-blue-500 px-3 py-1.5 rounded whitespace-nowrap"
+                        >
+                            <IoHomeOutline/>
+                            <span>Home</span>
+                        </Link>
+                    )}
                     {showCreateBtn && (
                         <>
                             <button className="border border-stone-300 text-sm flex items-center gap-2 bg-stone-100 transition-colors hover:bg-blue-500 px-3 py-1.5 rounded"
