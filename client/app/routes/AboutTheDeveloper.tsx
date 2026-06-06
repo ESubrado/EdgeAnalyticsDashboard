@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { IconType } from "react-icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   IoBriefcaseOutline,
   IoCallOutline,
@@ -16,15 +16,87 @@ import {
   IoSchoolOutline,
   IoSparklesOutline,
   IoRibbonOutline,
+  IoWarningOutline,
 } from "react-icons/io5";
 
 import AboutDeveloperHeader from "./AboutDeveloperHeader";
-import type { RootState } from "~/store/store";
+import {
+  ABOUT_DEVELOPER_API_NOT_FOUND_MESSAGE,
+  fetchAboutDeveloperData,
+} from "~/store/slices/sliceAboutDeveloper";
+import { type AppDispatch, type RootState } from "~/store/store";
 import type {
+  AboutDeveloperDataState,
   AboutDeveloperProfileSection as ProfileSection,
   AboutDeveloperSkillMeter as SkillMeter,
   AboutDeveloperTimelineItem as TimelineItem,
 } from "~/store/slices/sliceAboutDeveloper";
+
+const ABOUT_DEVELOPER_TOAST_DURATION_MS = 5000;
+
+const blankProfileSections: ProfileSection[] = [
+  "about-me",
+  "tech-stack",
+  "experience",
+  "certificates-awards",
+  "portfolio-projects",
+].map((id) => ({
+  id,
+  navLabel: "",
+  eyebrow: "",
+  headline: "",
+  summary: "",
+  icon: "IoSparklesOutline",
+  accent: "bg-stone-300",
+  points: ["", "", ""],
+}));
+
+const createBlankTimelineItems = (count: number): TimelineItem[] =>
+  Array.from({ length: count }, () => ({
+    title: "",
+    organization: "",
+    period: "",
+    description: "",
+    bullets: ["", ""],
+  }));
+
+const blankAboutDeveloperData: AboutDeveloperDataState = {
+  developerProfile: {
+    name: "",
+    role: "",
+    photoUrl: "",
+    initials: "",
+    pitch: "",
+    about: "",
+    availability: "",
+  },
+  contactItems: Array.from({ length: 5 }, () => ({
+    label: "",
+    value: "",
+    href: "",
+    icon: "IoSparklesOutline",
+  })),
+  profileSections: blankProfileSections,
+  skillRatings: Array.from({ length: 4 }, () => ({
+    label: "",
+    value: 0,
+  })),
+  technologyGroups: Array.from({ length: 4 }, () => ({
+    title: "",
+    tools: ["", "", "", ""],
+  })),
+  academicItems: createBlankTimelineItems(1),
+  experienceItems: createBlankTimelineItems(3),
+  certificateItems: createBlankTimelineItems(2),
+  awardItems: createBlankTimelineItems(2),
+  portfolioProjects: Array.from({ length: 2 }, () => ({
+    title: "",
+    type: "",
+    description: "",
+    stack: ["", "", ""],
+    href: "",
+  })),
+};
 
 const aboutDeveloperIcons: Record<string, IconType> = {
   IoBriefcaseOutline,
@@ -46,6 +118,8 @@ const getAboutDeveloperIcon = (iconName: string) =>
   aboutDeveloperIcons[iconName] ?? IoSparklesOutline;
 
 const AboutTheDeveloper = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const aboutDeveloperState = useSelector((state: RootState) => state.aboutDeveloper);
   const {
     developerProfile,
     contactItems,
@@ -57,7 +131,13 @@ const AboutTheDeveloper = () => {
     certificateItems,
     awardItems,
     portfolioProjects,
-  } = useSelector((state: RootState) => state.aboutDeveloper);
+  } =
+    aboutDeveloperState.source === "blank"
+      ? blankAboutDeveloperData
+      : aboutDeveloperState;
+  const { loading, error, source } = aboutDeveloperState;
+  const isBlankLayout = source === "blank";
+  const [showApiToast, setShowApiToast] = useState(false);
   const headerRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const firstProfileSectionId = profileSections[0]?.id ?? "";
@@ -72,10 +152,35 @@ const AboutTheDeveloper = () => {
   );
 
   useEffect(() => {
-    if (!activeSectionId && firstProfileSectionId) {
+    dispatch(fetchAboutDeveloperData());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const hasActiveSection = profileSections.some(
+      (section) => section.id === activeSectionId,
+    );
+
+    if (firstProfileSectionId && !hasActiveSection) {
       setActiveSectionId(firstProfileSectionId);
     }
-  }, [activeSectionId, firstProfileSectionId]);
+  }, [activeSectionId, firstProfileSectionId, profileSections]);
+
+  useEffect(() => {
+    if (!isBlankLayout) {
+      setShowApiToast(false);
+      return;
+    }
+
+    setShowApiToast(true);
+
+    const toastTimerId = window.setTimeout(() => {
+      setShowApiToast(false);
+    }, ABOUT_DEVELOPER_TOAST_DURATION_MS);
+
+    return () => {
+      window.clearTimeout(toastTimerId);
+    };
+  }, [error, isBlankLayout]);
 
   useEffect(() => {
     const updateAsideIdentityVisibility = () => {
@@ -168,7 +273,11 @@ const AboutTheDeveloper = () => {
     !awardsSection ||
     !projectsSection
   ) {
-    return null;
+    if (loading || source === "idle") {
+      return <BlankAboutDeveloperPage />;
+    }
+
+    return <BlankAboutDeveloperPage />;
   }
 
   const ActiveIcon = getAboutDeveloperIcon(activeSection.icon);
@@ -176,6 +285,11 @@ const AboutTheDeveloper = () => {
 
   return (
     <div className="min-h-screen rounded-lg bg-gray-50 shadow">
+      {showApiToast && (
+        <AboutDeveloperApiToast
+          message={error ?? ABOUT_DEVELOPER_API_NOT_FOUND_MESSAGE}
+        />
+      )}
       <div ref={headerRef}>
         <AboutDeveloperHeader profile={developerProfile} />
       </div>
@@ -215,13 +329,13 @@ const AboutTheDeveloper = () => {
               </div>
 
               <div className={`${showAsideIdentity ? "mt-3" : ""} space-y-2`}>
-                {contactItems.map((item) => {
+                {contactItems.map((item, contactIndex) => {
                   const ContactIcon = getAboutDeveloperIcon(item.icon);
 
                   return (
                     <a
-                      key={item.label}
-                      href={item.href}
+                      key={`${item.label}-${item.value}-${contactIndex}`}
+                      href={item.href || undefined}
                       className="flex items-center gap-2 border border-stone-200 bg-gray-50 px-2.5 py-1.5 text-sm transition-colors hover:border-emerald-400 hover:bg-emerald-50"
                     >
                       <ContactIcon className="h-4 w-4 shrink-0 text-stone-700" />
@@ -266,8 +380,8 @@ const AboutTheDeveloper = () => {
               sectionRefs={sectionRefs}
             >
               <div className="grid gap-4 md:grid-cols-3">
-                {aboutSection.points.map((point) => (
-                  <div key={point} className="border border-stone-300 bg-white p-4 shadow-sm">
+                {aboutSection.points.map((point, pointIndex) => (
+                  <div key={`${point}-${pointIndex}`} className="border border-stone-300 bg-white p-4 shadow-sm">
                     <IoSparklesOutline className="h-6 w-6 text-emerald-700" />
                     <p className="mt-3 text-sm font-semibold leading-6 text-stone-800">{point}</p>
                   </div>
@@ -285,16 +399,16 @@ const AboutTheDeveloper = () => {
             >
               <div className="border border-stone-300 bg-white p-5 shadow-sm">
                 <h3 className="text-lg font-bold text-stone-900">Technical Skill Ratings</h3>
-                <SkillMeterList skills={skillRatings} />
+                <SkillMeterList skills={skillRatings} hideValues={isBlankLayout} />
               </div>
               <div className="grid gap-4 md:grid-cols-2">
-                {technologyGroups.map((group) => (
-                  <div key={group.title} className="border border-stone-300 bg-white p-5 shadow-sm">
+                {technologyGroups.map((group, groupIndex) => (
+                  <div key={`${group.title}-${groupIndex}`} className="border border-stone-300 bg-white p-5 shadow-sm">
                     <h3 className="text-lg font-bold text-stone-900">{group.title}</h3>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {group.tools.map((tool) => (
+                      {group.tools.map((tool, toolIndex) => (
                         <span
-                          key={tool}
+                          key={`${tool}-${toolIndex}`}
                           className="border border-stone-300 bg-stone-100 px-2.5 py-1 text-sm font-medium text-stone-700"
                         >
                           {tool}
@@ -332,9 +446,9 @@ const AboutTheDeveloper = () => {
               sectionRefs={sectionRefs}
             >
               <div className="grid gap-4 xl:grid-cols-2">
-                {portfolioProjects.map((project) => (
+                {portfolioProjects.map((project, projectIndex) => (
                   <article
-                    key={project.title}
+                    key={`${project.title}-${projectIndex}`}
                     className="flex min-h-[260px] flex-col border border-stone-300 bg-white p-5 shadow-sm"
                   >
                     <div className="flex items-start justify-between gap-3">
@@ -348,9 +462,9 @@ const AboutTheDeveloper = () => {
                       {project.description}
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {project.stack.map((tool) => (
+                      {project.stack.map((tool, toolIndex) => (
                         <span
-                          key={tool}
+                          key={`${tool}-${toolIndex}`}
                           className="border border-stone-300 bg-stone-100 px-2.5 py-1 text-xs font-semibold text-stone-700"
                         >
                           {tool}
@@ -378,6 +492,29 @@ const AboutTheDeveloper = () => {
     </div>
   );
 };
+
+const BlankAboutDeveloperPage = () => (
+  <div className="min-h-screen rounded-lg bg-gray-50 shadow" />
+);
+
+type AboutDeveloperApiToastProps = {
+  message: string;
+};
+
+const AboutDeveloperApiToast = ({ message }: AboutDeveloperApiToastProps) => (
+  <div className="fixed right-4 top-4 z-50 flex w-[calc(100%-2rem)] justify-end sm:right-6 sm:top-6 sm:w-auto">
+    <div
+      role="alert"
+      aria-live="assertive"
+      className="flex h-12 w-full max-w-sm items-center gap-2 border border-red-800 bg-red-600 px-4 text-sm font-semibold text-white shadow-xl sm:w-auto"
+    >
+      <IoWarningOutline className="h-5 w-5 shrink-0 text-white" />
+      <span className="min-w-0 truncate">
+        {message || ABOUT_DEVELOPER_API_NOT_FOUND_MESSAGE}
+      </span>
+    </div>
+  </div>
+);
 
 const getSummaryPreview = (summary: string, limit = 150) => {
   if (summary.length <= limit) {
@@ -529,15 +666,22 @@ const ProfileScrollSection = ({
 type SkillMeterListProps = {
   skills: SkillMeter[];
   compact?: boolean;
+  hideValues?: boolean;
 };
 
-const SkillMeterList = ({ skills, compact = false }: SkillMeterListProps) => (
+const SkillMeterList = ({
+  skills,
+  compact = false,
+  hideValues = false,
+}: SkillMeterListProps) => (
   <div className={compact ? "mt-4 space-y-3" : "space-y-4"}>
-    {skills.map((skill) => (
-      <div key={skill.label}>
+    {skills.map((skill, skillIndex) => (
+      <div key={`${skill.label}-${skillIndex}`}>
         <div className="mb-1 flex items-center justify-between gap-3 text-sm">
           <span className="font-semibold text-stone-800">{skill.label}</span>
-          <span className="shrink-0 text-stone-600">{skill.value}%</span>
+          <span className="shrink-0 text-stone-600">
+            {hideValues ? "" : `${skill.value}%`}
+          </span>
         </div>
         <div className="h-2 overflow-hidden rounded-full bg-stone-200">
           <div
@@ -596,8 +740,8 @@ type TimelineProps = {
 
 const Timeline = ({ items, icon: Icon }: TimelineProps) => (
   <div className="space-y-4">
-    {items.map((item) => (
-      <article key={`${item.title}-${item.period}`} className="border border-stone-300 bg-white p-5 shadow-sm">
+    {items.map((item, itemIndex) => (
+      <article key={`${item.title}-${item.period}-${itemIndex}`} className="border border-stone-300 bg-white p-5 shadow-sm">
         <div className="grid gap-4 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-start">
           <div className="grid h-11 w-11 place-items-center rounded border border-stone-300 bg-stone-100">
             <Icon className="h-6 w-6 text-stone-800" />
@@ -608,8 +752,8 @@ const Timeline = ({ items, icon: Icon }: TimelineProps) => (
             <p className="mt-3 text-sm leading-6 text-stone-600">{item.description}</p>
             {item.bullets && (
               <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-stone-600">
-                {item.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
+                {item.bullets.map((bullet, bulletIndex) => (
+                  <li key={`${bullet}-${bulletIndex}`}>{bullet}</li>
                 ))}
               </ul>
             )}
