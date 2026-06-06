@@ -33,6 +33,22 @@ export type EventCountMap = {
   };
 };
 
+export interface IAboutDeveloper {
+  slug: string;
+  developerProfile: Record<string, unknown>;
+  contactItems: Record<string, unknown>[];
+  profileSections: Record<string, unknown>[];
+  skillRatings: Record<string, unknown>[];
+  technologyGroups: Record<string, unknown>[];
+  academicItems: Record<string, unknown>[];
+  experienceItems: Record<string, unknown>[];
+  certificateItems: Record<string, unknown>[];
+  awardItems: Record<string, unknown>[];
+  portfolioProjects: Record<string, unknown>[];
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
 
 
     

@@ -5,6 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { Server } from 'socket.io';
 
+import aboutDeveloperRoutes from './routes/aboutDeveloper.routes';
 import userRoutes from './routes/analytics.routes';
 import { AnalyticsBase } from './models/analytics';
 
@@ -23,6 +24,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/analytics', userRoutes);
+app.use('/api/about-developer', aboutDeveloperRoutes);
 
 // create server instance and initialize websocket
 const server = http.createServer(app)
