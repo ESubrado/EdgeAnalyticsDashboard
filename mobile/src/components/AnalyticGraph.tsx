@@ -5,6 +5,7 @@ import {
   Pressable,
   StyleSheet,
   Text,
+  useWindowDimensions,
   View,
 } from "react-native";
 import {
@@ -25,6 +26,8 @@ const tooltipDateFormatter = new Intl.DateTimeFormat("en-US", {
   hour: "numeric",
   minute: "2-digit",
 });
+
+const chartAnimationDuration = 800;
 
 function formatAxisLabel(time: string, range: DateRange) {
   const date = new Date(time);
@@ -65,6 +68,8 @@ export default function AnalyticGraph({
   totalEvents,
 }: AnalyticGraphProps) {
   const [chartWidth, setChartWidth] = useState(0);
+  const { width: screenWidth } = useWindowDimensions();
+  const isMobileLayout = screenWidth < 600;
 
   const dataSet = useMemo<DataSet[]>(() => {
     const visibleLabelEvery = Math.max(1, Math.ceil(chartData.length / 4));
@@ -89,14 +94,30 @@ export default function AnalyticGraph({
 
   return (
     <View style={styles.card}>
-      <View style={styles.graphHeader}>
-        <View style={styles.totalCard}>
+      <View
+        style={[
+          styles.graphHeader,
+          isMobileLayout && styles.graphHeaderMobile,
+        ]}
+      >
+        <View
+          style={[
+            styles.totalCard,
+            isMobileLayout && styles.totalCardMobile,
+          ]}
+        >
           <Text style={styles.totalText}>
             Total Number of Events: {totalEvents}
           </Text>
         </View>
 
-        <View accessibilityRole="tablist" style={styles.rangeSelector}>
+        <View
+          accessibilityRole="tablist"
+          style={[
+            styles.rangeSelector,
+            isMobileLayout && styles.rangeSelectorMobile,
+          ]}
+        >
           {dateRanges.map((range) => {
             const selected = dateRange === range.value;
 
@@ -108,6 +129,7 @@ export default function AnalyticGraph({
                 onPress={() => onDateRangeChange(range.value)}
                 style={({ pressed }) => [
                   styles.rangeButton,
+                  isMobileLayout && styles.rangeButtonMobile,
                   selected && styles.rangeButtonSelected,
                   pressed && styles.rangeButtonPressed,
                 ]}
@@ -176,7 +198,8 @@ export default function AnalyticGraph({
               <LineChart
                 adjustToWidth={chartData.length <= 8}
                 animateOnDataChange
-                animationDuration={500}
+                animateTogether
+                animationDuration={chartAnimationDuration}
                 customDataPoint={
                   Platform.OS === "web" ? renderWebDataPoint : undefined
                 }
@@ -186,6 +209,7 @@ export default function AnalyticGraph({
                 initialSpacing={12}
                 isAnimated
                 noOfSections={4}
+                onDataChangeAnimationDuration={chartAnimationDuration}
                 parentWidth={chartWidth}
                 pointerConfig={{
                   activatePointersOnLongPress: true,
@@ -238,6 +262,7 @@ export default function AnalyticGraph({
                 }}
                 rulesColor="#d6d3d1"
                 rulesType="dashed"
+                renderDataPointsAfterAnimationEnds
                 scrollAnimation
                 showScrollIndicator={false}
                 spacing={42}
@@ -275,6 +300,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 16,
   },
+  graphHeaderMobile: {
+    alignItems: "stretch",
+    flexDirection: "column",
+  },
   totalCard: {
     backgroundColor: "#ffffff",
     borderRadius: 6,
@@ -285,6 +314,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.12,
     shadowRadius: 2,
     elevation: 2,
+  },
+  totalCardMobile: {
+    alignSelf: "stretch",
   },
   totalText: {
     color: "#1c1917",
@@ -299,6 +331,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     overflow: "hidden",
   },
+  rangeSelectorMobile: {
+    alignSelf: "stretch",
+    width: "100%",
+  },
   rangeButton: {
     alignItems: "center",
     backgroundColor: "#ffffff",
@@ -308,6 +344,10 @@ const styles = StyleSheet.create({
     minHeight: 38,
     paddingHorizontal: 10,
     paddingVertical: 7,
+  },
+  rangeButtonMobile: {
+    flex: 1,
+    paddingHorizontal: 4,
   },
   rangeButtonSelected: {
     backgroundColor: "#15803d",
