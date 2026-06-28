@@ -41,11 +41,7 @@ const Portfolio = () => (
     {/* ── Nav ───────────────────────────────────────────────── */}
     <nav className="fixed inset-x-0 top-0 z-50 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <img
-          src="/myProfilePhoto.jpg"
-          alt="Eugene Subrado Jr."
-          className="h-10 w-10 rounded-full object-cover ring-2 ring-emerald-400/60"
-        />
+        <span className="font-mono text-xl font-bold text-emerald-400">ES.</span>
         <div className="flex items-center gap-6 text-sm text-slate-400">
           <Link to="/dashboard" className="transition-colors hover:text-emerald-400">
             Dashboard
