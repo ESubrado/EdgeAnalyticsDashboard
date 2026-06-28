@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import http from 'http';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 import { Server } from 'socket.io';
 
 import aboutDeveloperRoutes from './routes/aboutDeveloper.routes';
@@ -24,6 +25,14 @@ app.use((req, res, next) => {
 
 app.use('/api/analytics', userRoutes);
 app.use('/api/about-developer', aboutDeveloperRoutes);
+
+if (process.env.NODE_ENV === 'production') {
+  const clientBuild = path.join(__dirname, '..', 'client', 'build', 'client');
+  app.use(express.static(clientBuild));
+  app.get('*', (_req, res) => {
+    res.sendFile(path.join(clientBuild, 'index.html'));
+  });
+}
 
 const server = http.createServer(app);
 const io = new Server(server, {

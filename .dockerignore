@@ -1,0 +1,14 @@
+node_modules
+.git
+.gitignore
+**/*.log
+client/node_modules
+client/build
+server/node_modules
+server/dist
+attached_assets
+.local
+.agents
+.cache
+.replit
+README.md
