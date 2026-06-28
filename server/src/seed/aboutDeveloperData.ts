@@ -298,14 +298,6 @@ export const aboutDeveloperSeedData = {
       href: "https://edgeanalytics-client.onrender.com",
     },
     {
-      title: "Simplify Bill",
-      type: "Web Application · Next.js + Flask",
-      description:
-        "Converts a hundred-page Verizon Business telephone billing PDF file into an understandable format with interactive charts and individual person charges breakdown. Simplifies complex telecom invoices for business users.",
-      stack: ["Next.js", "React", "Flask", "Python"],
-      href: "https://simplebilling.onrender.com/",
-    },
-    {
       title: "Developer Portfolio Platform",
       type: "Full-Stack Portfolio Site · MERN",
       description:
