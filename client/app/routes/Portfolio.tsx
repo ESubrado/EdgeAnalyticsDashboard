@@ -14,10 +14,13 @@ import {
 } from "react-icons/io5";
 
 const TECH_STACK = [
-  "React 19", "TypeScript", "Node.js", "Express.js",
-  "MongoDB", "Socket.io", "Redux Toolkit", "Tailwind CSS",
-  "Vite", "Mongoose", "REST APIs", "React Router 7",
-  "Material UI", "Recharts", "Git / GitHub",
+  "React / jQuery", "JavaScript", "TypeScript", "Node.js / Express.js",
+  "Next.js", "Python / Flask", "Redux / Expo / Vue3",
+  "Tailwind CSS / Bootstrap", "MongoDB / PostgreSQL / SQLite",
+  "Material UI / Kendo UI", "Socket.io / Recharts",
+  "WordPress / WooCommerce", "Docker", "GitHub / GitKraken",
+  "Figma / Canva", "JIRA / Agile / CI-CD",
+  "n8n Automation", "AI Tools (Claude / Codex)",
 ];
 
 const STATS = [
