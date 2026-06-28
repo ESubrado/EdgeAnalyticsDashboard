@@ -82,11 +82,11 @@ const AboutDeveloperHeader = ({ profile }: AboutDeveloperHeaderProps) => (
                   className="grid h-9 w-9 place-items-center rounded-lg border border-slate-700 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400">
                   <IoLogoGithub className="h-5 w-5" />
                 </a>
-                <a href="https://linkedin.com/in/eugenesubrado" target="_blank" rel="noreferrer"
+                <a href="https://www.linkedin.com/in/essubrado" target="_blank" rel="noreferrer"
                   className="grid h-9 w-9 place-items-center rounded-lg border border-slate-700 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400">
                   <IoLogoLinkedin className="h-5 w-5" />
                 </a>
-                <a href="mailto:eusubjr@gmail.com"
+                <a href="mailto:eug.subradojr@gmail.com"
                   className="grid h-9 w-9 place-items-center rounded-lg border border-slate-700 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400">
                   <IoMailOutline className="h-5 w-5" />
                 </a>
