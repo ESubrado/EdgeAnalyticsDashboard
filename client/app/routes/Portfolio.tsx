@@ -191,7 +191,7 @@ const Portfolio = () => (
 
         <div className="grid gap-6 md:grid-cols-2">
           <div className="group relative overflow-hidden rounded-xl border border-slate-700 bg-slate-800 p-7 transition-all hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-500/10">
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
             <div className="flex items-start justify-between">
               <div className="grid h-12 w-12 place-items-center rounded-lg bg-emerald-500/10">
                 <IoBarChartOutline className="h-6 w-6 text-emerald-400" />
