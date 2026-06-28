@@ -271,21 +271,41 @@ const Portfolio = () => (
             </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-slate-700 p-10 text-center transition-colors hover:border-indigo-500/40">
-            <IoSparklesOutline className="h-10 w-10 text-slate-600" />
-            <p className="mt-4 text-lg font-bold text-slate-400">
-              More in the full portfolio
+          <div className="group relative overflow-hidden rounded-xl border border-slate-700 bg-slate-800 p-7 transition-all hover:border-violet-500/50 hover:shadow-xl hover:shadow-violet-500/10">
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-violet-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+            <div className="flex items-start justify-between">
+              <div className="grid h-12 w-12 place-items-center rounded-lg bg-violet-500/10">
+                <IoDocumentTextOutline className="h-6 w-6 text-violet-400" />
+              </div>
+              <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-400">
+                ● Live
+              </span>
+            </div>
+            <h3 className="mt-5 text-xl font-bold text-white">
+              Simplify Bill
+            </h3>
+            <p className="mt-3 text-sm leading-6 text-slate-400">
+              Converts a hundred-page Verizon Business telephone billing PDF
+              into an understandable format with charts and individual person
+              charges.
             </p>
-            <p className="mt-2 text-sm leading-6 text-slate-600">
-              See my complete background, work history, certifications, and
-              all projects.
-            </p>
-            <Link
-              to="/about-the-developer"
-              className="mt-7 inline-flex items-center gap-2 rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-6 py-2.5 text-sm font-semibold text-indigo-400 transition-colors hover:bg-indigo-500/20"
-            >
-              View Full Portfolio <IoArrowForwardOutline className="h-4 w-4" />
-            </Link>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {["Next.js", "React", "Flask", "Python"].map((t) => (
+                <span key={t} className="rounded bg-slate-700 px-2 py-0.5 text-xs text-slate-400">
+                  {t}
+                </span>
+              ))}
+            </div>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a
+                href="https://simplebilling.onrender.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-400 transition-colors hover:bg-emerald-500/20"
+              >
+                View Live Demo <IoArrowForwardOutline className="h-4 w-4" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
