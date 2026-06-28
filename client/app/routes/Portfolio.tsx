@@ -24,9 +24,9 @@ const TECH_STACK = [
 ];
 
 const STATS = [
-  { value: "MERN", label: "Full-Stack" },
-  { value: "Real-Time", label: "Specialization" },
-  { value: "TypeScript", label: "Language" },
+  { value: "10 Yrs", label: "Experience" },
+  { value: "Front-End", label: "Specialization" },
+  { value: "Full-Stack", label: "Capability" },
   { value: "Open", label: "To Opportunities" },
 ];
 
