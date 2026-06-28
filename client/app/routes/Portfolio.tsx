@@ -81,22 +81,34 @@ const Portfolio = () => (
       <div className="absolute left-2/3 top-1/2 h-48 w-48 rounded-full bg-violet-500/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-6 py-40">
-        <div className="max-w-4xl">
+        <div className="max-w-5xl">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-400">
             <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
             Available for full-time opportunities
           </div>
 
-          <h1 className="mt-2 text-5xl font-extrabold leading-tight sm:text-6xl lg:text-7xl">
-            Hi, I&apos;m{" "}
-            <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-              Eugene Subrado Jr.
-            </span>
-          </h1>
+          <div className="flex items-start gap-8">
+            <div className="min-w-0 flex-1">
+              <h1 className="mt-2 text-5xl font-extrabold leading-tight sm:text-6xl lg:text-7xl">
+                Hi, I&apos;m{" "}
+                <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-indigo-400 bg-clip-text text-transparent">
+                  Eugene Subrado Jr.
+                </span>
+              </h1>
 
-          <p className="mt-5 text-2xl font-semibold text-slate-300">
-            Full-Stack Web Developer
-          </p>
+              <p className="mt-5 text-2xl font-semibold text-slate-300">
+                Full-Stack Web Developer
+              </p>
+            </div>
+
+            <div className="hidden shrink-0 lg:block">
+              <img
+                src="/myProfilePhoto.jpg"
+                alt="Eugene Subrado Jr."
+                className="h-52 w-52 rounded-2xl object-cover ring-2 ring-emerald-400/40 shadow-2xl shadow-emerald-500/20"
+              />
+            </div>
+          </div>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-400">
             I build scalable, real-time web applications with the MERN stack.
