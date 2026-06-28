@@ -32,7 +32,7 @@ const TopBar : React.FC<topBarProps> = ({activateCreate, showCreateBtn, showHome
                         <span className='lg:px-2 md:pt-4 text-sm text-stone-500'>by: Eugene Subrado Jr</span>
                     </div>                    
                     <span className="text-sm block text-stone-500">
-                        <p>Today is {formattedDateTime}</p>
+                        <p suppressHydrationWarning>Today is {formattedDateTime}</p>
                     </span>
                 </div>               
                 <div className='pt-3 flex flex-wrap gap-2 justify-self-center lg:justify-end'>                    
