@@ -70,11 +70,48 @@ const Portfolio = () => (
     </nav>
 
     {/* ── Hero ──────────────────────────────────────────────── */}
+    <style>{`
+      @keyframes orb-drift-1 {
+        0%   { transform: translate(0px, 0px) scale(1); }
+        33%  { transform: translate(60px, -40px) scale(1.12); }
+        66%  { transform: translate(-30px, 50px) scale(0.92); }
+        100% { transform: translate(0px, 0px) scale(1); }
+      }
+      @keyframes orb-drift-2 {
+        0%   { transform: translate(0px, 0px) scale(1); }
+        33%  { transform: translate(-70px, 30px) scale(1.08); }
+        66%  { transform: translate(40px, -60px) scale(0.95); }
+        100% { transform: translate(0px, 0px) scale(1); }
+      }
+      @keyframes orb-drift-3 {
+        0%   { transform: translate(0px, 0px) scale(1); }
+        50%  { transform: translate(50px, 40px) scale(1.15); }
+        100% { transform: translate(0px, 0px) scale(1); }
+      }
+      @keyframes orb-drift-4 {
+        0%   { transform: translate(0px, 0px) scale(1); }
+        40%  { transform: translate(-40px, -50px) scale(1.1); }
+        80%  { transform: translate(30px, 30px) scale(0.9); }
+        100% { transform: translate(0px, 0px) scale(1); }
+      }
+      @keyframes orb-drift-5 {
+        0%   { transform: translate(0px, 0px) scale(1); }
+        60%  { transform: translate(-55px, 45px) scale(1.05); }
+        100% { transform: translate(0px, 0px) scale(1); }
+      }
+      .orb-1 { animation: orb-drift-1 18s ease-in-out infinite; }
+      .orb-2 { animation: orb-drift-2 22s ease-in-out infinite; }
+      .orb-3 { animation: orb-drift-3 15s ease-in-out infinite; }
+      .orb-4 { animation: orb-drift-4 26s ease-in-out infinite; }
+      .orb-5 { animation: orb-drift-5 20s ease-in-out infinite; }
+    `}</style>
     <section className="relative flex min-h-screen items-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950" />
-      <div className="absolute left-1/4 top-1/4 h-72 w-72 rounded-full bg-emerald-500/10 blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-indigo-500/10 blur-3xl" />
-      <div className="absolute left-2/3 top-1/2 h-48 w-48 rounded-full bg-violet-500/10 blur-3xl" />
+      <div className="orb-1 absolute left-1/4 top-1/4 h-80 w-80 rounded-full bg-emerald-500/15 blur-3xl" />
+      <div className="orb-2 absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-indigo-500/15 blur-3xl" />
+      <div className="orb-3 absolute left-2/3 top-1/2 h-56 w-56 rounded-full bg-violet-500/15 blur-3xl" />
+      <div className="orb-4 absolute right-1/3 top-1/6 h-64 w-64 rounded-full bg-cyan-500/10 blur-3xl" />
+      <div className="orb-5 absolute bottom-1/3 left-1/6 h-48 w-48 rounded-full bg-emerald-400/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-6 py-40">
         <div className="max-w-5xl">
