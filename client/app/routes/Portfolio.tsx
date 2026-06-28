@@ -344,9 +344,11 @@ const Portfolio = () => (
                 <div className="absolute bottom-8 right-8 h-32 w-32 rounded-full bg-indigo-500/20 blur-2xl" />
               </div>
               <div className="relative text-center">
-                <div className="mx-auto grid h-28 w-28 place-items-center rounded-full border-2 border-emerald-500/40 bg-gradient-to-br from-emerald-500/20 to-indigo-500/20 text-4xl font-extrabold text-emerald-400 shadow-xl shadow-emerald-500/20">
-                  ES
-                </div>
+                <img
+                  src="/myProfilePhoto.jpg"
+                  alt="Eugene Subrado Jr."
+                  className="mx-auto h-28 w-28 rounded-full object-cover border-2 border-emerald-500/40 shadow-xl shadow-emerald-500/20"
+                />
                 <p className="mt-5 text-xl font-bold text-white">Eugene Subrado Jr.</p>
                 <p className="text-sm font-semibold text-emerald-400">Full-Stack Web Developer</p>
                 <p className="mt-2 text-xs text-slate-500">📍 Philippines</p>
