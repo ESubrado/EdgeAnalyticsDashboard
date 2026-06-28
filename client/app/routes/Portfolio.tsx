@@ -307,6 +307,41 @@ const Portfolio = () => (
               </a>
             </div>
           </div>
+
+          {/* ── Upcoming Project placeholder ── */}
+          <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-slate-700 p-10 text-center transition-colors hover:border-yellow-500/40">
+            <div className="grid h-12 w-12 place-items-center rounded-full border border-yellow-500/30 bg-yellow-500/10">
+              <IoSparklesOutline className="h-6 w-6 text-yellow-400" />
+            </div>
+            <span className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1 text-xs font-semibold text-yellow-400">
+              ● Coming Soon
+            </span>
+            <p className="mt-3 text-lg font-bold text-slate-400">
+              Upcoming Project
+            </p>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Something new is in the works. Stay tuned!
+            </p>
+          </div>
+
+          {/* ── More in portfolio placeholder ── */}
+          <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-slate-700 p-10 text-center transition-colors hover:border-indigo-500/40">
+            <IoOpenOutline className="h-10 w-10 text-slate-600" />
+            <p className="mt-4 text-lg font-bold text-slate-400">
+              More in the full portfolio
+            </p>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              See my complete background, work history, certifications, and
+              all projects.
+            </p>
+            <Link
+              to="/about-the-developer"
+              className="mt-7 inline-flex items-center gap-2 rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-6 py-2.5 text-sm font-semibold text-indigo-400 transition-colors hover:bg-indigo-500/20"
+            >
+              View Full Portfolio <IoArrowForwardOutline className="h-4 w-4" />
+            </Link>
+          </div>
+
         </div>
       </div>
     </section>
