@@ -20,14 +20,14 @@ export const aboutDeveloperSeedData = {
     },
     {
       label: "LinkedIn",
-      value: "linkedin.com/in/eugenesubrado",
-      href: "https://linkedin.com/in/eugenesubrado",
+      value: "linkedin.com/in/essubrado",
+      href: "https://www.linkedin.com/in/essubrado",
       icon: "IoLogoLinkedin",
     },
     {
       label: "Email",
-      value: "eusubjr@gmail.com",
-      href: "mailto:eusubjr@gmail.com",
+      value: "eug.subradojr@gmail.com",
+      href: "mailto:eug.subradojr@gmail.com",
       icon: "IoMailOutline",
     },
     {

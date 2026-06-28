@@ -31,12 +31,12 @@ const STATS = [
 ];
 
 const HIGHLIGHTS = [
-  "Real-time apps with Socket.io & MongoDB Change Streams",
-  "MERN stack — React, Express, Node.js, MongoDB",
-  "TypeScript across the full stack",
-  "Responsive UI with Tailwind CSS & Material UI",
-  "Redux Toolkit for scalable state management",
-  "REST API design and integration",
+  "~10 years building robust, optimized front-end web applications",
+  "Front-end to full-stack: React, Next.js, Node.js, Express, Flask",
+  "WordPress / WooCommerce performance optimization & ERP integrations",
+  "OAuth 2.0, RBAC, MFA — enterprise-grade security implementations",
+  "AI-assisted development workflows (Claude, Codex, Ollama / Qwen)",
+  "Agile Scrum, CI/CD, mentoring & sprint delivery leadership",
 ];
 
 const Portfolio = () => (
@@ -62,7 +62,7 @@ const Portfolio = () => (
             <IoLogoGithub className="h-5 w-5" />
           </a>
           <a
-            href="https://linkedin.com/in/eugenesubrado"
+            href="https://www.linkedin.com/in/essubrado"
             target="_blank"
             rel="noreferrer"
             className="transition-colors hover:text-emerald-400"
@@ -134,7 +134,7 @@ const Portfolio = () => (
               </h1>
 
               <p className="mt-5 text-2xl font-semibold text-slate-300">
-                Full-Stack Web Developer
+                Software Development Engineer
               </p>
             </div>
 
@@ -148,9 +148,10 @@ const Portfolio = () => (
           </div>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-400">
-            I build scalable, real-time, robust and secured web applications.
-            Passionate about clean architecture, intuitive UIs, and data-driven
-            engineering that makes an impact.
+            A professional software engineer with ~10 years of experience developing
+            quality, robust, and optimized web applications for pharmaceutical and
+            automotive eCommerce clients. Dependable, self-starting, and
+            solutions-oriented.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
@@ -169,7 +170,7 @@ const Portfolio = () => (
           </div>
 
           <div className="mt-10 flex flex-wrap gap-3">
-            {["React", "Node.js", "MongoDB", "TypeScript", "Socket.io"].map((t) => (
+            {["React / jQuery", "Node.js / Express", "Python / Flask", "TypeScript", "WordPress"].map((t) => (
               <span
                 key={t}
                 className="rounded-full border border-slate-700 bg-slate-800/60 px-3 py-1 text-xs font-medium text-slate-400"
@@ -359,13 +360,14 @@ const Portfolio = () => (
                 About Me
               </p>
               <h2 className="mt-3 text-3xl font-bold text-white">
-                Passionate Developer Based in the Philippines
+                Software Development Engineer Based in the Philippines
               </h2>
               <p className="mt-5 leading-7 text-slate-400">
-                I&apos;m a full-stack developer who builds products from concept to
-                deployment. I specialize in the MERN stack and love creating
-                real-time applications that make complex data meaningful and
-                beautiful.
+                Knowledgeable across JavaScript, jQuery, Tailwind CSS, Flask (Python),
+                Node.js (Express), and React (Next.js / Native Expo). Contributed,
+                maintained, and completed client-focused projects for pharmaceutical
+                and automotive eCommerce companies. Strong commitment to team goals
+                and client satisfaction.
               </p>
               <ul className="mt-6 space-y-3">
                 {HIGHLIGHTS.map((item) => (
@@ -405,16 +407,16 @@ const Portfolio = () => (
                   className="mx-auto h-28 w-28 rounded-full object-cover border-2 border-emerald-500/40 shadow-xl shadow-emerald-500/20"
                 />
                 <p className="mt-5 text-xl font-bold text-white">Eugene Subrado Jr.</p>
-                <p className="text-sm font-semibold text-emerald-400">Full-Stack Web Developer</p>
+                <p className="text-sm font-semibold text-emerald-400">Software Development Engineer</p>
                 <p className="mt-2 text-xs text-slate-500">📍 Philippines</p>
                 <div className="mt-5 flex justify-center gap-3">
                   <a href="https://github.com/ESubrado" target="_blank" rel="noreferrer" className="grid h-9 w-9 place-items-center rounded-lg border border-slate-600 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400">
                     <IoLogoGithub className="h-5 w-5" />
                   </a>
-                  <a href="https://linkedin.com/in/eugenesubrado" target="_blank" rel="noreferrer" className="grid h-9 w-9 place-items-center rounded-lg border border-slate-600 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400">
+                  <a href="https://www.linkedin.com/in/essubrado" target="_blank" rel="noreferrer" className="grid h-9 w-9 place-items-center rounded-lg border border-slate-600 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400">
                     <IoLogoLinkedin className="h-5 w-5" />
                   </a>
-                  <a href="mailto:eusubjr@gmail.com" className="grid h-9 w-9 place-items-center rounded-lg border border-slate-600 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400">
+                  <a href="mailto:eug.subradojr@gmail.com" className="grid h-9 w-9 place-items-center rounded-lg border border-slate-600 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400">
                     <IoMailOutline className="h-5 w-5" />
                   </a>
                 </div>
@@ -433,12 +435,13 @@ const Portfolio = () => (
           Let&apos;s Build Something Great Together
         </h2>
         <p className="mt-4 text-slate-400">
-          I&apos;m actively looking for full-time opportunities where I can
-          contribute, grow, and keep building real-world solutions.
+          Actively looking for full-time opportunities where I can contribute,
+          grow, and keep building client-focused, real-world solutions.
+          Adaptable, dependable, and values teamwork.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <a
-            href="mailto:eusubjr@gmail.com"
+            href="mailto:eug.subradojr@gmail.com"
             className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-7 py-3.5 text-sm font-bold text-slate-950 shadow-lg shadow-emerald-500/25 transition-all hover:bg-emerald-400"
           >
             <IoMailOutline className="h-4 w-4" /> Get In Touch
@@ -463,10 +466,10 @@ const Portfolio = () => (
           <a href="https://github.com/ESubrado" target="_blank" rel="noreferrer" className="transition-colors hover:text-emerald-400">
             <IoLogoGithub className="h-5 w-5" />
           </a>
-          <a href="https://linkedin.com/in/eugenesubrado" target="_blank" rel="noreferrer" className="transition-colors hover:text-emerald-400">
+          <a href="https://www.linkedin.com/in/essubrado" target="_blank" rel="noreferrer" className="transition-colors hover:text-emerald-400">
             <IoLogoLinkedin className="h-5 w-5" />
           </a>
-          <a href="mailto:eusubjr@gmail.com" className="transition-colors hover:text-emerald-400">
+          <a href="mailto:eug.subradojr@gmail.com" className="transition-colors hover:text-emerald-400">
             <IoMailOutline className="h-5 w-5" />
           </a>
         </div>
