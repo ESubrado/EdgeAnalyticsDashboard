@@ -128,7 +128,7 @@ const Portfolio = () => (
             <div className="min-w-0 flex-1">
               <h1 className="mt-2 text-5xl font-extrabold leading-tight sm:text-6xl lg:text-7xl">
                 Hi, I&apos;m{" "}
-                <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-indigo-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-indigo-400 bg-clip-text text-[color:var(--color-gray-50)]">
                   Eugene Subrado Jr.
                 </span>
               </h1>
