@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import type { Route } from "./+types/AboutTheDeveloper";
 import type { IconType } from "react-icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -33,6 +34,10 @@ import type {
 } from "~/store/slices/sliceAboutDeveloper";
 
 const ABOUT_DEVELOPER_TOAST_DURATION_MS = 5000;
+
+export const meta: Route.MetaFunction = () => [
+  { title: "About the Developer" },
+];
 
 const blankProfileSections: ProfileSection[] = [
   "about-me",

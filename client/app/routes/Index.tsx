@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { Route } from "./+types/Index";
 
 import { AnalyticGraph } from "./AnalyticGraph";
 import AnalyticTopTable from "./AnalyticTop5Table";
@@ -11,6 +12,10 @@ import type { SnackbarCloseReason } from "@mui/material";
 
 import { useNavigate } from "react-router";
 import { useAppTableContext } from "~/context/AppContext";
+
+export const meta: Route.MetaFunction = () => [
+  { title: "Real Time Analytics Dashboard" },
+];
 
 const Home = () => {
 
