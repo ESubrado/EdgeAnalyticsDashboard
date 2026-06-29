@@ -5,6 +5,8 @@ import type { IAnalytics, EventCounterProps } from "~/models/analytics-model";
 import { io } from "socket.io-client"; 
 import API_BASE_URL from "~/base-client";
 
+const ANALYTICS_CACHE_KEY = "edgeanalytics.analytics-cache";
+
 type AppContextType = {
     topEventsData: EventCounterProps[];
     analyticItemsData: IAnalytics[];
@@ -14,13 +16,44 @@ type AppContextType = {
     refreshTables: ()=> void;    
 }
 
+type AnalyticsCache = {
+    topEventsData: EventCounterProps[];
+    analyticItemsData: IAnalytics[];
+}
+
 const AppContext = createContext<AppContextType | undefined>(undefined);
+
+const readAnalyticsCache = (): AnalyticsCache | null => {
+    if (typeof window === "undefined") {
+        return null;
+    }
+
+    try {
+        const cachedData = window.localStorage.getItem(ANALYTICS_CACHE_KEY);
+        return cachedData ? JSON.parse(cachedData) : null;
+    } catch {
+        return null;
+    }
+}
+
+const writeAnalyticsCache = (cache: AnalyticsCache) => {
+    if (typeof window === "undefined") {
+        return;
+    }
+
+    try {
+        window.localStorage.setItem(ANALYTICS_CACHE_KEY, JSON.stringify(cache));
+    } catch {
+        // Ignore storage quota/privacy-mode failures; live API data still works.
+    }
+}
 
 export const AppTableProvider: React.FC<{children:ReactNode}> = ({children}) => {
 
-    const [topEventsData, setTopEventsData] = useState<EventCounterProps[]>([]);
-    const [analyticItemsData, setAnalyticItemsData] = useState<IAnalytics[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [cachedAnalyticsData] = useState<AnalyticsCache | null>(() => readAnalyticsCache());
+    const [topEventsData, setTopEventsData] = useState<EventCounterProps[]>(cachedAnalyticsData?.topEventsData ?? []);
+    const [analyticItemsData, setAnalyticItemsData] = useState<IAnalytics[]>(cachedAnalyticsData?.analyticItemsData ?? []);
+    const [loading, setLoading] = useState(!cachedAnalyticsData);
     const [loadingError, setLoadingError] = useState(false);
     const [socketData, setSocketData] = useState("0");
     const socketRef = useRef<ReturnType<typeof io> | null>(null);
@@ -43,10 +76,24 @@ export const AppTableProvider: React.FC<{children:ReactNode}> = ({children}) => 
 
             setAnalyticItemsData(tableEventData);
             setTopEventsData(topEventData);  
+            writeAnalyticsCache({
+                analyticItemsData: tableEventData,
+                topEventsData: topEventData,
+            });
             setLoading(false);  
             setLoadingError(false); 
 
         } catch (error: any) {     
+            const fallbackData = readAnalyticsCache();
+
+            if (fallbackData) {
+                setAnalyticItemsData(fallbackData.analyticItemsData);
+                setTopEventsData(fallbackData.topEventsData);
+                setLoading(false);
+                setLoadingError(false);
+                return;
+            }
+
             setLoading(false);  
             setLoadingError(true);
             socketRef.current?.disconnect();

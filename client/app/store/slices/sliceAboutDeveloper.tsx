@@ -74,7 +74,7 @@ export type AboutDeveloperDataState = {
 export type AboutDeveloperState = AboutDeveloperDataState & {
   loading: boolean;
   error: string | null;
-  source: "idle" | "mongo" | "blank";
+  source: "idle" | "mongo" | "cache" | "blank";
 };
 
 export const ABOUT_DEVELOPER_API_NOT_FOUND_MESSAGE = "API not found.";
@@ -202,6 +202,16 @@ const aboutDeveloperSlice = createSlice({
         Object.assign(state, action.payload);
       })
       .addCase(fetchAboutDeveloperData.rejected, (state, action) => {
+        if (!isBlankAboutDeveloperData(state)) {
+          state.loading = false;
+          state.source = "cache";
+          state.error =
+            typeof action.payload === "string"
+              ? action.payload
+              : ABOUT_DEVELOPER_API_NOT_FOUND_MESSAGE;
+          return;
+        }
+
         Object.assign(state, createBlankAboutDeveloperData());
         state.loading = false;
         state.source = "blank";
