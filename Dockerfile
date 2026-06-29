@@ -7,9 +7,8 @@ RUN npm install --legacy-peer-deps --registry https://registry.npmjs.org
 COPY client/ ./
 RUN npm run build
 
-FROM node:20-alpine
-WORKDIR /app
-RUN npm install -g serve --registry https://registry.npmjs.org
-COPY --from=build /app/build/client ./public
-EXPOSE 3000
-CMD ["sh", "-c", "serve -s public -l ${PORT:-3000}"]
+FROM nginx:alpine
+COPY --from=build /app/build/client /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
