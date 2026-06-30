@@ -320,20 +320,32 @@ function PortfolioContent() {
               </div>
             </div>
 
-            {/* ── Upcoming Project placeholder ── */}
-            <div className="flex min-h-[280px] flex-col items-center justify-center rounded-xl border border-dashed border-slate-700 p-10 text-center transition-colors hover:border-yellow-500/40">
-              <div className="grid h-12 w-12 place-items-center rounded-full border border-yellow-500/30 bg-yellow-500/10">
-                <IoSparklesOutline className="h-6 w-6 text-yellow-400" />
+            {/* ── Locale Breeze Store ── */}
+            <div className="flex min-h-[280px] flex-col rounded-xl border border-slate-700/60 bg-gradient-to-br from-slate-800/80 to-slate-900 p-8 transition-all hover:border-yellow-500/40 hover:shadow-lg hover:shadow-yellow-500/5">
+              <div className="flex items-start justify-between gap-3">
+                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-yellow-500/10 ring-1 ring-yellow-500/20">
+                  <IoSparklesOutline className="h-5 w-5 text-yellow-400" />
+                </div>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1 text-xs font-semibold text-yellow-400">
+                  ● Ongoing
+                </span>
               </div>
-              <span className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1 text-xs font-semibold text-yellow-400">
-                ● Coming Soon
-              </span>
-              <p className="mt-3 text-lg font-bold text-slate-400">
-                Upcoming Project
+              <h3 className="mt-5 text-lg font-bold text-white">
+                Locale Breeze Store
+              </h3>
+              <p className="mt-2 line-clamp-3 flex-1 text-sm leading-6 text-slate-400">
+                A responsive e-commerce catalog built with Next.js, TypeScript, Supabase, and Tailwind CSS. Features dynamic product pages, image carousels, related product recommendations, and protected admin authentication.
               </p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                Something new is in the works. Stay tuned!
-              </p>
+              <div className="mt-auto pt-7">
+                <a
+                  href="https://locale-breeze-store.vercel.app/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-5 py-2.5 text-sm font-semibold text-yellow-400 transition-colors hover:bg-yellow-500/20"
+                >
+                  <IoOpenOutline className="h-4 w-4" /> View Project
+                </a>
+              </div>
             </div>
 
             {/* ── More in portfolio placeholder ── */}
