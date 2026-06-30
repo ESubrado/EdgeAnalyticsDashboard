@@ -1,20 +1,12 @@
-FROM node:20-alpine AS development-dependencies-env
-COPY . /app
-WORKDIR /app
-RUN npm ci
-
-FROM node:20-alpine AS production-dependencies-env
-COPY ./package.json package-lock.json /app/
-WORKDIR /app
-RUN npm ci --omit=dev
-
 FROM node:20-alpine AS build-env
-COPY . /app/
-COPY --from=development-dependencies-env /app/node_modules /app/node_modules
 WORKDIR /app
+ARG VITE_API_URL=""
+ENV VITE_API_URL=$VITE_API_URL
+COPY package*.json ./
+RUN npm ci --registry https://registry.npmjs.org
+COPY . ./
 RUN npm run build
 
-# ✅ Replace final stage with nginx
 FROM nginx:alpine
 RUN rm -f /etc/nginx/conf.d/default.conf
 COPY --from=build-env /app/build/client /usr/share/nginx/html
