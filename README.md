@@ -6,7 +6,7 @@ The application now works as both a personal developer portfolio and a productio
 
 ## Live Site
 
-- Portfolio and dashboard: https://edgeanalytics-client.onrender.com/
+- Portfolio and dashboard: https://eugenesubradoportfolio.onrender.com
 - API server: https://edgeanalytics-server.onrender.com/
 - Source code: https://github.com/ESubrado/EdgeAnalyticsDashboard
 
