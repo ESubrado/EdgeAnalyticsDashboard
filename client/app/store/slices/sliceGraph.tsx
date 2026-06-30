@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from "axios";
 import API_BASE_URL from '~/base-client';
 
-interface DataState {
+export interface DataState {
     chartdata: any[];
     loadingChart: boolean;
     error: string | null;

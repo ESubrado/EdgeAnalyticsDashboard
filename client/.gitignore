@@ -7,3 +7,6 @@
 
 # Local Codex preview server logs
 .codex-dev-server*.log
+
+#misc
+.env
