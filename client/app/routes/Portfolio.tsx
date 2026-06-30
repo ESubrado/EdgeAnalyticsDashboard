@@ -333,10 +333,17 @@ function PortfolioContent() {
               <h3 className="mt-5 text-lg font-bold text-white">
                 Locale Breeze Store
               </h3>
-              <p className="mt-2 line-clamp-3 flex-1 text-sm leading-6 text-slate-400">
+              <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-400">
                 A responsive e-commerce catalog built with Next.js, TypeScript, Supabase, and Tailwind CSS. Features dynamic product pages, image carousels, related product recommendations, and protected admin authentication.
               </p>
-              <div className="mt-auto pt-7">
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {["React", "Next.js", "ShadCN", "Tailwind", "Supabase", "PostgreSQL"].map((t) => (
+                  <span key={t} className="rounded-full border border-slate-700 bg-slate-800/60 px-2.5 py-0.5 text-xs font-medium text-slate-400">
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-auto pt-5">
                 <a
                   href="https://locale-breeze-store.vercel.app/"
                   target="_blank"
