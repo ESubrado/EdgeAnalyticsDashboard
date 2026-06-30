@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useLocation } from "react-router";
 import { useInView } from "~/hooks/useInView";
 import type { Route } from "./+types/AboutTheDeveloper";
 import type { IconType } from "react-icons";
@@ -123,7 +124,7 @@ const aboutDeveloperIcons: Record<string, IconType> = {
 const getAboutDeveloperIcon = (iconName: string) =>
   aboutDeveloperIcons[iconName] ?? IoSparklesOutline;
 
-const AboutTheDeveloper = () => {
+const AboutTheDeveloperContent = () => {
   const dispatch = useDispatch<AppDispatch>();
   const aboutDeveloperState = useSelector((state: RootState) => state.aboutDeveloper);
   const {
@@ -832,6 +833,12 @@ const ProjectsGrid = ({ projects }: ProjectsGridProps) => {
       ))}
     </div>
   );
+};
+
+const AboutTheDeveloper = () => {
+  const location = useLocation();
+
+  return <AboutTheDeveloperContent key={location.key} />;
 };
 
 export default AboutTheDeveloper;
