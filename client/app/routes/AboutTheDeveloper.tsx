@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import type { Route } from "./+types/AboutTheDeveloper";
 import type { IconType } from "react-icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -33,6 +34,10 @@ import type {
 } from "~/store/slices/sliceAboutDeveloper";
 
 const ABOUT_DEVELOPER_TOAST_DURATION_MS = 5000;
+
+export const meta: Route.MetaFunction = () => [
+  { title: "About the Developer" },
+];
 
 const blankProfileSections: ProfileSection[] = [
   "about-me",
@@ -284,7 +289,7 @@ const AboutTheDeveloper = () => {
   const activeSummaryPreview = getSummaryPreview(activeSection.summary);
 
   return (
-    <div className="min-h-screen rounded-lg bg-gray-50 shadow">
+    <div className="min-h-screen bg-gray-50">
       {showApiToast && (
         <AboutDeveloperApiToast
           message={error ?? ABOUT_DEVELOPER_API_NOT_FOUND_MESSAGE}
@@ -336,7 +341,7 @@ const AboutTheDeveloper = () => {
                     <a
                       key={`${item.label}-${item.value}-${contactIndex}`}
                       href={item.href || undefined}
-                      className="flex items-center gap-2 border border-stone-200 bg-gray-50 px-2.5 py-1.5 text-sm transition-colors hover:border-emerald-400 hover:bg-emerald-50"
+                      className="flex items-center gap-2 border border-stone-200 bg-white px-2.5 py-1.5 text-sm transition-colors hover:border-emerald-500 hover:bg-emerald-50 rounded-lg shadow-sm"
                     >
                       <ContactIcon className="h-4 w-4 shrink-0 text-stone-700" />
                       <span className="min-w-0">
@@ -449,7 +454,7 @@ const AboutTheDeveloper = () => {
                 {portfolioProjects.map((project, projectIndex) => (
                   <article
                     key={`${project.title}-${projectIndex}`}
-                    className="flex min-h-[260px] flex-col border border-stone-300 bg-white p-5 shadow-sm"
+                    className="group flex min-h-[260px] flex-col rounded-xl border border-stone-200 bg-white p-5 shadow-sm transition-all hover:border-emerald-300 hover:shadow-md"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div>
@@ -603,10 +608,10 @@ const ProfileSectionNavigation = ({
           title={section.eyebrow}
           aria-current={isActive ? "true" : undefined}
           onClick={() => onSectionSelect(section.id)}
-          className={`flex h-11 items-center gap-2 border px-3 text-left text-sm font-semibold transition-colors ${
+          className={`flex h-11 items-center gap-2 rounded-lg border px-3 text-left text-sm font-semibold transition-colors ${
             isActive
-              ? "border-emerald-500 bg-emerald-50 text-emerald-900"
-              : "border-stone-300 bg-white text-stone-700 hover:border-emerald-300 hover:bg-emerald-50"
+              ? "border-emerald-500 bg-emerald-50 text-emerald-900 shadow-sm"
+              : "border-stone-200 bg-white text-stone-700 hover:border-emerald-400 hover:bg-emerald-50"
           }`}
         >
           <SectionIcon className="h-5 w-5 shrink-0" />
@@ -636,7 +641,7 @@ const ProfileScrollSection = ({
       ref={(sectionElement) => {
         sectionRefs.current[section.id] = sectionElement;
       }}
-      className="scroll-mt-4 border border-stone-300 bg-gray-50 p-5 shadow-sm md:p-6"
+      className="scroll-mt-4 overflow-hidden rounded-xl border border-stone-200 bg-white p-5 shadow-sm md:p-6"
     >
       <div className="mb-5 grid gap-4 border-b border-stone-300 pb-5 md:grid-cols-[auto_minmax(0,1fr)]">
         <div className="grid h-12 w-12 place-items-center rounded border border-stone-300 bg-white">
@@ -685,7 +690,7 @@ const SkillMeterList = ({
         </div>
         <div className="h-2 overflow-hidden rounded-full bg-stone-200">
           <div
-            className="h-full rounded-full bg-orange-500"
+            className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-indigo-500"
             style={{ width: `${skill.value}%` }}
           />
         </div>

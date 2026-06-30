@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { io } from "socket.io-client";
+import type { Route } from "./+types/Index";
 
 import { AnalyticGraph } from "./AnalyticGraph";
 import AnalyticTopTable from "./AnalyticTop5Table";
@@ -10,10 +10,12 @@ import AnalyticEventTable from "./AnalyticEventTable";
 import { Snackbar } from "@mui/material";
 import type { SnackbarCloseReason } from "@mui/material";
 
-import API_BASE_URL from "~/base-client";
 import { useNavigate } from "react-router";
 import { useAppTableContext } from "~/context/AppContext";
-const socket = io(API_BASE_URL); // your backend URL
+
+export const meta: Route.MetaFunction = () => [
+  { title: "Real Time Analytics Dashboard" },
+];
 
 const Home = () => {
 

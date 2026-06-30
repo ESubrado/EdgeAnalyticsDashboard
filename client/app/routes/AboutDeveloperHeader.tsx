@@ -1,5 +1,12 @@
 import { Link } from "react-router";
-import { IoHomeOutline, IoRocketOutline } from "react-icons/io5";
+import {
+  IoArrowBackOutline,
+  IoBarChartOutline,
+  IoLogoGithub,
+  IoLogoLinkedin,
+  IoMailOutline,
+  IoRocketOutline,
+} from "react-icons/io5";
 
 type AboutDeveloperHeaderProps = {
   profile: {
@@ -13,21 +20,38 @@ type AboutDeveloperHeaderProps = {
 };
 
 const AboutDeveloperHeader = ({ profile }: AboutDeveloperHeaderProps) => (
-  <header className="bg-gray-50 px-4 pt-4">
-    <div className="mx-auto max-w-7xl">
-      <div className="mb-1 flex justify-end">
+  <header className="relative overflow-hidden bg-slate-950">
+    <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950" />
+    <div className="absolute left-1/4 top-0 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl" />
+    <div className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl" />
+
+    <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-5">
+      <div className="mb-6 flex items-center justify-between">
         <Link
           to="/"
-          className="flex items-center gap-2 whitespace-nowrap rounded border border-stone-300 bg-stone-100 px-3 py-1.5 text-sm transition-colors hover:bg-blue-500"
+          className="inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800/60 px-4 py-2 text-sm font-medium text-slate-300 backdrop-blur-sm transition-all hover:border-emerald-500/50 hover:text-emerald-400"
         >
-          <IoHomeOutline />
-          <span>Home</span>
+          <IoArrowBackOutline className="h-4 w-4" />
+          Back to Portfolio
+        </Link>
+        <Link
+          to="/dashboard"
+          className="inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800/60 px-4 py-2 text-sm font-medium text-slate-300 backdrop-blur-sm transition-all hover:border-emerald-500/50 hover:text-emerald-400"
+        >
+          <IoBarChartOutline className="h-4 w-4" />
+          Live Dashboard
         </Link>
       </div>
-      <section className="border-b border-stone-300 pb-5">
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(280px,360px)] lg:items-end">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-            <div className="grid h-32 w-32 shrink-0 place-items-center overflow-hidden rounded border border-stone-300 bg-stone-100 lg:h-36 lg:w-36">
+
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-center">
+        <div>
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-400">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+            {profile.availability || "Open to opportunities"}
+          </div>
+
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
+            <div className="relative grid h-28 w-28 shrink-0 place-items-center overflow-hidden rounded-full border-2 border-emerald-500/40 bg-gradient-to-br from-emerald-500/20 to-indigo-500/20 shadow-2xl shadow-emerald-500/20">
               {profile.photoUrl ? (
                 <img
                   src={profile.photoUrl}
@@ -35,35 +59,59 @@ const AboutDeveloperHeader = ({ profile }: AboutDeveloperHeaderProps) => (
                   className="h-full w-full object-cover"
                 />
               ) : (
-                <span className="text-4xl font-bold text-stone-700">
-                  {profile.initials}
+                <span className="text-3xl font-extrabold text-emerald-400">
+                  {profile.initials || "ES"}
                 </span>
               )}
             </div>
             <div>
-              <span className="text-sm font-semibold uppercase tracking-normal text-emerald-700">
-                About the Developer
-              </span>
-              <h1 className="mt-2 text-3xl font-bold text-stone-900 lg:text-4xl">
-                {profile.name}
+              <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400">
+                Portfolio
+              </p>
+              <h1 className="mt-1 text-4xl font-extrabold text-white lg:text-5xl">
+                {profile.name || "Eugene Subrado Jr."}
               </h1>
-              <p className="mt-3 max-w-3xl text-base leading-7 text-stone-600">
+              <p className="mt-2 text-lg font-semibold text-slate-300">
+                {profile.role || "Full-Stack Web Developer"}
+              </p>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-400">
                 {profile.pitch}
               </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3 border border-stone-300 bg-white p-4 shadow-sm">
-            <IoRocketOutline className="h-6 w-6 shrink-0 text-emerald-700" />
-            <div>
-              <p className="text-sm font-semibold text-stone-900">
-                {profile.role}
-              </p>
-              <p className="text-sm text-stone-600">{profile.availability}</p>
+              <div className="mt-4 flex gap-3">
+                <a href="https://github.com/ESubrado" target="_blank" rel="noreferrer"
+                  className="grid h-9 w-9 place-items-center rounded-lg border border-slate-700 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400">
+                  <IoLogoGithub className="h-5 w-5" />
+                </a>
+                <a href="https://www.linkedin.com/in/essubrado" target="_blank" rel="noreferrer"
+                  className="grid h-9 w-9 place-items-center rounded-lg border border-slate-700 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400">
+                  <IoLogoLinkedin className="h-5 w-5" />
+                </a>
+                <a href="mailto:eug.subradojr@gmail.com"
+                  className="grid h-9 w-9 place-items-center rounded-lg border border-slate-700 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400">
+                  <IoMailOutline className="h-5 w-5" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+
+        <div className="flex items-center gap-4 rounded-xl border border-slate-700/60 bg-slate-800/40 p-5 backdrop-blur-sm">
+          <div className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-emerald-500/10">
+            <IoRocketOutline className="h-6 w-6 text-emerald-400" />
+          </div>
+          <div>
+            <p className="text-sm font-bold text-white">
+              {profile.role || "Full-Stack Web Developer"}
+            </p>
+            <p className="mt-0.5 text-sm text-slate-400">
+              {profile.availability || "Open to full-time opportunities"}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <div className="relative h-px bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent" />
   </header>
 );
 
