@@ -50,10 +50,11 @@ const writeAnalyticsCache = (cache: AnalyticsCache) => {
 
 export const AppTableProvider: React.FC<{children:ReactNode}> = ({children}) => {
 
-    const [cachedAnalyticsData] = useState<AnalyticsCache | null>(() => readAnalyticsCache());
-    const [topEventsData, setTopEventsData] = useState<EventCounterProps[]>(cachedAnalyticsData?.topEventsData ?? []);
-    const [analyticItemsData, setAnalyticItemsData] = useState<IAnalytics[]>(cachedAnalyticsData?.analyticItemsData ?? []);
-    const [loading, setLoading] = useState(!cachedAnalyticsData);
+    // Always start with server-safe empty state so SSR and client hydration match.
+    // Cache is loaded inside useEffect (client-only) to avoid hydration mismatches.
+    const [topEventsData, setTopEventsData] = useState<EventCounterProps[]>([]);
+    const [analyticItemsData, setAnalyticItemsData] = useState<IAnalytics[]>([]);
+    const [loading, setLoading] = useState(true);
     const [loadingError, setLoadingError] = useState(false);
     const [socketData, setSocketData] = useState("0");
     const socketRef = useRef<ReturnType<typeof io> | null>(null);
@@ -103,6 +104,15 @@ export const AppTableProvider: React.FC<{children:ReactNode}> = ({children}) => 
     }   
 
     useEffect(() => {
+        // Seed state from localStorage cache immediately so the UI isn't blank
+        // while the API fetch is in flight.
+        const cachedData = readAnalyticsCache();
+        if (cachedData) {
+            setTopEventsData(cachedData.topEventsData);
+            setAnalyticItemsData(cachedData.analyticItemsData);
+            setLoading(false);
+        }
+
         // Initialize socket only on the client (avoids SSR hydration mismatch)
         socketRef.current = io(API_BASE_URL);
 
