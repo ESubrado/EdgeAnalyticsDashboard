@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import {
   IoArrowForwardOutline,
   IoBarChartOutline,
@@ -40,11 +40,7 @@ const HIGHLIGHTS = [
   "Agile Scrum, CI/CD, mentoring & sprint delivery leadership",
 ];
 
-const STAGGER_DELAYS = [
-  "0ms", "100ms", "200ms", "300ms", "400ms", "500ms",
-];
-
-export default function Portfolio() {
+function PortfolioContent() {
   const [statsRef, statsInView] = useInView<HTMLDivElement>();
   const [techRef, techInView] = useInView<HTMLElement>();
   const [projectsRef, projectsInView] = useInView<HTMLElement>();
@@ -52,101 +48,7 @@ export default function Portfolio() {
   const [ctaRef, ctaInView] = useInView<HTMLElement>();
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-
-      {/* ── Nav ───────────────────────────────────────────────── */}
-      <nav className="fixed inset-x-0 top-0 z-50 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <span className="font-mono text-xl font-bold text-emerald-400">ES.</span>
-          <div className="flex items-center gap-6 text-sm text-slate-400">
-            <Link to="/dashboard" className="transition-colors hover:text-emerald-400">
-              Dashboard
-            </Link>
-            <Link to="/about-the-developer" className="transition-colors hover:text-emerald-400">
-              About
-            </Link>
-            <a
-              href="https://github.com/ESubrado"
-              target="_blank"
-              rel="noreferrer"
-              className="transition-colors hover:text-emerald-400"
-            >
-              <IoLogoGithub className="h-5 w-5" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/essubrado"
-              target="_blank"
-              rel="noreferrer"
-              className="transition-colors hover:text-emerald-400"
-            >
-              <IoLogoLinkedin className="h-5 w-5" />
-            </a>
-          </div>
-        </div>
-      </nav>
-
-      {/* ── Styles ────────────────────────────────────────────── */}
-      <style>{`
-        @keyframes orb-drift-1 {
-          0%   { transform: translate(0px, 0px) scale(1); }
-          33%  { transform: translate(120px, -80px) scale(1.2); }
-          66%  { transform: translate(-60px, 100px) scale(0.85); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        @keyframes orb-drift-2 {
-          0%   { transform: translate(0px, 0px) scale(1); }
-          33%  { transform: translate(-140px, 60px) scale(1.18); }
-          66%  { transform: translate(80px, -120px) scale(0.88); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        @keyframes orb-drift-3 {
-          0%   { transform: translate(0px, 0px) scale(1); }
-          50%  { transform: translate(100px, 80px) scale(1.25); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        @keyframes orb-drift-4 {
-          0%   { transform: translate(0px, 0px) scale(1); }
-          40%  { transform: translate(-90px, -100px) scale(1.2); }
-          80%  { transform: translate(70px, 60px) scale(0.82); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        @keyframes orb-drift-5 {
-          0%   { transform: translate(0px, 0px) scale(1); }
-          60%  { transform: translate(-110px, 90px) scale(1.15); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .orb-1 { animation: orb-drift-1 14s ease-in-out infinite; }
-        .orb-2 { animation: orb-drift-2 17s ease-in-out infinite; }
-        .orb-3 { animation: orb-drift-3 12s ease-in-out infinite; }
-        .orb-4 { animation: orb-drift-4 20s ease-in-out infinite; }
-        .orb-5 { animation: orb-drift-5 16s ease-in-out infinite; }
-
-        /* ── Scroll animation base ── */
-        .animate-fade-up {
-          opacity: 0;
-          transform: translateY(24px);
-          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .animate-fade-up.in-view {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        .stagger-1 { transition-delay: 0ms; }
-        .stagger-2 { transition-delay: 100ms; }
-        .stagger-3 { transition-delay: 200ms; }
-        .stagger-4 { transition-delay: 300ms; }
-        .stagger-5 { transition-delay: 400ms; }
-        .stagger-6 { transition-delay: 500ms; }
-
-        @media (prefers-reduced-motion: reduce) {
-          .animate-fade-up {
-            opacity: 1;
-            transform: none;
-            transition: none;
-          }
-        }
-      `}</style>
-
+    <>
       {/* ── Hero ──────────────────────────────────────────────── */}
       <section className="relative flex min-h-screen items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950" />
@@ -519,6 +421,112 @@ export default function Portfolio() {
           </div>
         </div>
       </footer>
+    </>
+  );
+}
+
+export default function Portfolio() {
+  const location = useLocation();
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-white">
+
+      {/* ── Nav ───────────────────────────────────────────────── */}
+      <nav className="fixed inset-x-0 top-0 z-50 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <span className="font-mono text-xl font-bold text-emerald-400">ES.</span>
+          <div className="flex items-center gap-6 text-sm text-slate-400">
+            <Link to="/dashboard" className="transition-colors hover:text-emerald-400">
+              Dashboard
+            </Link>
+            <Link to="/about-the-developer" className="transition-colors hover:text-emerald-400">
+              About
+            </Link>
+            <a
+              href="https://github.com/ESubrado"
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors hover:text-emerald-400"
+            >
+              <IoLogoGithub className="h-5 w-5" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/essubrado"
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors hover:text-emerald-400"
+            >
+              <IoLogoLinkedin className="h-5 w-5" />
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      {/* ── Styles ────────────────────────────────────────────── */}
+      <style>{`
+        @keyframes orb-drift-1 {
+          0%   { transform: translate(0px, 0px) scale(1); }
+          33%  { transform: translate(120px, -80px) scale(1.2); }
+          66%  { transform: translate(-60px, 100px) scale(0.85); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        @keyframes orb-drift-2 {
+          0%   { transform: translate(0px, 0px) scale(1); }
+          33%  { transform: translate(-140px, 60px) scale(1.18); }
+          66%  { transform: translate(80px, -120px) scale(0.88); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        @keyframes orb-drift-3 {
+          0%   { transform: translate(0px, 0px) scale(1); }
+          50%  { transform: translate(100px, 80px) scale(1.25); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        @keyframes orb-drift-4 {
+          0%   { transform: translate(0px, 0px) scale(1); }
+          40%  { transform: translate(-90px, -100px) scale(1.2); }
+          80%  { transform: translate(70px, 60px) scale(0.82); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        @keyframes orb-drift-5 {
+          0%   { transform: translate(0px, 0px) scale(1); }
+          60%  { transform: translate(-110px, 90px) scale(1.15); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .orb-1 { animation: orb-drift-1 14s ease-in-out infinite; }
+        .orb-2 { animation: orb-drift-2 17s ease-in-out infinite; }
+        .orb-3 { animation: orb-drift-3 12s ease-in-out infinite; }
+        .orb-4 { animation: orb-drift-4 20s ease-in-out infinite; }
+        .orb-5 { animation: orb-drift-5 16s ease-in-out infinite; }
+
+        /* ── Scroll animation base ── */
+        .animate-fade-up {
+          opacity: 0;
+          transform: translateY(24px);
+          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-fade-up.in-view {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        .stagger-1 { transition-delay: 0ms; }
+        .stagger-2 { transition-delay: 100ms; }
+        .stagger-3 { transition-delay: 200ms; }
+        .stagger-4 { transition-delay: 300ms; }
+        .stagger-5 { transition-delay: 400ms; }
+        .stagger-6 { transition-delay: 500ms; }
+
+        @media (prefers-reduced-motion: reduce) {
+          .animate-fade-up {
+            opacity: 1;
+            transform: none;
+            transition: none;
+          }
+        }
+      `}</style>
+
+      {/* ── Animated content — keyed by location so it fully remounts
+           on every navigation back, resetting all useInView states ── */}
+      <PortfolioContent key={location.key} />
     </div>
   );
 }
