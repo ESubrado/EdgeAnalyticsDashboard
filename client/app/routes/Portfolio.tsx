@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import {
   IoArrowForwardOutline,
   IoBarChartOutline,
@@ -40,16 +40,9 @@ const HIGHLIGHTS = [
   "Agile Scrum, CI/CD, mentoring & sprint delivery leadership",
 ];
 
-const STAGGER_DELAYS = [
-  "0ms", "100ms", "200ms", "300ms", "400ms", "500ms",
-];
-
-export default function Portfolio() {
+function PortfolioContent() {
   const [statsRef, statsInView] = useInView<HTMLDivElement>();
   const [techRef, techInView] = useInView<HTMLElement>();
-  const [projectsRef, projectsInView] = useInView<HTMLElement>();
-  const [aboutRef, aboutInView] = useInView<HTMLElement>();
-  const [ctaRef, ctaInView] = useInView<HTMLElement>();
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -85,7 +78,7 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      {/* ── Styles ────────────────────────────────────────────── */}
+      {/* ── Hero ──────────────────────────────────────────────── */}
       <style>{`
         @keyframes orb-drift-1 {
           0%   { transform: translate(0px, 0px) scale(1); }
@@ -120,34 +113,7 @@ export default function Portfolio() {
         .orb-3 { animation: orb-drift-3 12s ease-in-out infinite; }
         .orb-4 { animation: orb-drift-4 20s ease-in-out infinite; }
         .orb-5 { animation: orb-drift-5 16s ease-in-out infinite; }
-
-        /* ── Scroll animation base ── */
-        .animate-fade-up {
-          opacity: 0;
-          transform: translateY(24px);
-          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .animate-fade-up.in-view {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        .stagger-1 { transition-delay: 0ms; }
-        .stagger-2 { transition-delay: 100ms; }
-        .stagger-3 { transition-delay: 200ms; }
-        .stagger-4 { transition-delay: 300ms; }
-        .stagger-5 { transition-delay: 400ms; }
-        .stagger-6 { transition-delay: 500ms; }
-
-        @media (prefers-reduced-motion: reduce) {
-          .animate-fade-up {
-            opacity: 1;
-            transform: none;
-            transition: none;
-          }
-        }
       `}</style>
-
-      {/* ── Hero ──────────────────────────────────────────────── */}
       <section className="relative flex min-h-screen items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950" />
         <div className="orb-1 absolute left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-emerald-500/30 blur-3xl" />
@@ -255,7 +221,6 @@ export default function Portfolio() {
               <span
                 key={tech}
                 className={`rounded-lg border border-slate-700 bg-slate-800/60 px-4 py-2 text-sm font-medium text-slate-300 transition-all hover:border-emerald-500/50 hover:bg-slate-800 hover:text-emerald-400 animate-fade-up stagger-${Math.min((i % 6) + 1, 6)}${techInView ? " in-view" : ""}`}
-                style={{ transitionDelay: techInView ? `${80 + (i % 6) * 80}ms` : "0ms" }}
               >
                 {tech}
               </span>
@@ -264,10 +229,10 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* ── Featured Projects ──────────────────────────────────── */}
-      <section ref={projectsRef} className="bg-slate-900 py-24">
+      {/* ── Featured Project ──────────────────────────────────── */}
+      <section className="bg-slate-900 py-24">
         <div className="mx-auto max-w-7xl px-6">
-          <div className={`mb-12 animate-fade-up stagger-1${projectsInView ? " in-view" : ""}`}>
+          <div className="mb-12">
             <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400">
               Featured Work
             </p>
@@ -275,8 +240,7 @@ export default function Portfolio() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
-            {/* Card 1 */}
-            <div className={`group relative flex min-h-[280px] flex-col overflow-hidden rounded-xl border border-slate-700 bg-slate-800 p-7 transition-all hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-500/10 animate-fade-up stagger-2${projectsInView ? " in-view" : ""}`}>
+            <div className="group relative flex min-h-[280px] flex-col overflow-hidden rounded-xl border border-slate-700 bg-slate-800 p-7 transition-all hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-500/10">
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
               <div className="flex items-start justify-between">
                 <div className="grid h-12 w-12 place-items-center rounded-lg bg-emerald-500/10">
@@ -319,8 +283,7 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* Card 2 */}
-            <div className={`group relative flex min-h-[280px] flex-col overflow-hidden rounded-xl border border-slate-700 bg-slate-800 p-7 transition-all hover:border-violet-500/50 hover:shadow-xl hover:shadow-violet-500/10 animate-fade-up stagger-3${projectsInView ? " in-view" : ""}`}>
+            <div className="group relative flex min-h-[280px] flex-col overflow-hidden rounded-xl border border-slate-700 bg-slate-800 p-7 transition-all hover:border-violet-500/50 hover:shadow-xl hover:shadow-violet-500/10">
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-violet-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
               <div className="flex items-start justify-between">
                 <div className="grid h-12 w-12 place-items-center rounded-lg bg-violet-500/10">
@@ -357,24 +320,36 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* Card 3 — Upcoming */}
-            <div className={`flex min-h-[280px] flex-col items-center justify-center rounded-xl border border-dashed border-slate-700 p-10 text-center transition-colors hover:border-yellow-500/40 animate-fade-up stagger-4${projectsInView ? " in-view" : ""}`}>
-              <div className="grid h-12 w-12 place-items-center rounded-full border border-yellow-500/30 bg-yellow-500/10">
-                <IoSparklesOutline className="h-6 w-6 text-yellow-400" />
+            {/* ── Locale Breeze Store ── */}
+            <div className="flex min-h-[280px] flex-col rounded-xl border border-slate-700/60 bg-gradient-to-br from-slate-800/80 to-slate-900 p-8 transition-all hover:border-yellow-500/40 hover:shadow-lg hover:shadow-yellow-500/5">
+              <div className="flex items-start justify-between gap-3">
+                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-yellow-500/10 ring-1 ring-yellow-500/20">
+                  <IoSparklesOutline className="h-5 w-5 text-yellow-400" />
+                </div>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1 text-xs font-semibold text-yellow-400">
+                  ● Ongoing
+                </span>
               </div>
-              <span className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1 text-xs font-semibold text-yellow-400">
-                ● Coming Soon
-              </span>
-              <p className="mt-3 text-lg font-bold text-slate-400">
-                Upcoming Project
+              <h3 className="mt-5 text-lg font-bold text-white">
+                Locale Breeze Store
+              </h3>
+              <p className="mt-2 line-clamp-3 flex-1 text-sm leading-6 text-slate-400">
+                A responsive e-commerce catalog built with Next.js, TypeScript, Supabase, and Tailwind CSS. Features dynamic product pages, image carousels, related product recommendations, and protected admin authentication.
               </p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                Something new is in the works. Stay tuned!
-              </p>
+              <div className="mt-auto pt-7">
+                <a
+                  href="https://locale-breeze-store.vercel.app/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-5 py-2.5 text-sm font-semibold text-yellow-400 transition-colors hover:bg-yellow-500/20"
+                >
+                  <IoOpenOutline className="h-4 w-4" /> View Project
+                </a>
+              </div>
             </div>
 
-            {/* Card 4 — More in portfolio */}
-            <div className={`flex min-h-[280px] flex-col items-center justify-center rounded-xl border border-dashed border-slate-700 p-10 text-center transition-colors hover:border-indigo-500/40 animate-fade-up stagger-5${projectsInView ? " in-view" : ""}`}>
+            {/* ── More in portfolio placeholder ── */}
+            <div className="flex min-h-[280px] flex-col items-center justify-center rounded-xl border border-dashed border-slate-700 p-10 text-center transition-colors hover:border-indigo-500/40">
               <IoOpenOutline className="h-10 w-10 text-slate-600" />
               <p className="mt-4 text-lg font-bold text-slate-400">
                 More in the full portfolio
@@ -390,16 +365,17 @@ export default function Portfolio() {
                 View Full Portfolio <IoArrowForwardOutline className="h-4 w-4" />
               </Link>
             </div>
+
           </div>
         </div>
       </section>
 
       {/* ── About teaser ──────────────────────────────────────── */}
-      <section ref={aboutRef} className="py-24">
+      <section className="py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="overflow-hidden rounded-2xl border border-slate-700 bg-gradient-to-br from-slate-800 to-slate-900">
             <div className="grid gap-0 md:grid-cols-2">
-              <div className={`p-10 md:p-14 animate-fade-up stagger-1${aboutInView ? " in-view" : ""}`}>
+              <div className="p-10 md:p-14">
                 <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400">
                   About Me
                 </p>
@@ -439,7 +415,7 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              <div className={`relative flex items-center justify-center border-t border-slate-700 bg-gradient-to-br from-indigo-950/50 to-slate-900 p-10 md:border-l md:border-t-0 animate-fade-up stagger-3${aboutInView ? " in-view" : ""}`}>
+              <div className="relative flex items-center justify-center border-t border-slate-700 bg-gradient-to-br from-indigo-950/50 to-slate-900 p-10 md:border-l md:border-t-0">
                 <div className="absolute inset-0 opacity-30">
                   <div className="absolute left-8 top-8 h-32 w-32 rounded-full bg-emerald-500/20 blur-2xl" />
                   <div className="absolute bottom-8 right-8 h-32 w-32 rounded-full bg-indigo-500/20 blur-2xl" />
@@ -472,18 +448,18 @@ export default function Portfolio() {
       </section>
 
       {/* ── CTA ───────────────────────────────────────────────── */}
-      <section ref={ctaRef} className="bg-slate-900 py-20">
+      <section className="bg-slate-900 py-20">
         <div className="mx-auto max-w-3xl px-6 text-center">
-          <IoCodeSlashOutline className={`mx-auto h-10 w-10 text-emerald-400 animate-fade-up stagger-1${ctaInView ? " in-view" : ""}`} />
-          <h2 className={`mt-4 text-3xl font-bold text-white animate-fade-up stagger-2${ctaInView ? " in-view" : ""}`}>
+          <IoCodeSlashOutline className="mx-auto h-10 w-10 text-emerald-400" />
+          <h2 className="mt-4 text-3xl font-bold text-white">
             Let&apos;s Build Something Great Together
           </h2>
-          <p className={`mt-4 text-slate-400 animate-fade-up stagger-3${ctaInView ? " in-view" : ""}`}>
+          <p className="mt-4 text-slate-400">
             Actively looking for full-time opportunities where I can contribute,
             grow, and keep building client-focused, real-world solutions.
             Adaptable, dependable, and values teamwork.
           </p>
-          <div className={`mt-8 flex flex-wrap justify-center gap-4 animate-fade-up stagger-4${ctaInView ? " in-view" : ""}`}>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
             <a
               href="mailto:eug.subradojr@gmail.com"
               className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-7 py-3.5 text-sm font-bold text-slate-950 shadow-lg shadow-emerald-500/25 transition-all hover:bg-emerald-400"
@@ -519,6 +495,12 @@ export default function Portfolio() {
           </div>
         </div>
       </footer>
+
     </div>
   );
+}
+
+export default function Portfolio() {
+  const location = useLocation();
+  return <PortfolioContent key={location.key} />;
 }
