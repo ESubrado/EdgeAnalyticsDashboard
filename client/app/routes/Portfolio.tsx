@@ -21,7 +21,7 @@ const TECH_STACK = [
   "Material UI / Kendo UI", "Socket.io / Recharts",
   "WordPress / WooCommerce", "Docker", "GitHub / GitKraken",
   "Figma / Canva", "JIRA / Agile / CI-CD",
-  "n8n Automation", "AI Tools (Claude / Codex / Replit)",
+  "AI Assist Automation", "AI Tools (Claude / Codex / Replit)",
 ];
 
 const STATS = [
