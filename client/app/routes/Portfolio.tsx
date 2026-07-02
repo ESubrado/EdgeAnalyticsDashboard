@@ -551,12 +551,6 @@ function PortfolioContent() {
             >
               <IoMailOutline className="h-4 w-4" /> Get In Touch
             </a>
-            <Link
-              to="/about-the-developer"
-              className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-7 py-3.5 text-sm font-bold text-slate-300 transition-all hover:border-emerald-500/50 hover:text-emerald-400"
-            >
-              <IoOpenOutline className="h-4 w-4" /> View Portfolio
-            </Link>
           </div>
         </div>
       </section>
