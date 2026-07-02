@@ -14,7 +14,6 @@ import { EnumEventTypes } from '~/models/analytics-model';
 import LoadingIcon from '~/components/LoadingIcon';
 import { useAppTableContext } from '~/context/AppContext';
 
-//function used to create an object that is acceptable to the table. Store it to row array
 function createData(
     id: string,
     eventType: string,
@@ -26,6 +25,14 @@ function createData(
   return { id, eventType, userId, timestamp, eventTypeName, createdAt };
 }
 
+const darkPaper   = { backgroundColor: '#1e293b', color: '#e2e8f0' };
+const headerCell  = { backgroundColor: '#0f172a', color: '#64748b', fontWeight: 600, borderBottom: '1px solid #334155' };
+const bodyCell    = { color: '#94a3b8', borderBottom: '1px solid #1e293b' };
+const bodyRow     = { '&:hover': { backgroundColor: '#1e293b' }, backgroundColor: '#0f172a' };
+const pagination  = { color: '#64748b', backgroundColor: '#0f172a', borderTop: '1px solid #334155',
+                       '.MuiTablePagination-selectIcon': { color: '#64748b' },
+                       '.MuiTablePagination-actions button': { color: '#64748b' } };
+
 const AnalyticEventTable = () => {
     const {analyticItemsData, loading} = useAppTableContext();
     
@@ -34,7 +41,6 @@ const AnalyticEventTable = () => {
     const  parseString : any  = useParseEnumFromString(EnumEventTypes)
     const rows : any[] = [];   
     
-    //Loop over event items and create object that is compatible to material table
     for (let i = 0; i < analyticItemsData.length; i++){
         rows.push(createData(
             analyticItemsData[i]._id, 
@@ -46,30 +52,29 @@ const AnalyticEventTable = () => {
         ))
     }    
 
-    //table pagination functions
     const handleChangePage = (event : any, newPage : any) => {
       setPage(newPage);
     };
     const handleChangeRowsPerPage = (event : any) => {
       setRowsPerPage(parseInt(event.target.value, 10));
-      setPage(0); // Reset to first page when rows per page changes
+      setPage(0);
     };
 
     return (
         <>      
-            <div className='px-2 md:p-2 pb-0 bg-stone-100 border border-stone-300 rounded col-span-12 lg:col-span-7'>        
+            <div className='px-2 md:p-2 pb-0 border border-slate-700/60 bg-slate-900 rounded-xl col-span-12 lg:col-span-7'>        
                 <div className="flex items justify-center py-2">
-                    {   //Loading text shows when no data is passed from the parent component
+                    {
                         loading ? (<LoadingIcon/>) : ( 
                             <>
-                            <TableContainer component={Paper} sx={{maxHeight: '375px', overflowY: 'auto'}}>
+                            <TableContainer component={Paper} sx={{ maxHeight: '375px', overflowY: 'auto', ...darkPaper }}>
                                 <Table sx={{ minWidth: 650 }} aria-label="grid Table">
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>Event Type</TableCell>
-                                            <TableCell align="right">User</TableCell>
-                                            <TableCell align="right">Time Stamp</TableCell> 
-                                            <TableCell align="right">Created At</TableCell>                                        
+                                            <TableCell sx={headerCell}>Event Type</TableCell>
+                                            <TableCell align="right" sx={headerCell}>User</TableCell>
+                                            <TableCell align="right" sx={headerCell}>Time Stamp</TableCell> 
+                                            <TableCell align="right" sx={headerCell}>Created At</TableCell>                                        
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -78,14 +83,14 @@ const AnalyticEventTable = () => {
                                         .map((row) => (
                                             <TableRow
                                             key={row.id}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            sx={{ ...bodyRow, '&:last-child td, &:last-child th': { border: 0 } }}
                                             >
-                                                <TableCell component="th" scope="row">
+                                                <TableCell component="th" scope="row" sx={bodyCell}>
                                                     {row.eventTypeName}
                                                 </TableCell>
-                                                <TableCell align="right">{row.userId}</TableCell>
-                                                <TableCell align="right">{moment(new Date(row.timestamp)).format("MMM-DD-YYYY hh:mm A")}</TableCell>
-                                                <TableCell align="right">{moment(new Date(row.createdAt)).format("MMM-DD-YYYY hh:mm A")}</TableCell>                                    
+                                                <TableCell align="right" sx={bodyCell}>{row.userId}</TableCell>
+                                                <TableCell align="right" sx={bodyCell}>{moment(new Date(row.timestamp)).format("MMM-DD-YYYY hh:mm A")}</TableCell>
+                                                <TableCell align="right" sx={bodyCell}>{moment(new Date(row.createdAt)).format("MMM-DD-YYYY hh:mm A")}</TableCell>                                    
                                             </TableRow>
                                         ))
                                     }
@@ -94,11 +99,12 @@ const AnalyticEventTable = () => {
                                 <TablePagination
                                     count={rows.length}
                                     component="div"
-                                    rowsPerPageOptions={[5, 10, 20 ]} // Customize options
+                                    rowsPerPageOptions={[5, 10, 20]}
                                     rowsPerPage={rowsPerPage}
                                     page={page}
                                     onPageChange={handleChangePage}
                                     onRowsPerPageChange={handleChangeRowsPerPage}
+                                    sx={pagination}
                                 />                               
                             </TableContainer>
                             </>

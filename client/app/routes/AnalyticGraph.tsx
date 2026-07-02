@@ -24,21 +24,20 @@ export const AnalyticGraph = () => {
         dispatch(fetchGraphData({ type: selectDateType }));
     }, [dispatch, selectDateType, socketData])
 
-    //toggle to change time line
     const handleToggle = (value: string) => {
         setSelectDateType(value);
     };
     
     return (     
         <>
-            <div className="p-4 pb-8 border bg-stone-100 border-stone-300 col-span-12 lg:col-span-8 rounded "> 
+            <div className="p-4 pb-8 border border-slate-700/60 bg-slate-900 col-span-12 lg:col-span-8 rounded-xl"> 
                 {
                     loadingChart ? (<LoadingIcon/>) : (
                         <>
                             <div className='m-1 md:flex justify-between'> 
                                 <div className="mb-2">
-                                    <div className="bg-white shadow text-center p-2 md:p-3 md:px-4 rounded-b-md transition">                                       
-                                        <span className='font-semibold text-xl'>Total Number of Events: {analyticItemsData.length || 0}</span>
+                                    <div className="border border-slate-700 bg-slate-800 text-center p-2 md:p-3 md:px-4 rounded-lg transition">                                       
+                                        <span className='font-semibold text-lg text-white'>Total Events: <span className="text-emerald-400">{analyticItemsData.length || 0}</span></span>
                                     </div>       
                                 </div> 
                                 <div className='text-center'>                                 
@@ -47,6 +46,7 @@ export const AnalyticGraph = () => {
                                             color='success'
                                             variant={selectDateType === 'hour' ? 'contained' : 'outlined'}
                                             onClick={() => handleToggle('hour')}
+                                            sx={selectDateType !== 'hour' ? { borderColor: '#334155', color: '#94a3b8', '&:hover': { borderColor: '#10b981', color: '#34d399' } } : {}}
                                         >
                                             Last Hour
                                         </Button>
@@ -54,6 +54,7 @@ export const AnalyticGraph = () => {
                                             color='success'
                                             variant={selectDateType === 'day' ? 'contained' : 'outlined'}
                                             onClick={() => handleToggle('day')}
+                                            sx={selectDateType !== 'day' ? { borderColor: '#334155', color: '#94a3b8', '&:hover': { borderColor: '#10b981', color: '#34d399' } } : {}}
                                         >
                                             Last Day
                                         </Button>
@@ -61,6 +62,7 @@ export const AnalyticGraph = () => {
                                             color='success'
                                             variant={selectDateType === 'month' ? 'contained' : 'outlined'}
                                             onClick={() => handleToggle('month')}
+                                            sx={selectDateType !== 'month' ? { borderColor: '#334155', color: '#94a3b8', '&:hover': { borderColor: '#10b981', color: '#34d399' } } : {}}
                                         >
                                             Last Month
                                         </Button>
@@ -70,11 +72,15 @@ export const AnalyticGraph = () => {
                             <div style={{ width: '100%', height: 280}} className='p-5 md:py-1'>
                                 <ResponsiveContainer width="100%" height="100%">
                                     <LineChart data={chartdata} margin={{ top: 5, right: 5, left: 0, bottom: 0 }}>
-                                        <CartesianGrid strokeDasharray="3 3" />
-                                        <XAxis dataKey="time" padding={{ left: 30, right: 30 }} tickFormatter={(tick) => moment(new Date(tick)).format("MMM-DD-YYYY hh:mm A")} />
-                                        <YAxis />
-                                        <Tooltip labelFormatter={(value) => moment(value).format("MMM-DD-YYYY hh:mm A")} />
-                                        <Legend height={22} />
+                                        <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                                        <XAxis dataKey="time" padding={{ left: 30, right: 30 }} tick={{ fill: '#94a3b8', fontSize: 11 }} tickFormatter={(tick) => moment(new Date(tick)).format("MMM-DD-YYYY hh:mm A")} />
+                                        <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} />
+                                        <Tooltip
+                                            labelFormatter={(value) => moment(value).format("MMM-DD-YYYY hh:mm A")}
+                                            contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '8px', color: '#e2e8f0' }}
+                                            labelStyle={{ color: '#94a3b8' }}
+                                        />
+                                        <Legend height={22} formatter={(value) => <span style={{ color: '#94a3b8' }}>{value}</span>} />
                                         <Line name="Page View" type="monotone" dataKey="page_view" stroke="#8884d8" activeDot={{ r: 8 }} />
                                         <Line name="Page Download" type="monotone" dataKey="page_download" stroke="#82ca9d" />
                                         <Line name="Page Update" type="monotone" dataKey="page_update" stroke="#ffa500" />
