@@ -15,13 +15,24 @@ import {
 import { useInView } from "../hooks/useInView";
 
 const TECH_STACK = [
-  "React / jQuery", "JavaScript", "TypeScript", "Node.js / Express.js",
-  "Next.js", "Python / Flask", "Redux / Expo / Vue3",
-  "Tailwind CSS / Bootstrap", "MongoDB / PostgreSQL / SQLite",
-  "Material UI / Kendo UI", "Socket.io / Recharts",
-  "WordPress / WooCommerce", "Docker", "GitHub / GitKraken",
-  "Figma / Canva", "JIRA / Agile / CI-CD",
-  "AI Assist Automation", "AI Tools (Claude / Codex / Replit)",
+  "React / jQuery",
+  "JavaScript",
+  "TypeScript",
+  "Node.js / Express.js",
+  "Next.js",
+  "Python / Flask",
+  "Redux / Expo / Vue3",
+  "Tailwind CSS / Bootstrap",
+  "MongoDB / PostgreSQL / SQLite",
+  "Material UI / Kendo UI",
+  "Socket.io / Recharts",
+  "WordPress / WooCommerce",
+  "Docker",
+  "GitHub / GitKraken",
+  "Figma / Canva",
+  "JIRA / Agile / CI-CD",
+  "AI Assist Automation",
+  "AI Tools (Claude / Codex / Replit)",
 ];
 
 const STATS = [
@@ -36,7 +47,7 @@ const HIGHLIGHTS = [
   "Front-end to full-stack: React, Next.js, Node.js, Express, Flask",
   "WordPress / WooCommerce performance optimization & ERP integrations",
   "OAuth 2.0, RBAC, MFA — enterprise-grade security implementations",
-  "AI-assisted development workflows (Claude, Codex, Ollama / Qwen)",
+  "AI-assisted development workflows (Claude, Codex, Replit, Ollama / Qwen)",
   "Agile Scrum, CI/CD, mentoring & sprint delivery leadership",
 ];
 
@@ -46,16 +57,23 @@ function PortfolioContent() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
-
       {/* ── Nav ───────────────────────────────────────────────── */}
       <nav className="fixed inset-x-0 top-0 z-50 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <span className="font-mono text-xl font-bold text-emerald-400">ES.</span>
+          <span className="font-mono text-xl font-bold text-emerald-400">
+            ES.
+          </span>
           <div className="flex items-center gap-6 text-sm text-slate-400">
-            <Link to="/dashboard" className="transition-colors hover:text-emerald-400">
+            <Link
+              to="/dashboard"
+              className="transition-colors hover:text-emerald-400"
+            >
               Dashboard
             </Link>
-            <Link to="/about-the-developer" className="transition-colors hover:text-emerald-400">
+            <Link
+              to="/about-the-developer"
+              className="transition-colors hover:text-emerald-400"
+            >
               About
             </Link>
             <a
@@ -153,10 +171,10 @@ function PortfolioContent() {
             </div>
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-400">
-              A professional software engineer with ~10 years of experience developing
-              quality, robust, and optimized web applications for pharmaceutical and
-              automotive eCommerce clients. Dependable, self-starting, and
-              solutions-oriented.
+              A professional software engineer with ~10 years of experience
+              developing quality, robust, and optimized web applications for
+              pharmaceutical and automotive eCommerce clients. Dependable,
+              self-starting, and solutions-oriented.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
@@ -175,7 +193,13 @@ function PortfolioContent() {
             </div>
 
             <div className="mt-10 flex flex-wrap gap-3">
-              {["React / jQuery", "Node.js / Express", "Python / Flask", "TypeScript", "WordPress"].map((t) => (
+              {[
+                "React / jQuery",
+                "Node.js / Express",
+                "Python / Flask",
+                "TypeScript",
+                "WordPress",
+              ].map((t) => (
                 <span
                   key={t}
                   className="rounded-full border border-slate-700 bg-slate-800/60 px-3 py-1 text-xs font-medium text-slate-400"
@@ -197,7 +221,9 @@ function PortfolioContent() {
                 key={s.label}
                 className={`px-8 py-8 text-center animate-fade-up stagger-${i + 1}${statsInView ? " in-view" : ""}`}
               >
-                <p className="text-3xl font-extrabold text-emerald-400">{s.value}</p>
+                <p className="text-3xl font-extrabold text-emerald-400">
+                  {s.value}
+                </p>
                 <p className="mt-1 text-sm text-slate-500">{s.label}</p>
               </div>
             ))}
@@ -208,7 +234,9 @@ function PortfolioContent() {
       {/* ── Tech Stack ────────────────────────────────────────── */}
       <section ref={techRef} className="py-24">
         <div className="mx-auto max-w-7xl px-6">
-          <div className={`mb-12 text-center animate-fade-up stagger-1${techInView ? " in-view" : ""}`}>
+          <div
+            className={`mb-12 text-center animate-fade-up stagger-1${techInView ? " in-view" : ""}`}
+          >
             <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400">
               My Toolkit
             </p>
@@ -236,7 +264,9 @@ function PortfolioContent() {
             <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400">
               Featured Work
             </p>
-            <h2 className="mt-3 text-3xl font-bold text-white">Live Projects</h2>
+            <h2 className="mt-3 text-3xl font-bold text-white">
+              Live Projects
+            </h2>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -254,13 +284,24 @@ function PortfolioContent() {
                 Edge Real-Time Analytics Dashboard
               </h3>
               <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-400">
-                A production-grade MERN application featuring live event tracking
-                with Socket.io and MongoDB Change Streams, interactive Recharts
-                visualizations, and a fully responsive React + Redux frontend.
+                A production-grade MERN application featuring live event
+                tracking with Socket.io and MongoDB Change Streams, interactive
+                Recharts visualizations, and a fully responsive React + Redux
+                frontend.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
-                {["React", "Node.js", "MongoDB", "Socket.io", "Redux", "TypeScript"].map((t) => (
-                  <span key={t} className="rounded bg-slate-700 px-2 py-0.5 text-xs text-slate-400">
+                {[
+                  "React",
+                  "Node.js",
+                  "MongoDB",
+                  "Socket.io",
+                  "Redux",
+                  "TypeScript",
+                ].map((t) => (
+                  <span
+                    key={t}
+                    className="rounded bg-slate-700 px-2 py-0.5 text-xs text-slate-400"
+                  >
                     {t}
                   </span>
                 ))}
@@ -303,7 +344,10 @@ function PortfolioContent() {
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {["Next.js", "React", "Flask", "Python"].map((t) => (
-                  <span key={t} className="rounded bg-slate-700 px-2 py-0.5 text-xs text-slate-400">
+                  <span
+                    key={t}
+                    className="rounded bg-slate-700 px-2 py-0.5 text-xs text-slate-400"
+                  >
                     {t}
                   </span>
                 ))}
@@ -334,11 +378,24 @@ function PortfolioContent() {
                 Locale Breeze Store
               </h3>
               <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-400">
-                A responsive e-commerce catalog built with Next.js, TypeScript, Supabase, and Tailwind CSS. Features dynamic product pages, image carousels, related product recommendations, and protected admin authentication.
+                A responsive e-commerce catalog built with Next.js, TypeScript,
+                Supabase, and Tailwind CSS. Features dynamic product pages,
+                image carousels, related product recommendations, and protected
+                admin authentication.
               </p>
               <div className="mt-3 flex flex-wrap gap-1.5">
-                {["React", "Next.js", "ShadCN", "Tailwind", "Supabase", "PostgreSQL"].map((t) => (
-                  <span key={t} className="rounded-full border border-slate-700 bg-slate-800/60 px-2.5 py-0.5 text-xs font-medium text-slate-400">
+                {[
+                  "React",
+                  "Next.js",
+                  "ShadCN",
+                  "Tailwind",
+                  "Supabase",
+                  "PostgreSQL",
+                ].map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-full border border-slate-700 bg-slate-800/60 px-2.5 py-0.5 text-xs font-medium text-slate-400"
+                  >
                     {t}
                   </span>
                 ))}
@@ -369,10 +426,10 @@ function PortfolioContent() {
                 to="/about-the-developer"
                 className="mt-7 inline-flex items-center gap-2 rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-6 py-2.5 text-sm font-semibold text-indigo-400 transition-colors hover:bg-indigo-500/20"
               >
-                View Full Portfolio <IoArrowForwardOutline className="h-4 w-4" />
+                View Full Portfolio{" "}
+                <IoArrowForwardOutline className="h-4 w-4" />
               </Link>
             </div>
-
           </div>
         </div>
       </section>
@@ -390,15 +447,19 @@ function PortfolioContent() {
                   Software Development Engineer Based in the Philippines
                 </h2>
                 <p className="mt-5 leading-7 text-slate-400">
-                  Knowledgeable across JavaScript, jQuery, Tailwind CSS, Flask (Python),
-                  Node.js (Express), and React (Next.js / Native Expo). Contributed,
-                  maintained, and completed client-focused projects for pharmaceutical
-                  and automotive eCommerce companies. Strong commitment to team goals
-                  and client satisfaction.
+                  Knowledgeable across JavaScript, jQuery, Tailwind CSS, Flask
+                  (Python), Node.js (Express), and React (Next.js / Native
+                  Expo). Contributed, maintained, and completed client-focused
+                  projects for pharmaceutical and automotive eCommerce
+                  companies. Strong commitment to team goals and client
+                  satisfaction.
                 </p>
                 <ul className="mt-6 space-y-3">
                   {HIGHLIGHTS.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5 text-sm text-slate-400">
+                    <li
+                      key={item}
+                      className="flex items-start gap-2.5 text-sm text-slate-400"
+                    >
                       <IoCheckmarkCircleOutline className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
                       {item}
                     </li>
@@ -433,17 +494,34 @@ function PortfolioContent() {
                     alt="Eugene Subrado Jr."
                     className="mx-auto h-28 w-28 rounded-full object-cover border-2 border-emerald-500/40 shadow-xl shadow-emerald-500/20"
                   />
-                  <p className="mt-5 text-xl font-bold text-white">Eugene Subrado Jr.</p>
-                  <p className="text-sm font-semibold text-emerald-400">Software Development Engineer</p>
+                  <p className="mt-5 text-xl font-bold text-white">
+                    Eugene Subrado Jr.
+                  </p>
+                  <p className="text-sm font-semibold text-emerald-400">
+                    Software Development Engineer
+                  </p>
                   <p className="mt-2 text-xs text-slate-500">📍 Philippines</p>
                   <div className="mt-5 flex justify-center gap-3">
-                    <a href="https://github.com/ESubrado" target="_blank" rel="noreferrer" className="grid h-9 w-9 place-items-center rounded-lg border border-slate-600 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400">
+                    <a
+                      href="https://github.com/ESubrado"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="grid h-9 w-9 place-items-center rounded-lg border border-slate-600 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400"
+                    >
                       <IoLogoGithub className="h-5 w-5" />
                     </a>
-                    <a href="https://www.linkedin.com/in/essubrado" target="_blank" rel="noreferrer" className="grid h-9 w-9 place-items-center rounded-lg border border-slate-600 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400">
+                    <a
+                      href="https://www.linkedin.com/in/essubrado"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="grid h-9 w-9 place-items-center rounded-lg border border-slate-600 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400"
+                    >
                       <IoLogoLinkedin className="h-5 w-5" />
                     </a>
-                    <a href="mailto:eug.subradojr@gmail.com" className="grid h-9 w-9 place-items-center rounded-lg border border-slate-600 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400">
+                    <a
+                      href="mailto:eug.subradojr@gmail.com"
+                      className="grid h-9 w-9 place-items-center rounded-lg border border-slate-600 text-slate-400 transition-colors hover:border-emerald-500/50 hover:text-emerald-400"
+                    >
                       <IoMailOutline className="h-5 w-5" />
                     </a>
                   </div>
@@ -490,19 +568,31 @@ function PortfolioContent() {
             © 2026 Eugene Subrado Jr. Built with the MERN Stack.
           </p>
           <div className="flex items-center gap-4 text-slate-500">
-            <a href="https://github.com/ESubrado" target="_blank" rel="noreferrer" className="transition-colors hover:text-emerald-400">
+            <a
+              href="https://github.com/ESubrado"
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors hover:text-emerald-400"
+            >
               <IoLogoGithub className="h-5 w-5" />
             </a>
-            <a href="https://www.linkedin.com/in/essubrado" target="_blank" rel="noreferrer" className="transition-colors hover:text-emerald-400">
+            <a
+              href="https://www.linkedin.com/in/essubrado"
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors hover:text-emerald-400"
+            >
               <IoLogoLinkedin className="h-5 w-5" />
             </a>
-            <a href="mailto:eug.subradojr@gmail.com" className="transition-colors hover:text-emerald-400">
+            <a
+              href="mailto:eug.subradojr@gmail.com"
+              className="transition-colors hover:text-emerald-400"
+            >
               <IoMailOutline className="h-5 w-5" />
             </a>
           </div>
         </div>
       </footer>
-
     </div>
   );
 }
