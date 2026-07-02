@@ -43,7 +43,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50 rounded-lg shadow">       
+      <div className="min-h-screen bg-slate-950">       
         <TopBar activateCreate={loading} useNav={navigateBackFromAbout} showCreateBtn={showCreateBtn} showHomeBtn={showHomeBtn} showReturnBtn={showReturnButton}/>               
             { loading ? (
               <></>

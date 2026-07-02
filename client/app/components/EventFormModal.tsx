@@ -17,6 +17,30 @@ import type { EventFormProps } from '~/models/analytics-model';
 import type { EventFormInputs } from '~/models/analytics-model';
 import API_BASE_URL from '~/base-client';
 
+const inputSx = {
+  '& .MuiOutlinedInput-root': {
+    color: '#e2e8f0',
+    '& fieldset': { borderColor: '#334155' },
+    '&:hover fieldset': { borderColor: '#10b981' },
+    '&.Mui-focused fieldset': { borderColor: '#10b981' },
+  },
+  '& .MuiInputLabel-root': { color: '#64748b' },
+  '& .MuiInputLabel-root.Mui-focused': { color: '#10b981' },
+  '& .MuiSelect-icon': { color: '#64748b' },
+  '& .MuiFormHelperText-root': { color: '#f87171' },
+};
+
+const menuPaperSx = {
+  PaperProps: {
+    sx: {
+      bgcolor: '#1e293b',
+      border: '1px solid #334155',
+      color: '#e2e8f0',
+      '& .MuiMenuItem-root:hover': { bgcolor: '#334155' },
+    },
+  },
+};
+
 const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {  
     const [isSubmitting, setIsSubmitting] = useState(false);
     const { control , handleSubmit, formState: { errors }, reset } = useForm<EventFormInputs>({
@@ -27,7 +51,6 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
         }
     });
   
-    //Post new data handler
     const handleFormSubmit : SubmitHandler<EventFormInputs> = async (formData) => {      
         setIsSubmitting(true);   
         
@@ -35,9 +58,9 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
             const response = await fetch(`${API_BASE_URL}/api/analytics`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json', // or 'multipart/form-data' for file uploads
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData), // Convert data to JSON string
+                body: JSON.stringify(formData),
             });
 
             const data = await response.json();
@@ -50,12 +73,11 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
     };
 
     const handleOnClose = () =>{
-        reset(); // reset form after submit
-        onClose(); // close modal
+        reset();
+        onClose();
         setIsSubmitting(false);
     }
 
-    //function to handle special characters. Enable also basic formatting buttons.
     const filterCharacters = (e : any) => {
         const key = e.key
         const regex = /^[a-zA-Z0-9 ]$/;
@@ -75,12 +97,26 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
 
     return (
         <>   
-        <Dialog open={open} onClose={() => handleOnClose()} fullWidth maxWidth="sm">
-            <DialogTitle>Simple Event Form</DialogTitle>        
-            <DialogContent>
+        <Dialog
+            open={open}
+            onClose={() => handleOnClose()}
+            fullWidth
+            maxWidth="sm"
+            PaperProps={{
+                sx: {
+                    bgcolor: '#0f172a',
+                    color: '#e2e8f0',
+                    border: '1px solid #334155',
+                    borderRadius: '12px',
+                }
+            }}
+        >
+            <DialogTitle sx={{ color: '#ffffff', borderBottom: '1px solid #334155' }}>
+                Simple Event Form
+            </DialogTitle>        
+            <DialogContent sx={{ pt: 2 }}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>             
                     <form id="modal-form" onSubmit={handleSubmit(handleFormSubmit)}>
-                        {/* Event Type Field */}
                         <Controller
                             name="eventType"
                             control={control}
@@ -95,6 +131,8 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
                                 margin="normal"
                                 error={!!errors.eventType}
                                 helperText={errors.eventType?.message}
+                                sx={inputSx}
+                                SelectProps={{ MenuProps: menuPaperSx }}
                                 >
                                     <MenuItem value="page_view">View Page</MenuItem>
                                     <MenuItem value="page_download">Download Page</MenuItem>
@@ -104,8 +142,6 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
                             )}
                         />
 
-
-                        {/* Name Field */}
                         <Controller
                             name="userId"
                             control={control}
@@ -121,11 +157,11 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
                                 error={!!errors.userId}
                                 helperText={errors.userId?.message}
                                 onKeyDown={filterCharacters}
+                                sx={inputSx}
                                 />
                             )}
                         />
                         
-                        {/* Date Picker */}
                         <Controller
                             name="timestamp"
                             control={control}
@@ -138,11 +174,27 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
                                 maxDateTime={new Date()}
                                 slotProps={{
                                     textField: {
-                                    fullWidth: true,
-                                    margin: "normal",
-                                    error: !!errors.timestamp,
-                                    helperText: errors.timestamp?.message,
+                                        fullWidth: true,
+                                        margin: "normal",
+                                        error: !!errors.timestamp,
+                                        helperText: errors.timestamp?.message,
+                                        sx: inputSx,
                                     },
+                                    desktopPaper: {
+                                        sx: {
+                                            bgcolor: '#1e293b',
+                                            border: '1px solid #334155',
+                                            color: '#e2e8f0',
+                                            '& .MuiPickersDay-root': { color: '#e2e8f0' },
+                                            '& .MuiPickersDay-root:hover': { bgcolor: '#334155' },
+                                            '& .MuiPickersDay-root.Mui-selected': { bgcolor: '#10b981' },
+                                            '& .MuiPickersCalendarHeader-label': { color: '#e2e8f0' },
+                                            '& .MuiPickersArrowSwitcher-button': { color: '#94a3b8' },
+                                            '& .MuiClock-pin': { bgcolor: '#10b981' },
+                                            '& .MuiClockPointer-root': { bgcolor: '#10b981' },
+                                            '& .MuiClockNumber-root': { color: '#94a3b8' },
+                                        }
+                                    }
                                 }}
                                 />
                             )}
@@ -151,11 +203,19 @@ const EventFormModal: React.FC<EventFormProps> = ({open, onClose}) => {
                 </LocalizationProvider>
             </DialogContent>
 
-            <DialogActions>
-                <Button onClick={() => onClose()}>Cancel</Button>
-                    <Button type="submit" form="modal-form" variant="contained" disabled={isSubmitting}>
-                        { isSubmitting ? 'Submitting...' : 'Submit' }
-                    </Button>
+            <DialogActions sx={{ borderTop: '1px solid #334155', px: 3, py: 2 }}>
+                <Button onClick={() => onClose()} sx={{ color: '#94a3b8', '&:hover': { color: '#e2e8f0' } }}>
+                    Cancel
+                </Button>
+                <Button
+                    type="submit"
+                    form="modal-form"
+                    variant="contained"
+                    disabled={isSubmitting}
+                    color="success"
+                >
+                    { isSubmitting ? 'Submitting...' : 'Submit' }
+                </Button>
             </DialogActions>
     
         </Dialog>

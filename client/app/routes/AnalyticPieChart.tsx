@@ -7,7 +7,6 @@ import useParseEnumFromString from '~/hooks/parse-string';
 import { EnumEventTypes } from '~/models/analytics-model';
 import { useAppTableContext } from '~/context/AppContext';
 
-// Initial declaration for pie chart styling and customed label names in legend
 const RADIAN = Math.PI / 180;
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#c91e08', '#535406', "#00000"];
 
@@ -33,7 +32,6 @@ const AnalyticPieChart  = () => {
   const  parseString : any  = useParseEnumFromString(EnumEventTypes)
   const eventcountdata : EventCounterProps[]  = []
   
-   //Add parsing to indicate real name of event type
   for (var i = 0; i < topEventsData.length; i++){
     eventcountdata.push(
       {
@@ -45,7 +43,7 @@ const AnalyticPieChart  = () => {
 
   return (
      <>
-        <div className='p-4 pb-0 bg-stone-100 border border-stone-300 rounded col-span-12 lg:col-span-5'>        
+        <div className='p-4 pb-0 border border-slate-700/60 bg-slate-900 rounded-xl col-span-12 lg:col-span-5'>        
             <div className="flex mb-0 items justify-center">
                 <PieChart width={500} height={390}>
                   <Pie
@@ -69,7 +67,8 @@ const AnalyticPieChart  = () => {
                         verticalAlign="middle"                    
                         iconType="circle"
                         iconSize={12} 
-                        wrapperStyle={{right: -20}}                       
+                        wrapperStyle={{ right: -20 }}
+                        formatter={(value) => <span style={{ color: '#94a3b8', fontSize: '13px' }}>{value}</span>}
                     />
                 </PieChart>       
             </div>           
