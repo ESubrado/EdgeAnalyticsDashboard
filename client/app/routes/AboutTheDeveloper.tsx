@@ -54,7 +54,7 @@ const blankProfileSections: ProfileSection[] = [
   headline: "",
   summary: "",
   icon: "IoSparklesOutline",
-  accent: "bg-stone-300",
+  accent: "bg-slate-600",
   points: ["", "", ""],
 }));
 
@@ -291,7 +291,7 @@ const AboutTheDeveloperContent = () => {
   const activeSummaryPreview = getSummaryPreview(activeSection.summary);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-slate-950">
       {showApiToast && (
         <AboutDeveloperApiToast
           message={error ?? ABOUT_DEVELOPER_API_NOT_FOUND_MESSAGE}
@@ -303,7 +303,7 @@ const AboutTheDeveloperContent = () => {
       <main className="mx-auto max-w-7xl px-4 pb-10 pt-4">
         <div className="grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
           <aside className="lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:self-start lg:overflow-y-auto lg:pr-1">
-            <div className="border border-stone-300 bg-white p-4 shadow-sm lg:p-3">
+            <div className="rounded-xl border border-slate-700/60 bg-slate-900 p-4 lg:p-3">
               <div
                 aria-hidden={!showAsideIdentity}
                 className={`overflow-hidden transition-all duration-300 ease-out motion-reduce:transition-none ${
@@ -313,7 +313,7 @@ const AboutTheDeveloperContent = () => {
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <div className="grid h-24 w-24 shrink-0 place-items-center overflow-hidden rounded border border-stone-300 bg-stone-100">
+                  <div className="grid h-24 w-24 shrink-0 place-items-center overflow-hidden rounded border border-slate-700 bg-slate-800">
                     {developerProfile.photoUrl ? (
                       <img
                         src={developerProfile.photoUrl}
@@ -321,14 +321,14 @@ const AboutTheDeveloperContent = () => {
                         className="h-full w-full object-cover"
                       />
                     ) : (
-                      <span className="text-2xl font-bold text-stone-700">
+                      <span className="text-2xl font-bold text-slate-300">
                         {developerProfile.initials}
                       </span>
                     )}
                   </div>
                   <div>
-                    <p className="text-lg font-bold leading-tight text-stone-900">{developerProfile.name}</p>
-                    <p className="text-sm font-medium text-emerald-700">
+                    <p className="text-lg font-bold leading-tight text-white">{developerProfile.name}</p>
+                    <p className="text-sm font-medium text-emerald-400">
                       {developerProfile.role}
                     </p>
                   </div>
@@ -343,33 +343,33 @@ const AboutTheDeveloperContent = () => {
                     <a
                       key={`${item.label}-${item.value}-${contactIndex}`}
                       href={item.href || undefined}
-                      className="flex items-center gap-2 border border-stone-200 bg-white px-2.5 py-1.5 text-sm transition-colors hover:border-emerald-500 hover:bg-emerald-50 rounded-lg shadow-sm"
+                      className="flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800/60 px-2.5 py-1.5 text-sm transition-colors hover:border-emerald-500/50 hover:bg-emerald-500/10"
                     >
-                      <ContactIcon className="h-4 w-4 shrink-0 text-stone-700" />
+                      <ContactIcon className="h-4 w-4 shrink-0 text-slate-400" />
                       <span className="min-w-0">
-                        <span className="block font-semibold text-stone-900">{item.label}</span>
-                        <span className="block break-words text-stone-600">{item.value}</span>
+                        <span className="block font-semibold text-white">{item.label}</span>
+                        <span className="block break-words text-slate-400">{item.value}</span>
                       </span>
                     </a>
                   );
                 })}
               </div>            
 
-              <div className="mt-3 border-t border-stone-200 pt-3">
+              <div className="mt-3 border-t border-slate-700 pt-3">
                 <div className="flex items-center gap-2.5">
                   <span className={`h-8 w-1.5 ${activeSection.accent}`} />
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-normal text-stone-500">
+                    <p className="text-xs font-semibold uppercase tracking-normal text-slate-500">
                       Now Viewing
                     </p>
-                    <p className="text-base font-bold text-stone-900">{activeSection.eyebrow}</p>
+                    <p className="text-base font-bold text-white">{activeSection.eyebrow}</p>
                   </div>
                 </div>
                 <div className="mt-3 flex gap-2.5">
-                  <div className="grid h-9 w-9 shrink-0 place-items-center rounded border border-stone-300 bg-stone-100">
-                    <ActiveIcon className="h-5 w-5 text-stone-800" />
+                  <div className="grid h-9 w-9 shrink-0 place-items-center rounded border border-slate-700 bg-slate-800">
+                    <ActiveIcon className="h-5 w-5 text-slate-200" />
                   </div>
-                  <p className="text-sm leading-5 text-stone-600">{activeSummaryPreview}</p>
+                  <p className="text-sm leading-5 text-slate-400">{activeSummaryPreview}</p>
                 </div>
               </div>
             </div>
@@ -388,7 +388,7 @@ const AboutTheDeveloperContent = () => {
             >
               <AboutPointsGrid points={aboutSection.points} />
               <div>
-                <h3 className="mb-3 text-lg font-bold text-stone-900">Academic History</h3>
+                <h3 className="mb-3 text-lg font-bold text-white">Academic History</h3>
                 <Timeline items={academicItems} icon={IoSchoolOutline} />
               </div>
             </ProfileScrollSection>
@@ -397,8 +397,8 @@ const AboutTheDeveloperContent = () => {
               section={techSection}
               sectionRefs={sectionRefs}
             >
-              <div className="border border-stone-300 bg-white p-5 shadow-sm">
-                <h3 className="text-lg font-bold text-stone-900">Technical Skill Ratings</h3>
+              <div className="rounded-xl border border-slate-700/60 bg-slate-900 p-5">
+                <h3 className="text-lg font-bold text-white">Technical Skill Ratings</h3>
                 <SkillMeterList skills={skillRatings} hideValues={isBlankLayout} />
               </div>
               <TechGroupGrid groups={technologyGroups} />
@@ -416,11 +416,11 @@ const AboutTheDeveloperContent = () => {
               sectionRefs={sectionRefs}
             >
               <div>
-                <h3 className="mb-3 text-lg font-bold text-stone-900">Certificates</h3>
+                <h3 className="mb-3 text-lg font-bold text-white">Certificates</h3>
                 <Timeline items={certificateItems} icon={IoSchoolOutline} />
               </div>
               <div>
-                <h3 className="mb-3 text-lg font-bold text-stone-900">Awards</h3>
+                <h3 className="mb-3 text-lg font-bold text-white">Awards</h3>
                 <Timeline items={awardItems} icon={IoRibbonOutline} />
               </div>
             </ProfileScrollSection>
@@ -439,7 +439,7 @@ const AboutTheDeveloperContent = () => {
 };
 
 const BlankAboutDeveloperPage = () => (
-  <div className="min-h-screen rounded-lg bg-gray-50 shadow" />
+  <div className="min-h-screen rounded-lg bg-slate-950" />
 );
 
 type AboutDeveloperApiToastProps = {
@@ -550,8 +550,8 @@ const ProfileSectionNavigation = ({
           onClick={() => onSectionSelect(section.id)}
           className={`flex h-11 items-center gap-2 rounded-lg border px-3 text-left text-sm font-semibold transition-colors ${
             isActive
-              ? "border-emerald-500 bg-emerald-50 text-emerald-900 shadow-sm"
-              : "border-stone-200 bg-white text-stone-700 hover:border-emerald-400 hover:bg-emerald-50"
+              ? "border-emerald-500/60 bg-emerald-500/10 text-emerald-400"
+              : "border-slate-700 bg-slate-800/60 text-slate-300 hover:border-emerald-500/40 hover:text-emerald-400"
           }`}
         >
           <SectionIcon className="h-5 w-5 shrink-0" />
@@ -583,18 +583,18 @@ const ProfileScrollSection = ({
         sectionRefs.current[section.id] = el;
         (inViewRef as React.MutableRefObject<HTMLElement | null>).current = el;
       }}
-      className="scroll-mt-4 overflow-hidden rounded-xl border border-stone-200 bg-white p-5 shadow-sm md:p-6"
+      className="scroll-mt-4 overflow-hidden rounded-xl border border-slate-700/60 bg-slate-900 p-5 md:p-6"
     >
-      <div className={`mb-5 grid gap-4 border-b border-stone-300 pb-5 md:grid-cols-[auto_minmax(0,1fr)] animate-fade-up stagger-1${isInView ? " in-view" : ""}`}>
-        <div className="grid h-12 w-12 place-items-center rounded border border-stone-300 bg-white">
-          <SectionIcon className="h-7 w-7 text-stone-800" />
+      <div className={`mb-5 grid gap-4 border-b border-slate-700 pb-5 md:grid-cols-[auto_minmax(0,1fr)] animate-fade-up stagger-1${isInView ? " in-view" : ""}`}>
+        <div className="grid h-12 w-12 place-items-center rounded border border-slate-700 bg-slate-800">
+          <SectionIcon className="h-7 w-7 text-slate-200" />
         </div>
         <div>
-          <p className="text-sm font-semibold uppercase tracking-normal text-stone-500">
+          <p className="text-sm font-semibold uppercase tracking-normal text-slate-500">
             {section.eyebrow}
           </p>
-          <h2 className="mt-1 text-2xl font-bold text-stone-900">{section.headline}</h2>
-          <p className="mt-3 text-sm leading-6 text-stone-600">{section.summary}</p>
+          <h2 className="mt-1 text-2xl font-bold text-white">{section.headline}</h2>
+          <p className="mt-3 text-sm leading-6 text-slate-400">{section.summary}</p>
         </div>
       </div>
       <div className={`space-y-4 animate-fade-up stagger-2${isInView ? " in-view" : ""}`}>{children}</div>
@@ -623,12 +623,12 @@ const SkillMeterList = ({
           className={`animate-fade-up stagger-${Math.min(skillIndex + 1, 6)}${isInView ? " in-view" : ""}`}
         >
           <div className="mb-1 flex items-center justify-between gap-3 text-sm">
-            <span className="font-semibold text-stone-800">{skill.label}</span>
-            <span className="shrink-0 text-stone-600">
+            <span className="font-semibold text-slate-200">{skill.label}</span>
+            <span className="shrink-0 text-slate-400">
               {hideValues ? "" : `${skill.value}%`}
             </span>
           </div>
-          <div className="h-2 overflow-hidden rounded-full bg-stone-200">
+          <div className="h-2 overflow-hidden rounded-full bg-slate-700">
             <div
               className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-indigo-500"
               style={{ width: `${skill.value}%` }}
@@ -646,11 +646,11 @@ type SidebarListProps = {
 };
 
 const SidebarList = ({ title, items }: SidebarListProps) => (
-  <div className="mt-5 border-t border-stone-200 pt-5">
-    <h3 className="text-lg font-bold text-stone-900">{title}</h3>
+  <div className="mt-5 border-t border-slate-700 pt-5">
+    <h3 className="text-lg font-bold text-white">{title}</h3>
     <ul className="mt-3 space-y-2">
       {items.map((item) => (
-        <li key={item} className="text-sm leading-6 text-stone-600">
+        <li key={item} className="text-sm leading-6 text-slate-400">
           {item}
         </li>
       ))}
@@ -666,13 +666,13 @@ type LanguageListProps = {
 };
 
 const LanguageList = ({ items }: LanguageListProps) => (
-  <div className="mt-5 border-t border-stone-200 pt-5">
-    <h3 className="text-lg font-bold text-stone-900">Languages</h3>
+  <div className="mt-5 border-t border-slate-700 pt-5">
+    <h3 className="text-lg font-bold text-white">Languages</h3>
     <div className="mt-3 space-y-2">
       {items.map((item) => (
         <div key={item.label} className="flex justify-between gap-3 text-sm">
-          <span className="font-semibold text-stone-800">{item.label}</span>
-          <span className="text-stone-600">{item.value}</span>
+          <span className="font-semibold text-slate-200">{item.label}</span>
+          <span className="text-slate-400">{item.value}</span>
         </div>
       ))}
     </div>
@@ -692,18 +692,18 @@ const Timeline = ({ items, icon: Icon }: TimelineProps) => {
       {items.map((item, itemIndex) => (
         <article
           key={`${item.title}-${item.period}-${itemIndex}`}
-          className={`border border-stone-300 bg-white p-5 shadow-sm animate-fade-up stagger-${Math.min(itemIndex + 1, 6)}${isInView ? " in-view" : ""}`}
+          className={`rounded-xl border border-slate-700/60 bg-slate-900 p-5 animate-fade-up stagger-${Math.min(itemIndex + 1, 6)}${isInView ? " in-view" : ""}`}
         >
           <div className="grid gap-4 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-start">
-            <div className="grid h-11 w-11 place-items-center rounded border border-stone-300 bg-stone-100">
-              <Icon className="h-6 w-6 text-stone-800" />
+            <div className="grid h-11 w-11 place-items-center rounded border border-slate-700 bg-slate-800">
+              <Icon className="h-6 w-6 text-slate-200" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-stone-900">{item.title}</h3>
-              <p className="mt-1 text-sm font-semibold text-emerald-700">{item.organization}</p>
-              <p className="mt-3 text-sm leading-6 text-stone-600">{item.description}</p>
+              <h3 className="text-lg font-bold text-white">{item.title}</h3>
+              <p className="mt-1 text-sm font-semibold text-emerald-400">{item.organization}</p>
+              <p className="mt-3 text-sm leading-6 text-slate-400">{item.description}</p>
               {item.bullets && (
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-stone-600">
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-slate-400">
                   {item.bullets.map((bullet, bulletIndex) => (
                     <li key={`${bullet}-${bulletIndex}`}>{bullet}</li>
                   ))}
@@ -714,14 +714,14 @@ const Timeline = ({ items, icon: Icon }: TimelineProps) => {
                   href={item.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-4 inline-flex h-9 items-center gap-2 border border-emerald-600 bg-emerald-50 px-3 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-100"
+                  className="mt-4 inline-flex h-9 items-center gap-2 rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-3 text-sm font-semibold text-emerald-400 transition-colors hover:bg-emerald-500/20"
                 >
                   <IoOpenOutline className="h-5 w-5" />
                   <span>View Credential</span>
                 </a>
               )}
             </div>
-            <span className="w-fit border border-stone-300 bg-stone-100 px-2.5 py-1 text-sm font-semibold text-stone-700">
+            <span className="w-fit rounded border border-slate-700 bg-slate-800 px-2.5 py-1 text-sm font-semibold text-slate-400">
               {item.period}
             </span>
           </div>
@@ -743,10 +743,10 @@ const AboutPointsGrid = ({ points }: AboutPointsGridProps) => {
       {points.map((point, pointIndex) => (
         <div
           key={`${point}-${pointIndex}`}
-          className={`border border-stone-300 bg-white p-4 shadow-sm animate-fade-up stagger-${Math.min(pointIndex + 1, 6)}${isInView ? " in-view" : ""}`}
+          className={`rounded-xl border border-slate-700/60 bg-slate-800/60 p-4 animate-fade-up stagger-${Math.min(pointIndex + 1, 6)}${isInView ? " in-view" : ""}`}
         >
-          <IoSparklesOutline className="h-6 w-6 text-emerald-700" />
-          <p className="mt-3 text-sm font-semibold leading-6 text-stone-800">{point}</p>
+          <IoSparklesOutline className="h-6 w-6 text-emerald-400" />
+          <p className="mt-3 text-sm font-semibold leading-6 text-slate-200">{point}</p>
         </div>
       ))}
     </div>
@@ -765,14 +765,14 @@ const TechGroupGrid = ({ groups }: TechGroupGridProps) => {
       {groups.map((group, groupIndex) => (
         <div
           key={`${group.title}-${groupIndex}`}
-          className={`border border-stone-300 bg-white p-5 shadow-sm animate-fade-up stagger-${Math.min(groupIndex + 1, 6)}${isInView ? " in-view" : ""}`}
+          className={`rounded-xl border border-slate-700/60 bg-slate-900 p-5 animate-fade-up stagger-${Math.min(groupIndex + 1, 6)}${isInView ? " in-view" : ""}`}
         >
-          <h3 className="text-lg font-bold text-stone-900">{group.title}</h3>
+          <h3 className="text-lg font-bold text-white">{group.title}</h3>
           <div className="mt-4 flex flex-wrap gap-2">
             {group.tools.map((tool, toolIndex) => (
               <span
                 key={`${tool}-${toolIndex}`}
-                className="border border-stone-300 bg-stone-100 px-2.5 py-1 text-sm font-medium text-stone-700"
+                className="rounded-full border border-slate-700 bg-slate-800/60 px-2.5 py-1 text-sm font-medium text-slate-400"
               >
                 {tool}
               </span>
@@ -796,23 +796,23 @@ const ProjectsGrid = ({ projects }: ProjectsGridProps) => {
       {projects.map((project, projectIndex) => (
         <article
           key={`${project.title}-${projectIndex}`}
-          className={`group flex min-h-[260px] flex-col rounded-xl border border-stone-200 bg-white p-5 shadow-sm transition-all hover:border-emerald-300 hover:shadow-md animate-fade-up stagger-${Math.min(projectIndex + 1, 6)}${isInView ? " in-view" : ""}`}
+          className={`group flex min-h-[260px] flex-col rounded-xl border border-slate-700/60 bg-slate-900 p-5 transition-all hover:border-emerald-500/40 hover:shadow-lg hover:shadow-emerald-500/5 animate-fade-up stagger-${Math.min(projectIndex + 1, 6)}${isInView ? " in-view" : ""}`}
         >
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-sm font-semibold text-cyan-700">{project.type}</p>
-              <h3 className="mt-1 text-xl font-bold text-stone-900">{project.title}</h3>
+              <p className="text-sm font-semibold text-cyan-400">{project.type}</p>
+              <h3 className="mt-1 text-xl font-bold text-white">{project.title}</h3>
             </div>
-            <IoGlobeOutline className="h-6 w-6 shrink-0 text-stone-700" />
+            <IoGlobeOutline className="h-6 w-6 shrink-0 text-slate-400" />
           </div>
-          <p className="mt-4 flex-1 text-sm leading-6 text-stone-600">
+          <p className="mt-4 flex-1 text-sm leading-6 text-slate-400">
             {project.description}
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {project.stack.map((tool, toolIndex) => (
               <span
                 key={`${tool}-${toolIndex}`}
-                className="border border-stone-300 bg-stone-100 px-2.5 py-1 text-xs font-semibold text-stone-700"
+                className="rounded-full border border-slate-700 bg-slate-800/60 px-2.5 py-1 text-xs font-semibold text-slate-400"
               >
                 {tool}
               </span>
@@ -823,7 +823,7 @@ const ProjectsGrid = ({ projects }: ProjectsGridProps) => {
               href={project.href}
               target="_blank"
               rel="noreferrer"
-              className="mt-5 inline-flex h-10 items-center justify-center gap-2 border border-cyan-600 bg-cyan-50 px-3 text-sm font-semibold text-cyan-800 transition-colors hover:bg-cyan-100"
+              className="mt-5 inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-cyan-500/40 bg-cyan-500/10 px-3 text-sm font-semibold text-cyan-400 transition-colors hover:bg-cyan-500/20"
             >
               <IoOpenOutline className="h-5 w-5" />
               <span>View Project</span>
