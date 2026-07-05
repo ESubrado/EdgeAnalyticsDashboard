@@ -54,6 +54,7 @@ const HIGHLIGHTS = [
 function PortfolioContent() {
   const [statsRef, statsInView] = useInView<HTMLDivElement>();
   const [techRef, techInView] = useInView<HTMLElement>();
+  const [featuredRef, featuredInView] = useInView<HTMLDivElement>();
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -269,8 +270,10 @@ function PortfolioContent() {
             </h2>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="group relative flex min-h-[280px] flex-col overflow-hidden rounded-xl border border-slate-700 bg-slate-800 p-7 transition-all hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-500/10">
+          <div ref={featuredRef} className="grid gap-6 md:grid-cols-2">
+            <div
+              className={`group relative flex min-h-[280px] flex-col overflow-hidden rounded-xl border border-slate-700 bg-slate-800 p-7 transition-all hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-500/10 animate-slide-in-left${featuredInView ? " in-view" : ""}`}
+            >
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
               <div className="flex items-start justify-between">
                 <div className="grid h-12 w-12 place-items-center rounded-lg bg-emerald-500/10">
@@ -324,7 +327,9 @@ function PortfolioContent() {
               </div>
             </div>
 
-            <div className="group relative flex min-h-[280px] flex-col overflow-hidden rounded-xl border border-slate-700 bg-slate-800 p-7 transition-all hover:border-violet-500/50 hover:shadow-xl hover:shadow-violet-500/10">
+            <div
+              className={`group relative flex min-h-[280px] flex-col overflow-hidden rounded-xl border border-slate-700 bg-slate-800 p-7 transition-all hover:border-violet-500/50 hover:shadow-xl hover:shadow-violet-500/10 animate-slide-in-right${featuredInView ? " in-view" : ""}`}
+            >
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-violet-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
               <div className="flex items-start justify-between">
                 <div className="grid h-12 w-12 place-items-center rounded-lg bg-violet-500/10">
@@ -365,7 +370,9 @@ function PortfolioContent() {
             </div>
 
             {/* ── Locale Breeze Store ── */}
-            <div className="flex min-h-[280px] flex-col rounded-xl border border-slate-700/60 bg-gradient-to-br from-slate-800/80 to-slate-900 p-8 transition-all hover:border-yellow-500/40 hover:shadow-lg hover:shadow-yellow-500/5">
+            <div
+              className={`flex min-h-[280px] flex-col rounded-xl border border-slate-700/60 bg-gradient-to-br from-slate-800/80 to-slate-900 p-8 transition-all hover:border-yellow-500/40 hover:shadow-lg hover:shadow-yellow-500/5 animate-slide-in-left${featuredInView ? " in-view" : ""}`}
+            >
               <div className="flex items-start justify-between gap-3">
                 <div className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-yellow-500/10 ring-1 ring-yellow-500/20">
                   <IoSparklesOutline className="h-5 w-5 text-yellow-400" />
@@ -413,7 +420,9 @@ function PortfolioContent() {
             </div>
 
             {/* ── More in portfolio placeholder ── */}
-            <div className="flex min-h-[280px] flex-col items-center justify-center rounded-xl border border-dashed border-slate-700 p-10 text-center transition-colors hover:border-indigo-500/40">
+            <div
+              className={`flex min-h-[280px] flex-col items-center justify-center rounded-xl border border-dashed border-slate-700 p-10 text-center transition-colors hover:border-indigo-500/40 animate-slide-in-right${featuredInView ? " in-view" : ""}`}
+            >
               <IoOpenOutline className="h-10 w-10 text-slate-600" />
               <p className="mt-4 text-lg font-bold text-slate-400">
                 More in the full portfolio
