@@ -55,6 +55,7 @@ function PortfolioContent() {
   const [statsRef, statsInView] = useInView<HTMLDivElement>();
   const [techRef, techInView] = useInView<HTMLElement>();
   const [featuredRef, featuredInView] = useInView<HTMLDivElement>();
+  const [aboutTeaserRef, aboutTeaserInView] = useInView<HTMLDivElement>();
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -447,8 +448,10 @@ function PortfolioContent() {
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="overflow-hidden rounded-2xl border border-slate-700 bg-gradient-to-br from-slate-800 to-slate-900">
-            <div className="grid gap-0 md:grid-cols-2">
-              <div className="p-10 md:p-14">
+            <div ref={aboutTeaserRef} className="grid gap-0 md:grid-cols-2">
+              <div
+                className={`p-10 md:p-14 animate-slide-in-left${aboutTeaserInView ? " in-view" : ""}`}
+              >
                 <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400">
                   About Me
                 </p>
@@ -492,7 +495,9 @@ function PortfolioContent() {
                 </div>
               </div>
 
-              <div className="relative flex items-center justify-center border-t border-slate-700 bg-gradient-to-br from-indigo-950/50 to-slate-900 p-10 md:border-l md:border-t-0">
+              <div
+                className={`relative flex items-center justify-center border-t border-slate-700 bg-gradient-to-br from-indigo-950/50 to-slate-900 p-10 md:border-l md:border-t-0 animate-slide-in-right${aboutTeaserInView ? " in-view" : ""}`}
+              >
                 <div className="absolute inset-0 opacity-30">
                   <div className="absolute left-8 top-8 h-32 w-32 rounded-full bg-emerald-500/20 blur-2xl" />
                   <div className="absolute bottom-8 right-8 h-32 w-32 rounded-full bg-indigo-500/20 blur-2xl" />
