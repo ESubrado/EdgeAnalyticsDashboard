@@ -56,6 +56,7 @@ function PortfolioContent() {
   const [techRef, techInView] = useInView<HTMLElement>();
   const [featuredRef, featuredInView] = useInView<HTMLDivElement>();
   const [aboutTeaserRef, aboutTeaserInView] = useInView<HTMLDivElement>();
+  const [ctaRef, ctaInView] = useInView<HTMLDivElement>();
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -548,7 +549,10 @@ function PortfolioContent() {
 
       {/* ── CTA ───────────────────────────────────────────────── */}
       <section className="bg-slate-900 py-20">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+        <div
+          ref={ctaRef}
+          className={`mx-auto max-w-3xl px-6 text-center animate-fade-up${ctaInView ? " in-view" : ""}`}
+        >
           <IoCodeSlashOutline className="mx-auto h-10 w-10 text-emerald-400" />
           <h2 className="mt-4 text-3xl font-bold text-white">
             Let&apos;s Build Something Great Together
